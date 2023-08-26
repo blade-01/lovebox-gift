@@ -9,6 +9,7 @@
         <p class="text-black">{{ currentText.header }}</p>
         <p class="text-black">{{ currentText.content }}</p>
       </div>
+      <BackgroundAnimate />
     </div>
   </div>
 </template>

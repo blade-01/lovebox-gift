@@ -12,7 +12,7 @@
 <script setup>
 import { ref } from "vue";
 
-const images = ["image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg"];
+const images = ["circle-1.svg", "circle-2.svg", "circle-3.svg", "circle-4.jpg"];
 const currentImageIndex = ref(0);
 const showBackground = ref(false);
 
