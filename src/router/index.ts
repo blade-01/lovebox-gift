@@ -1,5 +1,13 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import routes from '~pages';
+import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "../views/HomeView.vue";
+
+const routes = [
+  {
+    path: "/",
+    name: "home",
+    component: () => HomeView,
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),
@@ -7,14 +15,14 @@ const router = createRouter({
   scrollBehavior() {
     return {
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     };
-  }
+  },
 });
 
 router.beforeEach((to) => {
   if (to.meta.requiresAuth) {
-    return { path: '/' };
+    return { path: "/" };
   }
 });
 
