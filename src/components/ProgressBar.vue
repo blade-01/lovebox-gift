@@ -16,7 +16,7 @@ const simulateProgress = () => {
     if (progress.value >= 100) {
       clearInterval(interval);
     }
-  }, 50);
+  }, 100);
 };
 
 onMounted(() => {

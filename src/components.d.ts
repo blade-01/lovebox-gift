@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BackgroundAnimate: typeof import('./components/BackgroundAnimate.vue')['default']
     DynamicText: typeof import('./components/DynamicText.vue')['default']
     ProgressBar: typeof import('./components/ProgressBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
