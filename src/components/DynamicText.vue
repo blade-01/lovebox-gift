@@ -1,6 +1,6 @@
 <template>
   <div class="text-lg leading-7 text-center w-[280px]">
-    <p>{{ currentText }}</p>
+    <p class="text-black">{{ currentText }}</p>
   </div>
 </template>
 
