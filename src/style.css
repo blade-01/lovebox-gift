@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @layer base {
   /* CONFIG STYLE */
   body {
-    @apply font-urbanist text-base font-normal text-[#213547] dark:text-slate-200 bg-white dark:bg-darkBg transition-all duration-500 ease-in-out m-0 p-0;
+    @apply font-urbanist text-base font-normal text-[#213547] transition-all duration-500 ease-in-out m-0 p-0;
   }
 
   html {
@@ -69,14 +69,14 @@
   }
 
   .input-style {
-    @apply bg-transparent border-solid border-gray-300 border outline-none rounded-[4px] h-[42px] flex items-center py-3 px-4 focus:border-gray-600 w-full transition-all duration-200 ease-in-out disabled:rounded-[4px] disabled:border disabled:border-gray-300 disabled:bg-gray-50 disabled:p-4 disabled:py-6 placeholder:font-light placeholder:text-[#213547] dark:placeholder:text-[#d8d8d8] !important;
+    @apply bg-transparent border-solid border-gray-300 border outline-none rounded-[4px] h-[42px] flex items-center py-3 px-4 focus:border-gray-600 w-full transition-all duration-200 ease-in-out disabled:rounded-[4px] disabled:border disabled:border-gray-300 disabled:bg-gray-50 disabled:p-4 disabled:py-6 placeholder:font-light placeholder:text-[#213547]  !important;
   }
 
   .input-style.textarea-style {
     @apply h-auto !important;
   }
 
-  input[type='file'] {
+  input[type="file"] {
     @apply disabled:px-4 disabled:py-[13px] !important;
   }
 
@@ -124,7 +124,7 @@
   }
 
   .v-style .vs__dropdown-menu {
-    @apply bg-white dark:bg-darkBg;
+    @apply bg-white;
   }
 
   .v-style .vs__search:focus {
@@ -170,7 +170,7 @@
 
   /* CHART TITLE */
   .chart-bar {
-    @apply rounded-md p-4 mb-3 bg-white dark:bg-darkBgSec;
+    @apply rounded-md p-4 mb-3 bg-white;
   }
 
   .chart-title {
