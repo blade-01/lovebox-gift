@@ -19,7 +19,7 @@ module.exports = {
         nl: ["56px", "64px"],
       },
       backgroundSize: {
-        bgMobile: "230px",
+        bgMobile: "250px",
       },
       screens: {
         "2xs": "200px",

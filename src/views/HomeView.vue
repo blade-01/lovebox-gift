@@ -3,9 +3,16 @@
     class="w-full h-screen relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
     <div class="container">
-      <div class="flex flex-col items-center place-content-center m-auto">
+      <div
+        v-if="introPage"
+        class="flex flex-col items-center place-content-center m-auto"
+      >
         <img src="/img/logo.svg" alt="logo" />
-        <ProgressBar />
+        <div class="progress-bar">
+          <div class="progress" :style="{ width: `${progress}%` }"></div>
+        </div>
+        <div v-if="showBlackBackground" class="black-overlay"></div>
+        <div v-if="showPurpleBackground" class="purple-overlay"></div>
         <p class="text-black font-bold">{{ currentText.header }}</p>
         <p class="text-black font-bold">{{ currentText.content }}</p>
       </div>
@@ -26,6 +33,8 @@ interface textItem {
   header: string;
   content: string;
 }
+
+const introPage = ref<boolean>(true);
 
 const text: textItem[] = [
   {
@@ -49,7 +58,7 @@ const text: textItem[] = [
     content: "Finalizing the Process",
   },
 ];
-const currentIndex = ref(0);
+const currentIndex = ref<number>(0);
 const currentText = ref(text[currentIndex.value]);
 
 const changeText = () => {
@@ -94,13 +103,64 @@ onMounted(() => {
     return () => clearInterval(intervalidCircle);
   });
 });
+
+// progress
+const progress = ref<number>(0);
+
+// Simulate progress increment for demonstration
+const simulateProgress = () => {
+  const interval = setInterval(() => {
+    progress.value += 1;
+    if (progress.value >= 100) {
+      clearInterval(interval);
+    }
+  }, 100);
+};
+
+const showBlackBackground = ref<boolean>(false);
+const showPurpleBackground = ref<boolean>(false);
+
+watch(progress, (newProgress) => {
+  if (newProgress === 100) {
+    showBlackBackground.value = true;
+    setTimeout(() => {
+      showBlackBackground.value = false;
+      showPurpleBackground.value = true;
+      setTimeout(() => {
+        showPurpleBackground.value = false;
+        introPage.value = false;
+      }, 2000); // Set duration to 2 seconds
+    }, 2000); // Set duration to 2 seconds
+  } else {
+    showBlackBackground.value = false;
+  }
+});
+
+onMounted(() => {
+  simulateProgress();
+});
 </script>
 <style scoped>
 .animation-container {
   @apply absolute w-[600px] md:w-[800px] h-[600px] md:h-[800px] flex items-center place-content-center;
 }
-
 .circle {
   @apply w-full h-full rounded-[50%] bg-cover transition-[backgroud-image_1s];
+}
+/* progress bar styling */
+.progress-bar {
+  @apply h-1 bg-white border-[1px] border-[#644AE2] rounded-lg overflow-hidden w-[250px] md:w-[280px] mt-[50px] mb-[40px];
+}
+.progress {
+  @apply h-full bg-[#644AE2];
+}
+.black-background {
+  @apply bg-black overflow-hidden;
+}
+.black-overlay {
+  @apply fixed top-0 left-0 w-full h-screen bg-[url('/img/animate-logo-1.svg')] bg-no-repeat bg-center bg-black bg-bgMobile md:bg-contain transition-[background_2s] z-[9999];
+}
+.purple-overlay {
+  @apply fixed top-0 left-0 w-full h-screen bg-[url('/img/animate-logo-2.svg')] bg-no-repeat bg-center bg-[#644ae2]    bg-bgMobile md:bg-contain transition-[background_2s] z-[9999];
 }
 </style>
