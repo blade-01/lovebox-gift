@@ -21,6 +21,9 @@ module.exports = {
       backgroundSize: {
         bgMobile: "250px",
       },
+      boxShadow: {
+        shadow: "0 50px 50px -12px rgba(0, 0, 0, 0.25)",
+      },
       screens: {
         "2xs": "200px",
         "1xs": "350px",

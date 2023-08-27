@@ -1,66 +1,67 @@
 <template>
-  <div class="progress-bar">
-    <div class="progress" :style="{ width: `${progress}%` }"></div>
+  <div
+    class="w-full h-screen relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+  >
+    <div class="container">
+      <img class="mx-auto mb-12" src="/img/logo.svg" alt="logo" />
+      <div
+        class="flex flex-col items-center place-content-center m-auto bg-white shadow-xl rounded-3xl py-10 px-6 md:w-[488px] relative z-[9999]"
+      >
+        <img
+          class="w-auto md:w-[320px] md:h-[320px]"
+          src="/img/love-unboxed.svg"
+          alt="love-unboxed"
+        />
+      </div>
+    </div>
+    <div class="animation-container">
+      <div
+        class="circle"
+        :style="{
+          backgroundImage: `url(${animateCircle[currentAnimateIndex]})`,
+        }"
+      ></div>
+    </div>
   </div>
-  <div v-if="showBlackBackground" class="black-overlay"></div>
-  <div v-if="showPurpleBackground" class="purple-overlay"></div>
 </template>
-
 <script setup lang="ts">
-import { ref, onMounted, watch, defineProps, defineEmits } from "vue";
+import { ref, onMounted, watch } from "vue";
 
-const progress = ref<number>(0);
+const animateCircle: string[] = [
+  "/img/circle-1.svg",
+  "/img/circle-2.svg",
+  "/img/circle-3.svg",
+  "/img/circle-4.svg",
+  "/img/circle-1.svg",
+  "/img/circle-2.svg",
+  "/img/circle-3.svg",
+  "/img/circle-4.svg",
+];
 
-// Simulate progress increment for demonstration
-const simulateProgress = () => {
-  const interval = setInterval(() => {
-    progress.value += 1;
-    if (progress.value >= 100) {
-      clearInterval(interval);
-    }
-  }, 100);
+const currentAnimateIndex = ref(0);
+
+const changeImage = () => {
+  currentAnimateIndex.value =
+    (currentAnimateIndex.value + 1) % animateCircle.length;
 };
 
-const showBlackBackground = ref<boolean>(false);
-const showPurpleBackground = ref<boolean>(false);
+// Automatically change image every 3 second
+const intervalidCircle = setInterval(changeImage, 3000);
 
-watch(progress, (newProgress) => {
-  if (newProgress === 100) {
-    showBlackBackground.value = true;
-    setTimeout(() => {
-      showBlackBackground.value = false;
-      showPurpleBackground.value = true;
-      setTimeout(() => {
-        showPurpleBackground.value = false;
-      }, 2000); // Set duration to 2 seconds
-    }, 2000); // Set duration to 2 seconds
-  } else {
-    showBlackBackground.value = false;
-  }
-});
-
+// Cleanup when component is unmounted
 onMounted(() => {
-  simulateProgress();
+  watchEffect(() => {
+    return () => clearInterval(intervalidCircle);
+  });
 });
 </script>
 
 <style scoped>
-.progress-bar {
-  @apply h-1 bg-white border-[1px] border-[#644AE2] rounded-lg overflow-hidden w-[250px] md:w-[280px] mt-[50px] mb-[40px];
-}
-.progress {
-  @apply h-full bg-[#644AE2];
+.animation-container {
+  @apply absolute w-[600px] md:w-[900px] h-[600px] md:h-[800px] flex items-center place-content-center;
 }
 
-.black-background {
-  @apply bg-black overflow-hidden;
-}
-
-.black-overlay {
-  @apply fixed top-0 left-0 w-full h-screen bg-[url('/img/animate-logo-1.svg')] bg-no-repeat bg-center bg-black bg-bgMobile md:bg-contain transition-[background_2s] z-[9999];
-}
-
-.purple-overlay {
-  @apply fixed top-0 left-0 w-full h-screen bg-[url('/img/animate-logo-2.svg')] bg-no-repeat bg-center bg-[#644ae2]    bg-bgMobile md:bg-contain transition-[background_2s] z-[9999];
+.circle {
+  @apply w-full h-full rounded-[50%] bg-cover transition-[backgroud-image_1s];
 }
 </style>
