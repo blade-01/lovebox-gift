@@ -61,10 +61,10 @@ onMounted(() => {
 }
 
 .black-overlay {
-  @apply fixed top-0 left-0 w-full h-screen bg-[url('/img/animate-logo-1.svg')] bg-no-repeat bg-center bg-black bg-bgMobile md:bg-contain transition-[background_2s] z-[9999];
+  @apply fixed top-0 left-0 w-full h-screen bg-[url('/img/animate-logo-1.svg')] bg-no-repeat bg-center bg-black bg-bgMobile md:bg-auto transition-[background_2s] z-[9999];
 }
 
 .purple-overlay {
-  @apply fixed top-0 left-0 w-full h-screen bg-[url('/img/animate-logo-2.svg')] bg-no-repeat bg-center bg-[#644ae2]    bg-bgMobile md:bg-contain transition-[background_2s] z-[9999];
+  @apply fixed top-0 left-0 w-full h-screen bg-[url('/img/animate-logo-2.svg')] bg-no-repeat bg-center bg-[#644ae2]    bg-bgMobile md:bg-auto transition-[background_2s] z-[9999];
 }
 </style>
