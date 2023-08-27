@@ -10,7 +10,7 @@
           alt="logo"
       /></router-link>
       <div
-        class="flex flex-col items-center place-content-center m-auto bg-white shadow-xl rounded-3xl p-6 md:w-[488px] relative z-[9999]"
+        class="flex flex-col items-center place-content-center m-auto bg-white shadow-xl rounded-3xl py-10 px-6 md:w-[488px] relative z-[9999]"
       >
         <div class="progress-bar">
           <div class="progress" :style="{ width: `${progress}%` }"></div>
@@ -23,6 +23,15 @@
           src="/img/love-unboxed.svg"
           alt="love-unboxed"
         />
+        <div class="text-center flex flex-col gap-5">
+          <p>Want to guess the sender of this Lovebox?</p>
+          <button class="btn bg-[#644AE2] w-full">Yes</button>
+          <button
+            class="btn w-full bg-white border-[1px] border-gray-300 text-[#644AE2]"
+          >
+            No, Proceed
+          </button>
+        </div>
       </div>
     </div>
     <div class="animation-container">

@@ -10,6 +10,7 @@ module.exports = {
         priText: "#35AF8A",
         darkBg: "#1E1E2E",
         darkBgSec: "#27293D",
+        main: "#644AE2",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
