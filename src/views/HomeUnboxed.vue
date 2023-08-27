@@ -7,10 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
-import { useRouter } from "vue-router";
-
-const router = useRouter();
+import { ref, onMounted, watch, defineProps, defineEmits } from "vue";
 
 const progress = ref<number>(0);
 
@@ -24,8 +21,8 @@ const simulateProgress = () => {
   }, 100);
 };
 
-const showBlackBackground: boolean = ref(false);
-const showPurpleBackground: boolean = ref(false);
+const showBlackBackground = ref<boolean>(false);
+const showPurpleBackground = ref<boolean>(false);
 
 watch(progress, (newProgress) => {
   if (newProgress === 100) {
@@ -35,7 +32,6 @@ watch(progress, (newProgress) => {
       showPurpleBackground.value = true;
       setTimeout(() => {
         showPurpleBackground.value = false;
-        router.push({ name: "home-unboxed" });
       }, 2000); // Set duration to 2 seconds
     }, 2000); // Set duration to 2 seconds
   } else {
