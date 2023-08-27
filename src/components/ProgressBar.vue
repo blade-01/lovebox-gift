@@ -2,10 +2,12 @@
   <div class="progress-bar">
     <div class="progress" :style="{ width: `${progress}%` }"></div>
   </div>
+  <div v-if="showBlackBackground" class="black-overlay"></div>
+  <div v-if="showPurpleBackground" class="purple-overlay"></div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 
 const progress = ref<number>(0);
 
@@ -19,6 +21,24 @@ const simulateProgress = () => {
   }, 100);
 };
 
+const showBlackBackground: boolean = ref(false);
+const showPurpleBackground: boolean = ref(false);
+
+watch(progress, (newProgress) => {
+  if (newProgress === 100) {
+    showBlackBackground.value = true;
+    setTimeout(() => {
+      showBlackBackground.value = false;
+      showPurpleBackground.value = true;
+      setTimeout(() => {
+        showPurpleBackground.value = false;
+      }, 2000); // Set duration to 2 seconds
+    }, 2000); // Set duration to 2 seconds
+  } else {
+    showBlackBackground.value = false;
+  }
+});
+
 onMounted(() => {
   simulateProgress();
 });
@@ -30,5 +50,17 @@ onMounted(() => {
 }
 .progress {
   @apply h-full bg-[#644AE2];
+}
+
+.black-background {
+  @apply bg-black overflow-hidden;
+}
+
+.black-overlay {
+  @apply fixed top-0 left-0 w-full h-screen bg-[url('/img/animate-logo-1.svg')] bg-no-repeat bg-center bg-black bg-contain transition-[background_2s] z-[9999];
+}
+
+.purple-overlay {
+  @apply fixed top-0 left-0 w-full h-screen bg-[url('/img/animate-logo-2.svg')] bg-no-repeat bg-center bg-[#644ae2] bg-contain transition-[background_2s] z-[9999];
 }
 </style>
