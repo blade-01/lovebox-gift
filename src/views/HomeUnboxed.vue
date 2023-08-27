@@ -25,9 +25,13 @@
         />
         <div class="text-center flex flex-col gap-5">
           <p>Want to guess the sender of this Lovebox?</p>
-          <button class="btn bg-main w-full rounded-3xl">Yes</button>
+          <router-link :to="{ name: 'home-gift' }">
+            <button class="btn bg-main w-full rounded-3xl capitalize">
+              Yes
+            </button>
+          </router-link>
           <button
-            class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl"
+            class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
           >
             No, Proceed
           </button>

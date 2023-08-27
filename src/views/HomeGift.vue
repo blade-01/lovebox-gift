@@ -15,23 +15,45 @@
         <div class="progress-bar">
           <div class="progress" :style="{ width: `${progress}%` }"></div>
         </div>
-        <h1 class="font-semibold text-center text-lg md:text-2xl text-black">
-          Lovebox unboxed!
-        </h1>
-        <img
-          class="w-auto md:w-[250px] md:h-[250px]"
-          src="/img/love-unboxed.svg"
-          alt="love-unboxed"
-        />
-        <div class="text-center flex flex-col gap-5">
-          <p>Want to guess the sender of this Lovebox?</p>
-          <button class="btn bg-main w-full rounded-3xl">Yes</button>
+        <div class="flex flex-col gap-4">
+          <h1
+            class="font-bold text-center text-lg md:text-4xl text-black tracking-wide"
+          >
+            Unveil the sender:
+          </h1>
+          <p
+            class="font-bold text-center text-lg md:text-4xl text-black tracking-wide"
+          >
+            Can you guess?
+          </p>
+        </div>
+        <form
+          autocomplete="off"
+          @submit.prevent
+          class="flex flex-col gap-4 my-4 md:w-[300px]"
+        >
+          <div class="flex justify-between items-center flex-wrap gap-2">
+            <p class="text-sm font-medium">Gifted from who?</p>
+            <p class="text-sm font-medium">1/3 trials</p>
+          </div>
+          <input
+            class="w-full h-12 bg-gray-100 p-2 rounded-lg"
+            type="text"
+            placeholder="Placeholder"
+          />
+          <p class="text-sm font-medium">You have three windows to guess</p>
+        </form>
+        <div class="text-center flex flex-col gap-5 md:w-[300px]">
+          <button class="btn bg-main w-full rounded-3xl">Submit</button>
           <button
             class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl"
           >
-            No, Proceed
+            Skip
           </button>
         </div>
+        <p class="text-sm font-medium pt-4">
+          Not to worry, we will not notify the sender on wrong guesses
+        </p>
       </div>
     </div>
     <div class="animation-container">
@@ -46,6 +68,8 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
+// progress bar
+const progress = ref(70);
 
 const animateCircle: string[] = [
   "/img/circle-1.svg",
@@ -74,13 +98,6 @@ onMounted(() => {
     return () => clearInterval(intervalidCircle);
   });
 });
-
-// progress bar
-const progress = ref(30);
-
-const incrementProgress = () => {
-  progress.value = Math.min(progress.value + 30, 100);
-};
 </script>
 
 <style scoped>
