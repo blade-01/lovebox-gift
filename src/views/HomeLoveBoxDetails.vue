@@ -26,10 +26,15 @@
             src="/img/lovebox-sender.svg"
             alt="lovebox-sender"
           />
-          <h1 class="text-2xl font-semibold leading-8">Thoughtfully sent by</h1>
+          <h1 class="text-2xl font-semibold leading-8">
+            <span v-if="$route.query.name">Correct!</span> Thoughtfully sent by
+          </h1>
           <p>“Moboluwaduro Peters”</p>
         </div>
-        <div class="text-center flex flex-col gap-5 md:w-[300px]">
+        <div
+          :class="$route.query.name ? 'gap-2' : 'gap-5'"
+          class="text-center flex flex-col md:w-[300px]"
+        >
           <p class="font-medium leading-6">Your Package Number</p>
           <button
             class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize"
@@ -38,6 +43,10 @@
           </button>
           <p class="leading-6 font-medium py-1">
             To track your shipment, click
+            <span class="text-main underline font-bold">here.</span>
+          </p>
+          <p v-if="$route.query.name" class="leading-6 font-medium py-3">
+            Tell the world about Love Box! click
             <span class="text-main underline font-bold">here.</span>
           </p>
         </div>
