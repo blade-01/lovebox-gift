@@ -15,41 +15,35 @@ import { ref, onMounted } from "vue";
 const circles = ref<any>([]);
 
 const createCircle = (x: number, y: number) => {
-  const size: number = 10; // Initial size of the circle
-  const maxDistance = Math.max(window.innerWidth, window.innerHeight);
-  const circle = {
-    x,
-    y,
-    size,
-    style: {
-      left: `${x}px`,
-      top: `${y}px`,
-      width: `${size}px`,
-      height: `${size}px`,
-    },
-  };
-  circles.value.push(circle);
+  const numCircles = 3; // Number of circles to create for the ripple effect
+  const initialSize: number = 200;
 
-  const interval = setInterval(() => {
-    circle.size += 1; // Adjust the rate of expansion by changing this value
-    circle.style.width = `${circle.size}px`;
-    circle.style.height = `${circle.size}px`;
+  for (let i = 0; i < numCircles; i++) {
+    const circle = {
+      x,
+      y,
+      size: initialSize,
+      style: {
+        left: `${x}px`,
+        top: `${y}px`,
+        width: `${initialSize}px`,
+        height: `${initialSize}px`,
+        animationDelay: `${i * 0.2}s`, // Delay the animation of each circle
+      },
+    };
+    circles.value.push(circle);
 
-    if (circle.size >= maxDistance) {
-      clearInterval(interval);
-      circles.value.splice(circles.value.indexOf(circle), 1);
-    }
-  }, 10); // Adjust the interval to control the smoothness of the animation
+    const interval = setInterval(() => {
+      circle.size += 1;
+      circle.style.width = `${circle.size}px`;
+      circle.style.height = `${circle.size}px`;
+    }, 10 * (i + 1)); // Adjust the interval for each circle to create the ripple effect
+  }
 };
 
 // Trigger the initial circle creation on mount
 onMounted(() => {
   createCircle(window.innerWidth / 2, window.innerHeight / 2);
-});
-
-// Listen for mouse click events and create circles at those points
-window.addEventListener("click", (event) => {
-  createCircle(event.clientX, event.clientY);
 });
 </script>
 
@@ -57,15 +51,32 @@ window.addEventListener("click", (event) => {
 .circle-container {
   position: fixed;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  margin: auto;
 }
 
 .circle {
   position: absolute;
   border-radius: 50%;
-  border: 2px solid rgba(0, 0, 0, 0.5);
+  border: 1px solid #644ae2;
   transform: translate(-50%, -50%);
   pointer-events: none;
+  animation: ripple 2s linear infinite;
+}
+
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(8);
+    opacity: 0;
+  }
 }
 </style>
