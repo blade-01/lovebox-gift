@@ -30,11 +30,13 @@
               Yes
             </button>
           </router-link>
-          <button
-            class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
-          >
-            No, Proceed
-          </button>
+          <router-link :to="{ name: 'home-lovebox-details' }">
+            <button
+              class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
+            >
+              No, Proceed
+            </button>
+          </router-link>
         </div>
       </div>
     </div>
