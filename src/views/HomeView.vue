@@ -86,7 +86,7 @@ const changeImage = () => {
 };
 
 // Automatically change image every 3 second
-const intervalidCircle = setInterval(changeImage, 3000);
+const intervalidCircle = setInterval(changeImage, 1200);
 
 // Cleanup when component is unmounted
 onMounted(() => {
