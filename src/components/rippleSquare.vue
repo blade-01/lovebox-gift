@@ -67,7 +67,7 @@ onMounted(() => {
   background-color: #644ae2;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  animation: ripple 2s linear infinite;
+  animation: ripple 1.8s linear infinite;
 }
 
 @keyframes ripple {
