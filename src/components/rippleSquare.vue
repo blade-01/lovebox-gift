@@ -1,10 +1,10 @@
 <template>
-  <div class="circle-container">
+  <div class="square-container">
     <div
-      v-for="(circle, index) in circles"
+      v-for="(square, index) in squares"
       :key="index"
-      class="circle"
-      :style="circle.style"
+      class="square"
+      :style="square.style"
     ></div>
   </div>
 </template>
@@ -12,14 +12,14 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 
-const circles = ref<any>([]);
+const squares = ref<any>([]);
 
-const createCircle = (x: number, y: number) => {
-  const numCircles = 3; // Number of circles to create for the ripple effect
+const createSquare = (x: number, y: number) => {
+  const numSquare = 3; // Number of squares to create for the ripple effect
   const initialSize: number = 400;
 
-  for (let i = 0; i < numCircles; i++) {
-    const circle = {
+  for (let i = 0; i < numSquare; i++) {
+    const square = {
       x,
       y,
       size: initialSize,
@@ -28,27 +28,27 @@ const createCircle = (x: number, y: number) => {
         top: `${y}px`,
         width: `${initialSize}px`,
         height: `${initialSize}px`,
-        animationDelay: `${i * 0.2}s`, // Delay the animation of each circle
+        animationDelay: `${i * 0.2}s`, // Delay the animation of each square
       },
     };
-    circles.value.push(circle);
+    squares.value.push(square);
 
     const interval = setInterval(() => {
-      circle.size += 1;
-      circle.style.width = `${circle.size}px`;
-      circle.style.height = `${circle.size}px`;
-    }, 10 * (i + 1)); // Adjust the interval for each circle to create the ripple effect
+      square.size += 1;
+      square.style.width = `${square.size}px`;
+      square.style.height = `${square.size}px`;
+    }, 10 * (i + 1)); // Adjust the interval for each square to create the ripple effect
   }
 };
 
-// Trigger the initial circle creation on mount
+// Trigger the initial square creation on mount
 onMounted(() => {
-  createCircle(window.innerWidth / 2, window.innerHeight / 2);
+  createSquare(window.innerWidth / 2, window.innerHeight / 2);
 });
 </script>
 
 <style scoped>
-.circle-container {
+.square-container {
   position: fixed;
   width: 100%;
   height: 100vh;
@@ -60,9 +60,10 @@ onMounted(() => {
   margin: auto;
 }
 
-.circle {
+.square {
   position: absolute;
-  border-radius: 50%;
+  height: 300px;
+  width: 200px;
   border: 1px solid #644ae2;
   transform: translate(-50%, -50%);
   pointer-events: none;

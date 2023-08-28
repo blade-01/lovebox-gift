@@ -4,6 +4,9 @@
   </div>
   <div v-if="showBlackBackground" class="black-overlay"></div>
   <div v-if="showPurpleBackground" class="purple-overlay"></div>
+  <div class="circle-container" v-if="ripple === true">
+    <RippleCircle />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -13,6 +16,8 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 const progress = ref<number>(0);
+
+const ripple = ref<boolean>(false);
 
 // Simulate progress increment for demonstration
 const simulateProgress = () => {
@@ -28,7 +33,9 @@ const showBlackBackground = ref<boolean>(false);
 const showPurpleBackground = ref<boolean>(false);
 
 watch(progress, (newProgress) => {
-  if (newProgress === 50) {
+  if (newProgress === 40) {
+    ripple.value = true;
+  } else if (newProgress === 50) {
     showBlackBackground.value = true;
     setTimeout(() => {
       showBlackBackground.value = false;
@@ -66,5 +73,9 @@ onMounted(() => {
 
 .purple-overlay {
   @apply fixed top-0 left-0 w-full h-screen bg-[url('/img/animate-logo-2.svg')] bg-no-repeat bg-center bg-[#644ae2]    bg-bgMobile md:bg-auto transition-[background_2s] z-[9999];
+}
+
+.circle-container {
+  @apply fixed w-full h-screen pointer-events-none flex justify-between place-items-center flex-col m-auto;
 }
 </style>

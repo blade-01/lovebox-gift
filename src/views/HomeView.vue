@@ -2,8 +2,7 @@
   <div
     class="w-full h-screen relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
-    <RippleCircle />
-    <!-- <div class="container">
+    <div class="container">
       <div class="flex flex-col items-center place-content-center m-auto">
         <img src="/img/logo.svg" alt="logo" />
         <ProgressBar />
@@ -18,7 +17,7 @@
           backgroundImage: `url(${animateCircle[currentAnimateIndex]})`,
         }"
       ></div>
-    </div> -->
+    </div>
   </div>
 </template>
 <script setup lang="ts">
