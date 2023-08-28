@@ -98,9 +98,12 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
+import { useRouter } from "vue-router";
+
+// router
+const router = useRouter();
 // progress bar
 const progress = ref<number>(70);
 
@@ -159,6 +162,12 @@ const handleSubmit = () => {
     }
   } else {
     console.log(placeholder.value);
+    router.push({
+      name: "home-lovebox-details",
+      query: {
+        name: placeholder.value.name,
+      },
+    });
   }
 };
 </script>
