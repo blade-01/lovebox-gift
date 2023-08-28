@@ -31,19 +31,34 @@
           autocomplete="off"
           @submit.prevent
           class="flex flex-col gap-4 my-4 md:w-[300px]"
+          v-if="form"
         >
           <div class="flex justify-between items-center flex-wrap gap-2">
             <p class="text-sm font-medium">Gifted from who?</p>
-            <p class="text-sm font-medium">1/3 trials</p>
+            <p class="text-sm font-medium">{{ trialCount }}/3 trials</p>
           </div>
+          <small
+            class="font-medium leading-6 text-black flex items-center"
+            :class="{ 'err-message': v$.name.$error }"
+            v-if="v$.name.$error"
+          >
+            <span
+              class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
+            ></span>
+            Your guess is wrong, give it 2 more shot!</small
+          >
           <input
-            class="w-full h-12 bg-gray-100 p-2 rounded-lg"
+            class="w-full h-12 bg-gray-100 p-2 rounded-lg outline-none"
             type="text"
+            v-model="placeholder.name"
             placeholder="Placeholder"
           />
           <p class="text-sm font-medium">You have three windows to guess</p>
 
-          <button class="btn bg-main w-full rounded-3xl capitalize">
+          <button
+            @click="handleSubmit"
+            class="btn bg-main w-full rounded-3xl capitalize"
+          >
             Submit
           </button>
           <router-link :to="{ name: 'home-lovebox-details' }">
@@ -54,6 +69,19 @@
             </button>
           </router-link>
         </form>
+        <div v-if="formProceed" class="flex flex-col gap-7 my-4 md:w-[300px]">
+          <small class="font-medium leading-6 text-black flex items-center">
+            <span
+              class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
+            ></span>
+            Limit exceeded! Proceed to view sender</small
+          >
+          <router-link :to="{ name: 'home-lovebox-details' }">
+            <button class="btn bg-main w-full rounded-3xl capitalize">
+              Proceed
+            </button>
+          </router-link>
+        </div>
         <p class="text-sm font-medium pt-4">
           Not to worry, we will not notify the sender on wrong guesses
         </p>
@@ -71,8 +99,10 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
+import { useVuelidate } from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 // progress bar
-const progress = ref(70);
+const progress = ref<number>(70);
 
 const animateCircle: string[] = [
   "/img/circle-1.svg",
@@ -85,7 +115,7 @@ const animateCircle: string[] = [
   "/img/circle-4.svg",
 ];
 
-const currentAnimateIndex = ref(0);
+const currentAnimateIndex = ref<number>(0);
 
 const changeImage = () => {
   currentAnimateIndex.value =
@@ -101,6 +131,36 @@ onMounted(() => {
     return () => clearInterval(intervalidCircle);
   });
 });
+
+// trial count
+const trialCount = ref<number>(1);
+interface name {
+  name: string;
+}
+const form = ref<boolean>(true);
+const formProceed = ref<boolean>(false);
+const placeholder = ref<name>({
+  name: "",
+});
+// Form Validation
+const rules = {
+  name: { required },
+};
+const v$ = useVuelidate(rules, placeholder);
+
+const handleSubmit = () => {
+  if (v$.value.$invalid) {
+    v$.value.$validate();
+    scrollTo({ top: 0 });
+    trialCount.value += 1;
+    if (trialCount.value >= 3) {
+      form.value = false;
+      formProceed.value = true;
+    }
+  } else {
+    console.log(placeholder.value);
+  }
+};
 </script>
 
 <style scoped>
