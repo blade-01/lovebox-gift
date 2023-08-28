@@ -42,17 +42,18 @@
             placeholder="Placeholder"
           />
           <p class="text-sm font-medium">You have three windows to guess</p>
-        </form>
-        <div class="text-center flex flex-col gap-5 md:w-[300px]">
+
           <button class="btn bg-main w-full rounded-3xl capitalize">
             Submit
           </button>
-          <button
-            class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
-          >
-            Skip
-          </button>
-        </div>
+          <router-link :to="{ name: 'home-lovebox-details' }">
+            <button
+              class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
+            >
+              Skip
+            </button>
+          </router-link>
+        </form>
         <p class="text-sm font-medium pt-4">
           Not to worry, we will not notify the sender on wrong guesses
         </p>
