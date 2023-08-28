@@ -58,7 +58,7 @@ const changeText = () => {
 };
 
 // Automatically change text every 1 seconds
-const intervalId = setInterval(changeText, 1000);
+const intervalId = setInterval(changeText, 1100);
 
 // Cleanup when component is unmounted
 onMounted(() => {

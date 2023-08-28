@@ -18,17 +18,17 @@ const progress = ref<number>(0);
 const simulateProgress = () => {
   const interval = setInterval(() => {
     progress.value += 1;
-    if (progress.value >= 100) {
+    if (progress.value >= 50) {
       clearInterval(interval);
     }
   }, 100);
 };
 
-const showBlackBackground: boolean = ref(false);
-const showPurpleBackground: boolean = ref(false);
+const showBlackBackground = ref<boolean>(false);
+const showPurpleBackground = ref<boolean>(false);
 
 watch(progress, (newProgress) => {
-  if (newProgress === 100) {
+  if (newProgress === 50) {
     showBlackBackground.value = true;
     setTimeout(() => {
       showBlackBackground.value = false;
