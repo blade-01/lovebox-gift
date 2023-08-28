@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import HomeUnboxed from "../views/HomeUnboxed.vue";
 import HomeGift from "../views/HomeGift.vue";
+import HomeLoveBoxDetails from "../views/HomeLoveBoxDetails.vue";
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: "/home-gift",
     name: "home-gift",
     component: () => HomeGift,
+  },
+  {
+    path: "/home-lovebox-details",
+    name: "home-lovebox-details",
+    component: () => HomeLoveBoxDetails,
   },
 ];
 
