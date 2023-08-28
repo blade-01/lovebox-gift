@@ -15,47 +15,32 @@
         <div class="progress-bar">
           <div class="progress" :style="{ width: `${progress}%` }"></div>
         </div>
-        <div class="flex flex-col gap-4">
-          <h1
-            class="font-bold text-center text-lg md:text-4xl text-black tracking-wide"
+        <h1
+          class="font-bold text-center text-lg md:text-4xl text-black tracking-wide"
+        >
+          Lovebox Details
+        </h1>
+        <div class="text-center flex flex-col gap-2 my-5">
+          <img
+            class="mx-auto"
+            src="/img/lovebox-sender.svg"
+            alt="lovebox-sender"
+          />
+          <h1 class="text-2xl font-semibold leading-8">Thoughtfully sent by</h1>
+          <p>“Moboluwaduro Peters”</p>
+        </div>
+        <div class="text-center flex flex-col gap-5 md:w-[300px]">
+          <p class="font-medium leading-6">Your Package Number</p>
+          <button
+            class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize"
           >
-            Unveil the sender:
-          </h1>
-          <p
-            class="font-bold text-center text-lg md:text-4xl text-black tracking-wide"
-          >
-            Can you guess?
+            5871630601
+          </button>
+          <p class="leading-6 font-medium py-1">
+            To track your shipment, click
+            <span class="text-main underline font-bold">here.</span>
           </p>
         </div>
-        <form
-          autocomplete="off"
-          @submit.prevent
-          class="flex flex-col gap-4 my-4 md:w-[300px]"
-        >
-          <div class="flex justify-between items-center flex-wrap gap-2">
-            <p class="text-sm font-medium">Gifted from who?</p>
-            <p class="text-sm font-medium">1/3 trials</p>
-          </div>
-          <input
-            class="w-full h-12 bg-gray-100 p-2 rounded-lg"
-            type="text"
-            placeholder="Placeholder"
-          />
-          <p class="text-sm font-medium">You have three windows to guess</p>
-        </form>
-        <div class="text-center flex flex-col gap-5 md:w-[300px]">
-          <button class="btn bg-main w-full rounded-3xl capitalize">
-            Submit
-          </button>
-          <button
-            class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
-          >
-            Skip
-          </button>
-        </div>
-        <p class="text-sm font-medium pt-4">
-          Not to worry, we will not notify the sender on wrong guesses
-        </p>
       </div>
     </div>
     <div class="animation-container">
@@ -71,7 +56,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 // progress bar
-const progress = ref(70);
+const progress = ref(100);
 
 const animateCircle: string[] = [
   "/img/circle-1.svg",
