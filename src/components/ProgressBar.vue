@@ -6,6 +6,7 @@
   <div v-if="showPurpleBackground" class="purple-overlay"></div>
   <div class="circle-container" v-if="ripple === true">
     <RippleCircle />
+    <RippleSquare />
   </div>
 </template>
 

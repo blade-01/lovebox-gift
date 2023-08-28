@@ -15,8 +15,8 @@ import { ref, onMounted } from "vue";
 const squares = ref<any>([]);
 
 const createSquare = (x: number, y: number) => {
-  const numSquare = 3; // Number of squares to create for the ripple effect
-  const initialSize: number = 400;
+  const numSquare = 1; // Number of squares to create for the ripple effect
+  const initialSize: number = 200;
 
   for (let i = 0; i < numSquare; i++) {
     const square = {
@@ -37,7 +37,7 @@ const createSquare = (x: number, y: number) => {
       square.size += 1;
       square.style.width = `${square.size}px`;
       square.style.height = `${square.size}px`;
-    }, 10 * (i + 1)); // Adjust the interval for each square to create the ripple effect
+    }, 8 * (i + 1)); // Adjust the interval for each square to create the ripple effect
   }
 };
 
@@ -63,8 +63,8 @@ onMounted(() => {
 .square {
   position: absolute;
   height: 300px;
-  width: 200px;
-  border: 1px solid #644ae2;
+  width: 300px;
+  background-color: #644ae2;
   transform: translate(-50%, -50%);
   pointer-events: none;
   animation: ripple 2s linear infinite;

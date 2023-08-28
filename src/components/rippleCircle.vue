@@ -15,7 +15,7 @@ import { ref, onMounted } from "vue";
 const circles = ref<any>([]);
 
 const createCircle = (x: number, y: number) => {
-  const numCircles = 3; // Number of circles to create for the ripple effect
+  const numCircles = 1; // Number of circles to create for the ripple effect
   const initialSize: number = 400;
 
   for (let i = 0; i < numCircles; i++) {
