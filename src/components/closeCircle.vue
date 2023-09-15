@@ -28,7 +28,7 @@ const createCircle = (x: number, y: number) => {
         top: `${y}px`,
         width: `${initialSize}px`,
         height: `${initialSize}px`,
-        animationDelay: `${i * 0.18}s`, // Delay the animation of each circle
+        animationDelay: `${i * 0.2}s`, // Delay the animation of each circle
       },
     };
     circles.value.push(circle);
