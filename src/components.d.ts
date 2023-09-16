@@ -8,6 +8,7 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     BackgroundAnimate: typeof import('./components/BackgroundAnimate.vue')['default']
+    CloseCircle: typeof import('./components/closeCircle.vue')['default']
     DynamicText: typeof import('./components/DynamicText.vue')['default']
     ProgressBar: typeof import('./components/ProgressBar.vue')['default']
     RippleCircle: typeof import('./components/rippleCircle.vue')['default']
