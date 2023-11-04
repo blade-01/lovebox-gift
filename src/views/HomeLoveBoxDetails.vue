@@ -75,7 +75,6 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
-// progress bar
 const progress = ref(100);
 
 const animateCircle: string[] = [
