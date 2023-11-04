@@ -11,6 +11,7 @@ module.exports = {
         darkBg: "#1E1E2E",
         darkBgSec: "#27293D",
         main: "#644AE2",
+        priBlack: "#2A3538",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
