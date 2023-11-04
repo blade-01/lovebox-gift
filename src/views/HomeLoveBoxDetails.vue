@@ -45,7 +45,9 @@
             </button>
             <p class="leading-6 font-medium py-1 text-sm">
               To track your shipment, click
-              <span class="text-main underline font-bold">here.</span>
+              <span class="text-main underline font-bold" @click="trackShipment"
+                >here.</span
+              >
             </p>
             <p class="leading-6 font-medium py-3 text-base">
               Tell the world about Love Box! click
@@ -75,7 +77,22 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
+
+// router
+const router = useRouter();
+const route = useRoute();
 const progress = ref(100);
+
+// Track shipment
+const trackShipment = () => {
+  router.push({
+    name: "home-track-shipment",
+    query: {
+      name: route.query.name,
+    },
+  });
+};
 
 const animateCircle: string[] = [
   "/img/circle-1.svg",
