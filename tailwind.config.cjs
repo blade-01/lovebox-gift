@@ -12,6 +12,7 @@ module.exports = {
         darkBgSec: "#27293D",
         main: "#644AE2",
         priBlack: "#2A3538",
+        priGray: "#4F5D6D",
         secBg: "#FAFAFA",
       },
       fontFamily: {

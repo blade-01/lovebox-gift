@@ -10,31 +10,28 @@
           alt="logo"
       /></router-link>
       <div
-        class="flex flex-col items-center place-content-center m-auto bg-white shadow-xl rounded-3xl py-10 px-6 xl:py-6 xl:px-2 md:w-[488px] relative z-[9999]"
+        class="flex flex-col items-center place-content-center m-auto bg-secBg shadow-xl rounded-3xl py-8 px-5 md:w-[488px] relative z-[9999] drop-shadow"
       >
         <div class="progress-bar">
           <div class="progress" :style="{ width: `${progress}%` }"></div>
         </div>
-        <h1
+        <!-- <h1
           class="font-bold text-center text-lg md:text-4xl text-black tracking-wide"
         >
           Lovebox Details
-        </h1>
-        <div class="text-center flex flex-col gap-2 my-5">
+        </h1> -->
+        <div class="text-center flex flex-col gap-2 my-4">
           <img
             class="mx-auto"
             src="/img/lovebox-sender.svg"
             alt="lovebox-sender"
           />
-          <h1 class="text-2xl font-semibold leading-8">
-            <span v-if="$route.query.name">Correct!</span> Thoughtfully sent by
+          <h1 class="text-2xl font-semibold leading-8 text-priBlack">
+            Correct! Thoughtfully sent by
           </h1>
-          <p>“Moboluwaduro Peters”</p>
+          <p>“{{ $route.query.name }}”</p>
         </div>
-        <div
-          :class="$route.query.name ? 'gap-2' : 'gap-5'"
-          class="text-center flex flex-col md:w-[300px]"
-        >
+        <div class="text-center flex flex-col gap-2 md:w-[300px]">
           <p class="font-medium leading-6">Your Package Number</p>
           <button
             class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize"
