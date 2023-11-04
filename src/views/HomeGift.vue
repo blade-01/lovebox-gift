@@ -9,82 +9,90 @@
           src="/img/logo.svg"
           alt="logo"
       /></router-link>
-      <div
-        class="flex flex-col items-center place-content-center m-auto bg-white shadow-xl rounded-3xl py-10 px-6 xl:py-6 xl:px-2 md:w-[488px] relative z-[9999]"
-      >
-        <div class="progress-bar">
-          <div class="progress" :style="{ width: `${progress}%` }"></div>
-        </div>
-        <div class="flex flex-col gap-4">
-          <h1
-            class="font-bold text-center text-lg md:text-4xl text-black tracking-wide"
+      <div class="p-0.5">
+        <div
+          class="flex flex-col items-center place-content-center m-auto bg-secBg shadow-xl rounded-3xl py-8 px-5 md:w-[488px] relative z-[9999] drop-shadow"
+        >
+          <div class="progress-bar">
+            <div class="progress" :style="{ width: `${progress}%` }"></div>
+          </div>
+          <div
+            class="flex flex-col gap-4 text-priBlack text-[22px] text-center font-semibold tracking-wide"
           >
-            Unveil the sender:
-          </h1>
-          <p
-            class="font-bold text-center text-lg md:text-4xl text-black tracking-wide"
+            <p class="leading-9">
+              Unveil the sender: <br />
+              <span>Can you guess?</span>
+            </p>
+          </div>
+          <form
+            autocomplete="off"
+            @submit.prevent
+            class="flex flex-col gap-4 my-4 md:w-[300px]"
+            v-if="form"
           >
-            Can you guess?
+            <div
+              class="flex justify-between items-center flex-wrap gap-2 text-priBlack"
+            >
+              <p class="text-sm font-medium">Gifted from who?</p>
+              <p class="text-sm font-medium">{{ trialCount }}/3 trials</p>
+            </div>
+            <small
+              class="font-medium leading-6 text-black flex items-center"
+              :class="{ 'err-message': v$.name.$error }"
+              v-if="v$.name.$error"
+            >
+              <span
+                class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
+              ></span>
+              Your guess is wrong, give it 2 more shot!</small
+            >
+            <input
+              class="w-full h-12 bg-gray-100 p-2 rounded-lg outline-none"
+              type="text"
+              v-model="placeholder.name"
+              placeholder="Placeholder"
+            />
+            <p class="text-sm font-medium">You have three windows to guess</p>
+
+            <button
+              @click="handleSubmit"
+              class="btn bg-main w-full rounded-3xl capitalize"
+            >
+              Yes
+            </button>
+            <router-link :to="{ name: 'home-lovebox-details' }">
+              <button
+                class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
+              >
+                No, Proceed
+              </button>
+            </router-link>
+          </form>
+          <div v-if="formProceed" class="flex flex-col gap-7 my-4 md:w-[300px]">
+            <small class="font-medium leading-6 text-black flex items-center">
+              <span
+                class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
+              ></span>
+              Limit exceeded! Proceed to view sender</small
+            >
+            <router-link :to="{ name: 'home-lovebox-details' }">
+              <button class="btn bg-main w-full rounded-3xl capitalize">
+                Proceed
+              </button>
+            </router-link>
+          </div>
+          <p class="text-sm font-medium pt-4">
+            Not to worry, we will not notify the sender on wrong guesses
           </p>
         </div>
-        <form
-          autocomplete="off"
-          @submit.prevent
-          class="flex flex-col gap-4 my-4 md:w-[300px]"
-          v-if="form"
-        >
-          <div class="flex justify-between items-center flex-wrap gap-2">
-            <p class="text-sm font-medium">Gifted from who?</p>
-            <p class="text-sm font-medium">{{ trialCount }}/3 trials</p>
-          </div>
-          <small
-            class="font-medium leading-6 text-black flex items-center"
-            :class="{ 'err-message': v$.name.$error }"
-            v-if="v$.name.$error"
+        <div class="text-center pt-4">
+          <a
+            href="www.lovebox.com"
+            class="text-main font-bold text-sm underline"
           >
-            <span
-              class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
-            ></span>
-            Your guess is wrong, give it 2 more shot!</small
-          >
-          <input
-            class="w-full h-12 bg-gray-100 p-2 rounded-lg outline-none"
-            type="text"
-            v-model="placeholder.name"
-            placeholder="Placeholder"
-          />
-          <p class="text-sm font-medium">You have three windows to guess</p>
-
-          <button
-            @click="handleSubmit"
-            class="btn bg-main w-full rounded-3xl capitalize"
-          >
-            Submit
-          </button>
-          <router-link :to="{ name: 'home-lovebox-details' }">
-            <button
-              class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
-            >
-              Skip
-            </button>
-          </router-link>
-        </form>
-        <div v-if="formProceed" class="flex flex-col gap-7 my-4 md:w-[300px]">
-          <small class="font-medium leading-6 text-black flex items-center">
-            <span
-              class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
-            ></span>
-            Limit exceeded! Proceed to view sender</small
-          >
-          <router-link :to="{ name: 'home-lovebox-details' }">
-            <button class="btn bg-main w-full rounded-3xl capitalize">
-              Proceed
-            </button>
-          </router-link>
+            www.lovebox.com
+          </a>
         </div>
-        <p class="text-sm font-medium pt-4">
-          Not to worry, we will not notify the sender on wrong guesses
-        </p>
       </div>
     </div>
     <div class="animation-container">
@@ -185,5 +193,10 @@ const handleSubmit = () => {
 }
 .progress {
   @apply h-full bg-[#644AE2];
+}
+
+.drop-shadow {
+  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px
+    #00000026;
 }
 </style>
