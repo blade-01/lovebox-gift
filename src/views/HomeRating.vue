@@ -38,28 +38,6 @@
                   <p class="text-priGray text-sm font-medium">4 Packages</p>
                 </div>
               </div>
-              <div
-                class="grid grid-cols-3 place-items-center border-[1px] border-priGray rounded-lg py-2 px-4 md:py-3 md:px-6"
-                v-for="iteration in 4"
-              >
-                <div
-                  class="text-center"
-                  :class="{
-                    'border-x-[1px] border-priGray px-2 md:px-5': index === 1,
-                    'mr-auto pr-2 md:pr-0': index === 0,
-                    'ml-auto pl-2 md:pl-0': index === 2,
-                  }"
-                  v-for="(ship, index) in shippingLists"
-                  :key="index + iteration * shippingLists.length"
-                >
-                  <p class="text-sm text-priBlack font-semibold">
-                    {{ ship.title }}
-                  </p>
-                  <p class="text-[12px] text-priGray capitalize">
-                    {{ ship.content }}
-                  </p>
-                </div>
-              </div>
               <p class="leading-6 font-medium py-3 text-base text-center">
                 Tell the world about Love Box! click
                 <span class="text-main underline font-bold">here.</span>
@@ -89,21 +67,6 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
-// grid container
-const shippingLists = ref([
-  {
-    title: "Gift Card",
-    content: "Dummy text",
-  },
-  {
-    title: "50,000 NGN",
-    content: "Any Store",
-  },
-  {
-    title: "Store Name",
-    content: "Dummy Text",
-  },
-]);
 const progress = ref(100);
 
 const animateCircle: string[] = [

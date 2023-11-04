@@ -51,7 +51,9 @@
             </p>
             <p class="leading-6 font-medium py-3 text-base">
               Tell the world about Love Box! click
-              <span class="text-main underline font-bold">here.</span>
+              <span class="text-main underline font-bold" @click="handleRating"
+                >here.</span
+              >
             </p>
           </div>
         </div>
@@ -91,6 +93,13 @@ const trackShipment = () => {
     query: {
       name: route.query.name,
     },
+  });
+};
+
+// rating
+const handleRating = () => {
+  router.push({
+    name: "home-rating",
   });
 };
 

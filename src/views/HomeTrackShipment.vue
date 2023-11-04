@@ -62,7 +62,11 @@
               </div>
               <p class="leading-6 font-medium py-3 text-base text-center">
                 Tell the world about Love Box! click
-                <span class="text-main underline font-bold">here.</span>
+                <span
+                  class="text-main underline font-bold"
+                  @click="handleRating"
+                  >here.</span
+                >
               </p>
             </div>
           </div>
@@ -89,6 +93,16 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
+
+// home rating
+const router = useRouter();
+const handleRating = () => {
+  router.push({
+    name: "home-rating",
+  });
+};
+
 // grid container
 const shippingLists = ref([
   {
