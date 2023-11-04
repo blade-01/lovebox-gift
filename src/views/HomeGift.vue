@@ -13,77 +13,82 @@
         <div
           class="flex flex-col items-center place-content-center m-auto bg-secBg shadow-xl rounded-3xl py-8 px-5 md:w-[488px] relative z-[9999] drop-shadow"
         >
-          <div class="progress-bar">
-            <div class="progress" :style="{ width: `${progress}%` }"></div>
-          </div>
-          <div
-            class="flex flex-col gap-4 text-priBlack text-[22px] text-center font-semibold tracking-wide"
-          >
-            <p class="leading-9">
-              Unveil the sender: <br />
-              <span>Can you guess?</span>
+          <div class="w-full">
+            <div class="progress-bar">
+              <div class="progress" :style="{ width: `${progress}%` }"></div>
+            </div>
+            <div
+              class="flex flex-col gap-4 text-priBlack text-[22px] text-center font-semibold tracking-wide"
+            >
+              <p class="leading-9">
+                Unveil the sender: <br />
+                <span>Can you guess?</span>
+              </p>
+            </div>
+            <form
+              autocomplete="off"
+              @submit.prevent
+              class="flex flex-col gap-4 my-4 md:w-[300px]"
+              v-if="form"
+            >
+              <div
+                class="flex justify-between items-center flex-wrap gap-2 text-priBlack"
+              >
+                <p class="text-sm font-medium">Gifted from who?</p>
+                <p class="text-sm font-medium">{{ trialCount }}/3 trials</p>
+              </div>
+              <small
+                class="font-medium leading-6 text-black flex items-center"
+                :class="{ 'err-message': v$.name.$error }"
+                v-if="v$.name.$error"
+              >
+                <span
+                  class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
+                ></span>
+                Your guess is wrong, give it 2 more shot!</small
+              >
+              <input
+                class="w-full h-12 bg-gray-100 p-2 rounded-lg outline-none"
+                type="text"
+                v-model="placeholder.name"
+                placeholder="Placeholder"
+              />
+              <p class="text-sm font-medium">You have three windows to guess</p>
+
+              <button
+                @click="handleSubmit"
+                class="btn bg-main w-full rounded-3xl capitalize"
+              >
+                Yes
+              </button>
+              <router-link :to="{ name: 'home-lovebox-details' }">
+                <button
+                  class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
+                >
+                  No, Proceed
+                </button>
+              </router-link>
+            </form>
+            <div
+              v-if="formProceed"
+              class="flex flex-col gap-7 my-4 md:w-[300px]"
+            >
+              <small class="font-medium leading-6 text-black flex items-center">
+                <span
+                  class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
+                ></span>
+                Limit exceeded! Proceed to view sender</small
+              >
+              <router-link :to="{ name: 'home-lovebox-details' }">
+                <button class="btn bg-main w-full rounded-3xl capitalize">
+                  Proceed
+                </button>
+              </router-link>
+            </div>
+            <p class="text-sm font-medium pt-4">
+              Not to worry, we will not notify the sender on wrong guesses
             </p>
           </div>
-          <form
-            autocomplete="off"
-            @submit.prevent
-            class="flex flex-col gap-4 my-4 md:w-[300px]"
-            v-if="form"
-          >
-            <div
-              class="flex justify-between items-center flex-wrap gap-2 text-priBlack"
-            >
-              <p class="text-sm font-medium">Gifted from who?</p>
-              <p class="text-sm font-medium">{{ trialCount }}/3 trials</p>
-            </div>
-            <small
-              class="font-medium leading-6 text-black flex items-center"
-              :class="{ 'err-message': v$.name.$error }"
-              v-if="v$.name.$error"
-            >
-              <span
-                class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
-              ></span>
-              Your guess is wrong, give it 2 more shot!</small
-            >
-            <input
-              class="w-full h-12 bg-gray-100 p-2 rounded-lg outline-none"
-              type="text"
-              v-model="placeholder.name"
-              placeholder="Placeholder"
-            />
-            <p class="text-sm font-medium">You have three windows to guess</p>
-
-            <button
-              @click="handleSubmit"
-              class="btn bg-main w-full rounded-3xl capitalize"
-            >
-              Yes
-            </button>
-            <router-link :to="{ name: 'home-lovebox-details' }">
-              <button
-                class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
-              >
-                No, Proceed
-              </button>
-            </router-link>
-          </form>
-          <div v-if="formProceed" class="flex flex-col gap-7 my-4 md:w-[300px]">
-            <small class="font-medium leading-6 text-black flex items-center">
-              <span
-                class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
-              ></span>
-              Limit exceeded! Proceed to view sender</small
-            >
-            <router-link :to="{ name: 'home-lovebox-details' }">
-              <button class="btn bg-main w-full rounded-3xl capitalize">
-                Proceed
-              </button>
-            </router-link>
-          </div>
-          <p class="text-sm font-medium pt-4">
-            Not to worry, we will not notify the sender on wrong guesses
-          </p>
         </div>
         <div class="text-center pt-4">
           <a
@@ -189,7 +194,7 @@ const handleSubmit = () => {
 }
 
 .progress-bar {
-  @apply h-1 bg-primary border-[1px] border-[#644AE2] rounded-lg overflow-hidden w-[250px] md:w-[280px] m-[20px];
+  @apply h-1  bg-primary border-[1px] border-[#644AE2] rounded-lg overflow-hidden w-[250px] md:w-[280px] mx-auto my-[20px];
 }
 .progress {
   @apply h-full bg-[#644AE2];

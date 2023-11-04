@@ -132,7 +132,7 @@ onMounted(() => {
 }
 
 .progress-bar {
-  @apply h-1 bg-primary border-[1px] border-[#644AE2] rounded-lg overflow-hidden w-[250px] md:w-[280px] m-[20px];
+  @apply h-1  bg-primary border-[1px] border-[#644AE2] rounded-lg overflow-hidden w-[250px] md:w-[280px] mx-auto my-[20px];
 }
 .progress {
   @apply h-full bg-[#644AE2];
