@@ -9,9 +9,9 @@
           src="/img/logo.svg"
           alt="logo"
       /></router-link>
-      <div class="p-0.5">
+      <div class="p-0.5 relative z-[9999]">
         <div
-          class="flex flex-col items-center place-content-center m-auto bg-secBg shadow-xl rounded-3xl py-8 px-5 md:w-[488px] relative z-[9999] drop-shadow"
+          class="flex flex-col items-center place-content-center m-auto bg-secBg shadow-xl rounded-3xl py-8 px-5 md:w-[488px] drop-shadow"
         >
           <div class="w-full">
             <div class="progress-bar">
