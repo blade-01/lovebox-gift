@@ -28,7 +28,7 @@
             <form
               autocomplete="off"
               @submit.prevent
-              class="flex flex-col gap-4 my-4 md:w-[300px]"
+              class="flex flex-col gap-4 my-4"
               v-if="form"
             >
               <div
@@ -69,10 +69,7 @@
                 </button>
               </router-link>
             </form>
-            <div
-              v-if="formProceed"
-              class="flex flex-col gap-7 my-4 md:w-[300px]"
-            >
+            <div v-if="formProceed" class="flex flex-col gap-7 my-4">
               <small class="font-medium leading-6 text-black flex items-center">
                 <span
                   class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"

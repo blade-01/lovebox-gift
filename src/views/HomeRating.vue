@@ -14,30 +14,66 @@
           class="flex flex-col items-center place-content-center m-auto bg-secBg shadow-xl rounded-3xl py-8 px-5 md:w-[488px] relative z-[9999] drop-shadow"
         >
           <div class="w-full">
-            <div class="progress-bar">
-              <div class="progress" :style="{ width: `${progress}%` }"></div>
-            </div>
             <div class="text-center flex flex-col gap-2 my-4">
-              <img
-                class="mx-auto"
-                src="/img/lovebox-sender.svg"
-                alt="lovebox-sender"
-              />
-              <h1 class="text-2xl font-semibold leading-8 text-priBlack">
-                Correct! Thoughtfully sent by
+              <img class="mx-auto" src="/img/home-mark.svg" alt="home mark" />
+              <h1 class="text-xl font-semibold leading-7 text-priBlack">
+                Unboxed and finished! Rate us
               </h1>
-              <p class="text-priGray text-lg leading-6">
-                “{{ $route.query.name }}”
-              </p>
             </div>
             <div class="grid grid-cols-1 gap-3">
-              <div class="flex justify-between items-center">
-                <p class="text-priBlack text-sm font-bold">Sample HTML text</p>
-                <div class="flex gap-1 items-center">
-                  <img src="/img/trash.svg" alt="trash" />
-                  <p class="text-priGray text-sm font-medium">4 Packages</p>
+              <div class="grid grid-cols-1 gap-2">
+                <p class="text-sm leading-5 font-medium text-priGray">
+                  How Satisfied are you with LoveBox?
+                </p>
+                <div class="grid grid-cols-5 gap-2">
+                  <div
+                    v-for="(count, index) in rate"
+                    :key="index"
+                    class="h-[48px] lg:h-[60px] rounded-lg text-center flex items-center justify-center font-medium text-xl cursor-pointer"
+                    :class="
+                      count.isActive
+                        ? 'bg-main text-white'
+                        : 'bg-[#E9E6FA] text-main'
+                    "
+                    @click="submitRating(count)"
+                  >
+                    {{ count.rate }}
+                  </div>
+                </div>
+                <div
+                  class="flex justify-between items-center text-priGray text-[12px]"
+                >
+                  <p>Not Satisfied</p>
+                  <p>Very Satisfied</p>
+                </div>
+                <div v-if="shortNote" class="mt-3">
+                  <div class="flex justify-between items-center font-medium">
+                    <p class="text-sm leading-5">Write a short review</p>
+                    <p class="text-[12px] leading-5">
+                      {{ characterCount }}/50 Characters
+                    </p>
+                  </div>
+                  <textarea
+                    v-model="reviewText"
+                    type="text"
+                    class="bg-[#F3F2F5] rounded-lg h-20 w-full px-4 py-2 outline-none mt-2 text-[#989898]"
+                    placeholder="Placeholder"
+                    @input="updateCharacterCount"
+                  />
                 </div>
               </div>
+              <button
+                v-if="shortNote"
+                @click="handleSubmit"
+                class="btn bg-main border-[1px] border-main text-white md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-[48px]"
+              >
+                Submit
+              </button>
+              <button
+                class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-[48px]"
+              >
+                No, Close
+              </button>
               <p class="leading-6 font-medium py-3 text-base text-center">
                 Tell the world about Love Box! click
                 <span class="text-main underline font-bold">here.</span>
@@ -67,6 +103,57 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
+
+// home rating
+const router = useRouter();
+const route = useRoute();
+const characterCount = ref(0);
+const reviewText = ref("");
+
+const updateCharacterCount = () => {
+  characterCount.value = reviewText.value.length;
+
+  // Limit the text to 50 characters
+  if (characterCount.value > 50) {
+    reviewText.value = reviewText.value.slice(0, 50);
+    characterCount.value = 50;
+  }
+};
+
+// short note
+const shortNote = ref(false);
+// rating
+const rate = ref([
+  { id: 1, rate: 1, isActive: false },
+  { id: 2, rate: 2, isActive: false },
+  { id: 3, rate: 3, isActive: false },
+  { id: 4, rate: 4, isActive: false },
+  { id: 5, rate: 5, isActive: false },
+]);
+const submitRating = (count: any) => {
+  // Iterate through the rate array and update isActive property
+  rate.value.forEach((item) => {
+    if (item.id === count.id) {
+      item.isActive = !item.isActive;
+    } else {
+      item.isActive = false;
+    }
+  });
+
+  shortNote.value = count.isActive;
+  // submit rating to router
+  router.push({
+    query: {
+      rating: count.rate,
+    },
+  });
+};
+
+const handleSubmit = () => {
+  console.log(reviewText.value, route.query.rating);
+};
+
 const progress = ref(100);
 
 const animateCircle: string[] = [
