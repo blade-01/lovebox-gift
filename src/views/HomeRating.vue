@@ -76,7 +76,9 @@
               </button>
               <p class="leading-6 font-medium py-3 text-base text-center">
                 Tell the world about Love Box! click
-                <span class="text-main underline font-bold">here.</span>
+                <span class="text-main underline font-bold cursor-pointer"
+                  >here.</span
+                >
               </p>
             </div>
           </div>
@@ -84,7 +86,7 @@
         <div class="text-center pt-4">
           <a
             href="www.lovebox.com"
-            class="text-main font-bold text-sm underline"
+            class="text-main font-bold text-sm underline cursor-pointer"
           >
             www.lovebox.com
           </a>

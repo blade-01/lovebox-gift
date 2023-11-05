@@ -47,7 +47,7 @@
         <div class="text-center pt-4">
           <a
             href="www.lovebox.com"
-            class="text-main font-bold text-sm underline"
+            class="text-main font-bold text-sm underline cursor-pointer"
           >
             www.lovebox.com
           </a>

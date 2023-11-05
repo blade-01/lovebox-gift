@@ -45,13 +45,17 @@
             </button>
             <p class="leading-6 font-medium py-1 text-sm">
               To track your shipment, click
-              <span class="text-main underline font-bold" @click="trackShipment"
+              <span
+                class="text-main underline font-bold cursor-pointer"
+                @click="trackShipment"
                 >here.</span
               >
             </p>
             <p class="leading-6 font-medium py-3 text-base">
               Tell the world about Love Box! click
-              <span class="text-main underline font-bold" @click="handleRating"
+              <span
+                class="text-main underline font-bold cursor-pointer"
+                @click="handleRating"
                 >here.</span
               >
             </p>
@@ -60,7 +64,7 @@
         <div class="text-center pt-4">
           <a
             href="www.lovebox.com"
-            class="text-main font-bold text-sm underline"
+            class="text-main font-bold text-sm underline cursor-pointer"
           >
             www.lovebox.com
           </a>
