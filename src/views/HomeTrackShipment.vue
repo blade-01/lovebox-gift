@@ -36,7 +36,7 @@
               </p>
               <p class="font-medium text-base leading-5">
                 You’ve got a note from the sender,
-                <span class="text-main underline" @click="viewNote">view</span>
+                <span class="text-main underline cursor-pointer" @click="viewNote">view</span>
               </p>
             </div>
             <div class="grid grid-cols-1 gap-3">
