@@ -18,6 +18,7 @@ module.exports = {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
         urbanist: ["Urbanist", "sans-serif"],
+        meowScript: ["Meow Script", "cursive"],
       },
       fontSize: {
         nl: ["56px", "64px"],
