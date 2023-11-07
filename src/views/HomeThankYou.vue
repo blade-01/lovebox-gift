@@ -16,11 +16,6 @@
           <div class="progress-bar">
             <div class="progress" :style="{ width: `${progress}%` }"></div>
           </div>
-          <h1
-            class="font-semibold text-center text-lg md:text-4xl text-black tracking-wide"
-          >
-            Lovebox Details
-          </h1>
           <div class="text-center flex flex-col gap-2 my-4">
             <img
               class="mx-auto"
@@ -28,29 +23,24 @@
               alt="lovebox-sender"
             />
             <h1 class="text-2xl font-semibold leading-8 text-priBlack">
-              Correct! Thoughtfully sent by
+              Thank you!
             </h1>
-            <p class="text-priGray text-lg leading-6">
-              “{{ $route.query.name }}”
+            <p class="text-priGray text-base leading-6 max-w-[327px] py-4">
+              We hope you enjoyed your experience with Lovebox. We would love
+              for you to join our customer family.
             </p>
           </div>
-          <div class="text-center flex flex-col gap-2 md:w-[300px]">
-            <p class="font-medium leading-6 text-priBlack text-[15px]">
-              Your Package Number
-            </p>
+          <div class="text-center flex flex-col gap-4 md:w-[300px]">
             <button
-              class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize"
+              class="btn bg-main text-white md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-12"
             >
-              5871630601
+              Download our App
             </button>
-            <p class="leading-6 font-medium py-1 text-sm">
-              To track your shipment, click
-              <span
-                class="text-main underline font-bold cursor-pointer"
-                @click="trackShipment"
-                >here.</span
-              >
-            </p>
+            <button
+              class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-12"
+            >
+              View our website
+            </button>
             <p class="leading-6 font-medium py-3 text-base">
               Tell the world about Love Box! click
               <span
@@ -61,14 +51,14 @@
             </p>
           </div>
         </div>
-        <div class="text-center pt-4">
+        <!-- <div class="text-center pt-4">
           <a
             href="www.lovebox.com"
             class="text-main font-bold text-sm underline cursor-pointer"
           >
             www.lovebox.com
           </a>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="animation-container">
@@ -89,16 +79,6 @@ import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
 const progress = ref(100);
-
-// Track shipment
-const trackShipment = () => {
-  router.push({
-    name: "home-track-shipment",
-    query: {
-      name: route.query.name,
-    },
-  });
-};
 
 // rating
 const handleRating = () => {

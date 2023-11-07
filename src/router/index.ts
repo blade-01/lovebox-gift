@@ -5,6 +5,7 @@ import HomeGift from "../views/HomeGift.vue";
 import HomeLoveBoxDetails from "../views/HomeLoveBoxDetails.vue";
 import HomeTrackShipment from "../views/HomeTrackShipment.vue";
 import HomeRating from "../views/HomeRating.vue";
+import HomeThankYou from "../views/HomeThankYou.vue";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: "/home-rating",
     name: "home-rating",
     component: () => HomeRating,
+  },
+  {
+    path: "/home-thank-you",
+    name: "home-thank-you",
+    component: () => HomeThankYou,
   },
 ];
 

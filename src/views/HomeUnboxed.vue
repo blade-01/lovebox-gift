@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-full xl:h-screen mt-10 xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+    class="w-full h-full 1xl:h-screen mt-10 1xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
     <div class="container">
       <router-link :to="{ name: 'home' }">
@@ -13,35 +13,33 @@
         <div
           class="flex flex-col items-center place-content-center m-auto bg-secBg shadow-xl rounded-3xl py-8 px-5 md:w-[488px] drop-shadow"
         >
-          <div class="w-full">
-            <div class="progress-bar">
-              <div class="progress" :style="{ width: `${progress}%` }"></div>
-            </div>
-            <h1 class="font-semibold text-center text-2xl text-priBlack">
-              Lovebox unboxed!
-            </h1>
-            <img
-              class="w-auto md:w-[391.13px] md:h-[359.69px]"
-              src="/img/love-unboxed.svg"
-              alt="love-unboxed"
-            />
-            <div class="text-center flex flex-col gap-4">
-              <p class="text-priBlack font-semibold text-base">
-                Want to guess the sender of this Lovebox?
-              </p>
-              <router-link :to="{ name: 'home-gift' }">
-                <button class="btn bg-main w-full rounded-3xl capitalize">
-                  Yes
-                </button>
-              </router-link>
-              <router-link :to="{ name: 'home-lovebox-details' }">
-                <button
-                  class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
-                >
-                  No, Proceed
-                </button>
-              </router-link>
-            </div>
+          <div class="progress-bar">
+            <div class="progress" :style="{ width: `${progress}%` }"></div>
+          </div>
+          <h1 class="font-semibold text-center text-2xl text-priBlack">
+            Lovebox unboxed!
+          </h1>
+          <img
+            class="w-auto md:w-[391.13px] md:h-[359.69px]"
+            src="/img/love-unboxed.svg"
+            alt="love-unboxed"
+          />
+          <div class="text-center flex flex-col gap-4">
+            <p class="text-priBlack font-semibold text-base">
+              Want to guess the sender of this Lovebox?
+            </p>
+            <router-link :to="{ name: 'home-gift' }">
+              <button class="btn bg-main w-full rounded-3xl capitalize">
+                Yes
+              </button>
+            </router-link>
+            <router-link :to="{ name: 'home-lovebox-details' }">
+              <button
+                class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
+              >
+                No, Proceed
+              </button>
+            </router-link>
           </div>
         </div>
         <div class="text-center pt-4">

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-full 1xl:h-screen mt-8 1xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+    class="w-full h-full 2xl:h-screen mt-8 2xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
     <div class="container">
       <router-link :to="{ name: 'home' }">
@@ -17,7 +17,12 @@
             <div class="progress-bar">
               <div class="progress" :style="{ width: `${progress}%` }"></div>
             </div>
-            <div class="text-center flex flex-col gap-2 my-4">
+            <h1
+              class="font-semibold text-center text-lg md:text-4xl text-black tracking-wide"
+            >
+              Lovebox Details
+            </h1>
+            <div class="text-center flex flex-col gap-2 my-10">
               <img
                 class="mx-auto"
                 src="/img/lovebox-sender.svg"
@@ -28,6 +33,10 @@
               </h1>
               <p class="text-priGray text-lg leading-6">
                 “{{ $route.query.name }}”
+              </p>
+              <p class="font-medium text-base leading-5">
+                You’ve got a note from the sender,
+                <span class="text-main underline">view</span>
               </p>
             </div>
             <div class="grid grid-cols-1 gap-3">
@@ -60,14 +69,20 @@
                   </p>
                 </div>
               </div>
-              <p class="leading-6 font-medium py-3 text-base text-center">
-                Tell the world about Love Box! click
-                <span
-                  class="text-main underline font-bold cursor-pointer"
-                  @click="handleRating"
-                  >here.</span
-                >
-              </p>
+              <div class="pt-6 text-center">
+                <p class="leading-6 font-medium text-base text-center">
+                  Tell the world about Love Box! click
+                  <span
+                    class="text-main underline font-bold cursor-pointer"
+                    @click="handleRating"
+                    >here.</span
+                  >
+                </p>
+                <p class="text-base">
+                  Tracking Number:
+                  <span class="font-bold text-[#2A3538]">5871630601</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>

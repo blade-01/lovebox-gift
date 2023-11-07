@@ -70,6 +70,7 @@
                 Submit
               </button>
               <button
+                @click="handleCancelSubmit"
                 class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-[48px]"
               >
                 No, Close
@@ -153,7 +154,15 @@ const submitRating = (count: any) => {
 };
 
 const handleSubmit = () => {
-  console.log(reviewText.value, route.query.rating);
+  router.push({
+    name: "home-thank-you",
+  });
+};
+
+const handleCancelSubmit = () => {
+  router.push({
+    name: "home-thank-you",
+  });
 };
 
 const progress = ref(100);
