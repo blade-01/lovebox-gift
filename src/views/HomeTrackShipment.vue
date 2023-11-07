@@ -36,7 +36,7 @@
               </p>
               <p class="font-medium text-base leading-5">
                 You’ve got a note from the sender,
-                <span class="text-main underline">view</span>
+                <span class="text-main underline" @click="viewNote">view</span>
               </p>
             </div>
             <div class="grid grid-cols-1 gap-3">
@@ -111,13 +111,22 @@ import { ref, onMounted, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 
 // home rating
+const route = useRoute();
 const router = useRouter();
 const handleRating = () => {
   router.push({
     name: "home-rating",
   });
 };
-
+// navigate to note route
+const viewNote = () => {
+  router.push({
+    name: "home-note",
+    query: {
+      name: route.query.name,
+    },
+  });
+};
 // grid container
 const shippingLists = ref([
   {
