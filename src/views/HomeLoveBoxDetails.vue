@@ -16,11 +16,11 @@
           <div class="progress-bar">
             <div class="progress" :style="{ width: `${progress}%` }"></div>
           </div>
-          <!-- <h1
-          class="font-bold text-center text-lg md:text-4xl text-black tracking-wide"
-        >
-          Lovebox Details
-        </h1> -->
+          <h1
+            class="font-semibold text-center text-lg md:text-4xl text-black tracking-wide"
+          >
+            Lovebox Details
+          </h1>
           <div class="text-center flex flex-col gap-2 my-4">
             <img
               class="mx-auto"
