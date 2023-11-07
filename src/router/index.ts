@@ -3,6 +3,10 @@ import HomeView from "../views/HomeView.vue";
 import HomeUnboxed from "../views/HomeUnboxed.vue";
 import HomeGift from "../views/HomeGift.vue";
 import HomeLoveBoxDetails from "../views/HomeLoveBoxDetails.vue";
+import HomeTrackShipment from "../views/HomeTrackShipment.vue";
+import HomeRating from "../views/HomeRating.vue";
+import HomeThankYou from "../views/HomeThankYou.vue";
+import HomeNote from "../views/HomeNote.vue";
 
 const routes = [
   {
@@ -24,6 +28,26 @@ const routes = [
     path: "/home-lovebox-details",
     name: "home-lovebox-details",
     component: () => HomeLoveBoxDetails,
+  },
+  {
+    path: "/home-track-shipment",
+    name: "home-track-shipment",
+    component: () => HomeTrackShipment,
+  },
+  {
+    path: "/home-rating",
+    name: "home-rating",
+    component: () => HomeRating,
+  },
+  {
+    path: "/home-thank-you",
+    name: "home-thank-you",
+    component: () => HomeThankYou,
+  },
+  {
+    path: "/home-note",
+    name: "home-note",
+    component: () => HomeNote,
   },
 ];
 
