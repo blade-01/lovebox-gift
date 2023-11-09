@@ -65,14 +65,6 @@
             </router-link>
           </div>
         </div>
-        <div class="text-center pt-4">
-          <a
-            href="www.lovebox.com"
-            class="text-main font-bold text-sm underline cursor-pointer"
-          >
-            www.lovebox.com
-          </a>
-        </div>
       </div>
     </div>
     <div class="animation-container">
