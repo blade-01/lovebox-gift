@@ -5,6 +5,18 @@ interface responseData {
   // Define the structure of your order details here
   isAnonymous: boolean;
   senderName: string;
+  productDetails: {
+    id: string;
+    name: string;
+    slug: string;
+    tags: {
+      id: number;
+      name: string;
+      slug: string;
+    }[];
+    type: string;
+    price: string;
+  }[];
   // ... other properties
 }
 
