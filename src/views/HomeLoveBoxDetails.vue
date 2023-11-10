@@ -27,12 +27,15 @@
               src="/img/lovebox-sender.svg"
               alt="lovebox-sender"
             />
-            <h1 class="text-2xl font-semibold leading-8 text-priBlack">
-              Correct! Thoughtfully sent by
-            </h1>
-            <p class="text-priGray text-lg leading-6">
-              “{{ $route.query.name }}”
-            </p>
+            <div
+              v-if="isAnonymous === false"
+              class="text-center flex flex-col gap-2"
+            >
+              <h1 class="text-2xl font-semibold leading-8 text-priBlack">
+                Correct! Thoughtfully sent by
+              </h1>
+              <p class="text-priGray text-lg leading-6">“{{ senderName }}”</p>
+            </div>
           </div>
           <div class="text-center flex flex-col gap-2 md:w-[300px]">
             <p class="font-medium leading-6 text-priBlack text-[15px]">
@@ -84,6 +87,16 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useStore } from "../composables/useStore";
+
+// get order details and data from store
+const { getOrderDetails, data } = useStore();
+const isAnonymous = computed(() => {
+  return data.value?.isAnonymous;
+});
+const senderName = computed(() => {
+  return data.value?.senderName;
+});
 
 // router
 const router = useRouter();
@@ -133,6 +146,7 @@ onMounted(() => {
   watchEffect(() => {
     return () => clearInterval(intervalidCircle);
   });
+  getOrderDetails();
 });
 </script>
 

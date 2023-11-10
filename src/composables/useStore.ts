@@ -1,7 +1,16 @@
 import axios from "axios";
 import { ref } from "vue";
-export function useGetter() {
-  const data = ref("");
+
+interface responseData {
+  // Define the structure of your order details here
+  isAnonymous: boolean;
+  senderName: string;
+  // ... other properties
+}
+
+export function useStore() {
+  const data = ref<responseData>(); // Specify the type of data
+
   const getOrderDetails = async () => {
     try {
       const response = await axios.get(
@@ -12,6 +21,7 @@ export function useGetter() {
       return Promise.reject(error);
     }
   };
+
   const postReviews = async () => {
     try {
       const response = await axios.post(

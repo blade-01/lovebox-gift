@@ -28,18 +28,29 @@
             <p class="text-priBlack font-semibold text-base">
               Want to guess the sender of this Lovebox?
             </p>
-            <router-link :to="{ name: 'home-gift' }">
-              <button class="btn bg-main w-full rounded-3xl capitalize">
-                Yes
-              </button>
-            </router-link>
-            <router-link :to="{ name: 'home-lovebox-details' }">
-              <button
-                class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
-              >
-                No, Proceed
-              </button>
-            </router-link>
+            <div v-if="isAnonymous === true">
+              <router-link :to="{ name: 'home-lovebox-details' }">
+                <button
+                  class="btn w-full bg-main text-white rounded-3xl capitalize"
+                >
+                  Proceed
+                </button>
+              </router-link>
+            </div>
+            <div class="flex flex-col gap-4" v-if="isAnonymous === false">
+              <router-link :to="{ name: 'home-gift' }">
+                <button class="btn bg-main w-full rounded-3xl capitalize">
+                  Yes
+                </button>
+              </router-link>
+              <router-link :to="{ name: 'home-lovebox-details' }">
+                <button
+                  class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
+                >
+                  No, Proceed
+                </button>
+              </router-link>
+            </div>
           </div>
         </div>
         <div class="text-center pt-4">
@@ -64,7 +75,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
+import { useStore } from "../composables/useStore";
+
+// get order details and data from store
+const { getOrderDetails, data } = useStore();
+const isAnonymous = computed(() => {
+  return data.value?.isAnonymous;
+});
 
 const animateCircle: string[] = [
   "/img/circle-1.svg",
@@ -92,6 +110,7 @@ onMounted(() => {
   watchEffect(() => {
     return () => clearInterval(intervalidCircle);
   });
+  getOrderDetails();
 });
 
 // progress bar
