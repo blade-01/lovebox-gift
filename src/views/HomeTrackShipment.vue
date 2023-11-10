@@ -53,7 +53,9 @@
                 <p class="text-priBlack text-sm font-bold">Sample HTML text</p>
                 <div class="flex gap-1 items-center">
                   <img src="/img/trash.svg" alt="trash" />
-                  <p class="text-priGray text-sm font-medium">4 Packages</p>
+                  <p class="text-priGray text-sm font-medium">
+                    {{ productDetails?.length }} Packages
+                  </p>
                 </div>
               </div>
               <div
@@ -71,7 +73,7 @@
                   class="text-center border-x-[1px] border-priGray px-2 md:px-5"
                 >
                   <p class="text-sm text-priBlack font-semibold uppercase">
-                    {{ product?.price }} NGN
+                    {{ formatNumber(product?.price) }} NGN
                   </p>
                   <p class="text-[12px] text-priGray capitalize">Any Store</p>
                 </div>
@@ -123,7 +125,10 @@
 import { ref, onMounted, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "../composables/useStore";
+import { useFormatter } from "../composables/useFormatter";
 
+// use formatter for number
+const { formatNumber } = useFormatter();
 // get order details and data from store
 const { getOrderDetails, data } = useStore();
 const isAnonymous = computed(() => {
@@ -150,21 +155,7 @@ const viewNote = () => {
     name: "home-note",
   });
 };
-// grid container
-const shippingLists = ref([
-  {
-    title: "Gift Card",
-    content: "Dummy text",
-  },
-  {
-    title: "50,000 NGN",
-    content: "Any Store",
-  },
-  {
-    title: "Store Name",
-    content: "Dummy Text",
-  },
-]);
+
 const progress = ref(100);
 
 const animateCircle: string[] = [
