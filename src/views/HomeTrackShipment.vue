@@ -39,7 +39,7 @@
                   “{{ senderName }}”
                 </p>
               </div>
-              <p class="font-medium text-base leading-5">
+              <p class="font-medium text-base leading-5" v-if="notes !== null">
                 You’ve got a note from the sender,
                 <span
                   class="text-main underline cursor-pointer"
@@ -93,9 +93,9 @@
                     >here.</span
                   >
                 </p>
-                <p class="text-base">
+                <p class="text-base" v-if="hasDelivery === true">
                   Tracking Number:
-                  <span class="font-bold text-[#2A3538]">5871630601</span>
+                  <span class="font-bold text-[#2A3538]">N/A</span>
                 </p>
               </div>
             </div>
@@ -139,6 +139,12 @@ const senderName = computed(() => {
 });
 const productDetails = computed(() => {
   return data.value?.productDetails;
+});
+const notes = computed(() => {
+  return data.value?.notes;
+});
+const hasDelivery = computed(() => {
+  return data.value?.hasDelivery;
 });
 
 // home rating

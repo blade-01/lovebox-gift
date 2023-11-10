@@ -49,7 +49,12 @@
                 <div v-if="shortNote" class="mt-3">
                   <div class="flex justify-between items-center font-medium">
                     <p class="text-sm leading-5">Write a short review</p>
-                    <p class="text-[12px] leading-5">
+                    <p
+                      class="text-[12px] leading-5"
+                      :class="{
+                        'text-red-600': err || characterCount >= 50,
+                      }"
+                    >
                       {{ characterCount }}/50 Characters
                     </p>
                   </div>
@@ -59,6 +64,10 @@
                     class="bg-[#F3F2F5] rounded-lg h-20 w-full px-4 py-2 outline-none mt-2 text-[#989898]"
                     placeholder="Placeholder"
                     @input="updateCharacterCount"
+                    :class="{
+                      'border-[1px] border-red-600':
+                        err || characterCount >= 50,
+                    }"
                   />
                 </div>
               </div>
@@ -67,7 +76,11 @@
                 @click="handleSubmit"
                 class="btn bg-main border-[1px] border-main text-white md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-[48px]"
               >
-                Submit
+                <span
+                  v-if="isLoading === true"
+                  class="mdi mdi-loading animate-spin"
+                ></span>
+                <span v-else>Submit</span>
               </button>
               <button
                 @click="handleCancelSubmit"
@@ -107,12 +120,20 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useStore } from "../composables/useStore";
+
+// send review from store
+const { postReviews, getOrderDetails, data, isLoading } = useStore();
+const id = computed(() => {
+  return data.value?.id;
+});
 
 // home rating
 const router = useRouter();
 const route = useRoute();
 const characterCount = ref(0);
-const reviewText = ref("");
+const reviewText = ref<string>("");
+const err = ref<boolean>(false);
 
 const updateCharacterCount = () => {
   characterCount.value = reviewText.value.length;
@@ -122,6 +143,9 @@ const updateCharacterCount = () => {
     reviewText.value = reviewText.value.slice(0, 50);
     characterCount.value = 50;
   }
+
+  // Check if reviewText is empty and update err accordingly
+  err.value = reviewText.value.trim() === "";
 };
 
 // short note
@@ -154,9 +178,24 @@ const submitRating = (count: any) => {
 };
 
 const handleSubmit = () => {
-  router.push({
-    name: "home-thank-you",
-  });
+  if (reviewText.value === "") {
+    err.value = true;
+  } else {
+    interface review {
+      orderID: any;
+      review: string;
+      actor: string;
+      rating: number;
+    }
+    const rating = Number(route.query.rating);
+    const payload = ref<review>({
+      orderID: id.value,
+      review: reviewText.value,
+      actor: "beneficiary",
+      rating: isNaN(rating) ? 0 : rating,
+    });
+    postReviews(payload.value);
+  }
 };
 
 const handleCancelSubmit = () => {
@@ -193,6 +232,7 @@ onMounted(() => {
   watchEffect(() => {
     return () => clearInterval(intervalidCircle);
   });
+  getOrderDetails();
 });
 </script>
 

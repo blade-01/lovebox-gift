@@ -1,8 +1,10 @@
 import axios from "axios";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 interface responseData {
   // Define the structure of your order details here
+  id: string;
   isAnonymous: boolean;
   senderName: string;
   productDetails: {
@@ -18,11 +20,15 @@ interface responseData {
     price: string;
   }[];
   notes: string | null;
+  hasDelivery: boolean;
   // ... other properties
 }
 
 export function useStore() {
   const data = ref<responseData>(); // Specify the type of data
+  // router
+  const router = useRouter();
+  const isLoading = ref<boolean>(false);
 
   const getOrderDetails = async () => {
     try {
@@ -35,20 +41,41 @@ export function useStore() {
     }
   };
 
-  const postReviews = async () => {
+  const postReviews = async (review: object) => {
     try {
+      isLoading.value = true;
       const response = await axios.post(
-        "https://core-api-katg.onrender.com/api/v1/review-order"
+        "https://core-api-katg.onrender.com/api/v1/review-order",
+        review
       );
-      data.value = response.data.data;
     } catch (error) {
       return Promise.reject(error);
+    } finally {
+      isLoading.value = false;
+      router.push({
+        name: "home-thank-you",
+      });
     }
   };
+
+  // async applyBootcamp(bootcamp) {
+  //   try {
+  //     const response = await http.post("/application", bootcamp);
+  //     toast.success("Successfully applied to bootcamp 🎉");
+  //     this.bootcamp.push(response.data.data);
+  //     push("home");
+  //   } catch (error) {
+  //     toast.error("Oops!, Something went wrong.", {
+  //       timeout: 5000,
+  //     });
+  //     return Promise.reject(error);
+  //   }
+  // },
 
   return {
     getOrderDetails,
     postReviews,
+    isLoading,
     data,
   };
 }
