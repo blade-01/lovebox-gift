@@ -17,6 +17,7 @@ interface responseData {
     type: string;
     price: string;
   }[];
+  notes: string | null;
   // ... other properties
 }
 

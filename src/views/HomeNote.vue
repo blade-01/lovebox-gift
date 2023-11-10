@@ -17,14 +17,12 @@
             <img class="mx-auto" src="/img/note.svg" alt="note" />
           </div>
           <p class="text-center text-base flex flex-col gap-2 md:w-[360px]">
-            Happy birthday Collins! You mean a whole lot to me and I have sent
-            this token to you to really tell you how much I value your immense
-            contribution towards my life and well-being. You are truly a
-            wonderful brother and indeed, more than a brother. Accept this with
-            Love
+            {{ notes !== null ? notes : "No Note is available 😊" }}
           </p>
           <div class="text-center pt-4">
-            <p class="font-meowScript text-2xl">{{ $route.query.name }}</p>
+            <p class="font-meowScript text-2xl" v-if="isAnonymous === false">
+              {{ senderName }}
+            </p>
             <p
               class="text-main underline font-bold pt-2 leading-6 cursor-pointer"
               @click="back"
@@ -48,6 +46,19 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useStore } from "../composables/useStore";
+
+// get order details and data from store
+const { getOrderDetails, data } = useStore();
+const notes = computed(() => {
+  return data.value?.notes;
+});
+const isAnonymous = computed(() => {
+  return data.value?.isAnonymous;
+});
+const senderName = computed(() => {
+  return data.value?.senderName;
+});
 
 // router
 const router = useRouter();
@@ -83,6 +94,7 @@ onMounted(() => {
   watchEffect(() => {
     return () => clearInterval(intervalidCircle);
   });
+  getOrderDetails();
 });
 </script>
 
