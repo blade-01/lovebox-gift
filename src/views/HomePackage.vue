@@ -16,50 +16,54 @@
           <div class="progress-bar">
             <div class="progress" :style="{ width: `${progress}%` }"></div>
           </div>
-          <h1 class="font-semibold text-center text-2xl text-priBlack">
-            Lovebox unboxed!
+          <h1
+            class="font-semibold text-center text-2xl lg:text-4xl text-priBlack"
+          >
+            Your Package
           </h1>
-          <img
-            class="w-auto md:w-[391.13px] md:h-[359.69px]"
-            src="/img/love-unboxed.svg"
-            alt="love-unboxed"
-          />
+          <div class="relative mt-5">
+            <img
+              class="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              src="/img/p-bg.png"
+              alt="package"
+            />
+            <div class="max-w-[300px] m-auto">
+              <carousel
+                :items-to-show="1.5"
+                :autoplay="2000"
+                :wrap-around="true"
+              >
+                <slide v-for="(slide, index) in slideImg" :key="index">
+                  <img
+                    class="w-[90%] h-[250px] rounded-lg"
+                    :src="`/img/${slide}`"
+                    :alt="`${slide}`"
+                  />
+                </slide>
+                <template #addons>
+                  <!-- <navigation /> -->
+                  <pagination />
+                </template>
+              </carousel>
+            </div>
+          </div>
           <div class="text-center flex flex-col gap-4">
             <p class="text-priBlack font-semibold text-base">
               Want to guess the sender of this Lovebox?
             </p>
-            <div v-if="isAnonymous === true">
-              <router-link :to="{ name: 'home-lovebox-details' }">
-                <button
-                  class="btn w-full bg-main text-white rounded-3xl capitalize"
-                >
-                  Proceed
-                </button>
-              </router-link>
-            </div>
-            <div class="flex flex-col gap-4" v-if="isAnonymous === false">
-              <router-link :to="{ name: 'home-gift' }">
-                <button class="btn bg-main w-full rounded-3xl capitalize">
-                  Yes
-                </button>
-              </router-link>
-              <router-link :to="{ name: 'home-lovebox-details' }">
-                <button
-                  class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
-                >
-                  No, Proceed
-                </button>
-              </router-link>
-            </div>
+            <router-link :to="{ name: 'home-gift' }">
+              <button class="btn bg-main w-full rounded-3xl capitalize">
+                Yes
+              </button>
+            </router-link>
+            <router-link :to="{ name: 'home-lovebox-details' }">
+              <button
+                class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
+              >
+                No, Proceed
+              </button>
+            </router-link>
           </div>
-        </div>
-        <div class="text-center pt-4">
-          <a
-            href="www.lovebox.com"
-            class="text-main font-bold text-sm underline cursor-pointer"
-          >
-            www.lovebox.com
-          </a>
         </div>
       </div>
     </div>
@@ -75,14 +79,16 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from "vue";
-import { useStore } from "../composables/useStore";
+import { ref, onMounted, watch } from "vue";
+import "vue3-carousel/dist/carousel.css";
+import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 
-// get order details and data from store
-const { getOrderDetails, data } = useStore();
-const isAnonymous = computed(() => {
-  return data.value?.isAnonymous;
-});
+const slideImg: string[] = [
+  "slide-01.png",
+  "slide-02.png",
+  "slide-03.png",
+  "slide-04.png",
+];
 
 const animateCircle: string[] = [
   "/img/circle-1.svg",
@@ -110,7 +116,6 @@ onMounted(() => {
   watchEffect(() => {
     return () => clearInterval(intervalidCircle);
   });
-  getOrderDetails();
 });
 
 // progress bar
@@ -139,5 +144,11 @@ const incrementProgress = () => {
 .drop-shadow {
   box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px
     #00000026;
+}
+.carousel {
+  @apply mt-[2rem];
+}
+.carousel__pagination {
+  @apply my-[2rem] mx-auto;
 }
 </style>
