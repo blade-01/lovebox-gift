@@ -28,15 +28,24 @@
                 src="/img/lovebox-sender.svg"
                 alt="lovebox-sender"
               />
-              <h1 class="text-2xl font-semibold leading-8 text-priBlack">
-                Correct! Thoughtfully sent by
-              </h1>
-              <p class="text-priGray text-lg leading-6">
-                “{{ $route.query.name }}”
-              </p>
-              <p class="font-medium text-base leading-5">
+              <div
+                v-if="isAnonymous === false"
+                class="text-center flex flex-col gap-2"
+              >
+                <h1 class="text-2xl font-semibold leading-8 text-priBlack">
+                  Correct! Thoughtfully sent by
+                </h1>
+                <p class="text-priGray text-lg leading-6 capitalize">
+                  “{{ senderName }}”
+                </p>
+              </div>
+              <p class="font-medium text-base leading-5" v-if="notes !== null">
                 You’ve got a note from the sender,
-                <span class="text-main underline cursor-pointer" @click="viewNote">view</span>
+                <span
+                  class="text-main underline cursor-pointer"
+                  @click="viewNote"
+                  >view</span
+                >
               </p>
             </div>
             <div class="grid grid-cols-1 gap-3">
@@ -44,29 +53,35 @@
                 <p class="text-priBlack text-sm font-bold">Sample HTML text</p>
                 <div class="flex gap-1 items-center">
                   <img src="/img/trash.svg" alt="trash" />
-                  <p class="text-priGray text-sm font-medium">4 Packages</p>
+                  <p class="text-priGray text-sm font-medium">
+                    {{ productDetails?.length }} Packages
+                  </p>
                 </div>
               </div>
               <div
                 class="grid grid-cols-3 place-items-center border-[1px] border-priGray rounded-lg py-2 px-4 md:py-3 md:px-6"
-                v-for="iteration in 4"
+                v-for="(product, index) in productDetails"
+                :key="index"
               >
+                <div class="text-center mr-auto pr-2 md:pr-0">
+                  <p class="text-sm text-priBlack font-semibold capitalize">
+                    {{ product?.type }}
+                  </p>
+                  <p class="text-[12px] text-priGray capitalize">Dummy Text</p>
+                </div>
                 <div
-                  class="text-center"
-                  :class="{
-                    'border-x-[1px] border-priGray px-2 md:px-5': index === 1,
-                    'mr-auto pr-2 md:pr-0': index === 0,
-                    'ml-auto pl-2 md:pl-0': index === 2,
-                  }"
-                  v-for="(ship, index) in shippingLists"
-                  :key="index + iteration * shippingLists.length"
+                  class="text-center border-x-[1px] border-priGray px-2 md:px-5"
                 >
+                  <p class="text-sm text-priBlack font-semibold uppercase">
+                    {{ formatNumber(product?.price) }} NGN
+                  </p>
+                  <p class="text-[12px] text-priGray capitalize">Any Store</p>
+                </div>
+                <div class="text-center ml-auto pl-2 md:pl-0">
                   <p class="text-sm text-priBlack font-semibold">
-                    {{ ship.title }}
+                    {{ product?.name }}
                   </p>
-                  <p class="text-[12px] text-priGray capitalize">
-                    {{ ship.content }}
-                  </p>
+                  <p class="text-[12px] text-priGray capitalize">Dummy Text</p>
                 </div>
               </div>
               <div class="pt-6 text-center">
@@ -78,9 +93,9 @@
                     >here.</span
                   >
                 </p>
-                <p class="text-base">
+                <p class="text-base" v-if="hasDelivery === true">
                   Tracking Number:
-                  <span class="font-bold text-[#2A3538]">5871630601</span>
+                  <span class="font-bold text-[#2A3538]">N/A</span>
                 </p>
               </div>
             </div>
@@ -109,6 +124,28 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useStore } from "../composables/useStore";
+import { useFormatter } from "../composables/useFormatter";
+
+// use formatter for number
+const { formatNumber } = useFormatter();
+// get order details and data from store
+const { getOrderDetails, data } = useStore();
+const isAnonymous = computed(() => {
+  return data.value?.isAnonymous;
+});
+const senderName = computed(() => {
+  return data.value?.senderName;
+});
+const productDetails = computed(() => {
+  return data.value?.productDetails;
+});
+const notes = computed(() => {
+  return data.value?.notes;
+});
+const hasDelivery = computed(() => {
+  return data.value?.hasDelivery;
+});
 
 // home rating
 const route = useRoute();
@@ -122,26 +159,9 @@ const handleRating = () => {
 const viewNote = () => {
   router.push({
     name: "home-note",
-    query: {
-      name: route.query.name,
-    },
   });
 };
-// grid container
-const shippingLists = ref([
-  {
-    title: "Gift Card",
-    content: "Dummy text",
-  },
-  {
-    title: "50,000 NGN",
-    content: "Any Store",
-  },
-  {
-    title: "Store Name",
-    content: "Dummy Text",
-  },
-]);
+
 const progress = ref(100);
 
 const animateCircle: string[] = [
@@ -170,6 +190,7 @@ onMounted(() => {
   watchEffect(() => {
     return () => clearInterval(intervalidCircle);
   });
+  getOrderDetails();
 });
 </script>
 

@@ -40,12 +40,12 @@
               <small
                 class="font-medium leading-6 text-black flex items-center"
                 :class="{ 'err-message': v$.name.$error }"
-                v-if="v$.name.$error"
+                v-if="v$.name.$error || errorValidate()"
               >
                 <span
                   class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
                 ></span>
-                Your guess is wrong, give it 2 more shot!</small
+                Your guess is wrong, give it {{ guessCount }} more shot!</small
               >
               <input
                 class="w-full h-12 bg-gray-100 p-2 rounded-lg outline-none"
@@ -111,6 +111,14 @@
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import { useRouter } from "vue-router";
+import { useStore } from "../composables/useStore";
+
+// get order details and data from store
+const { getOrderDetails, data } = useStore();
+
+const senderName = computed(() => {
+  return data.value?.senderName;
+});
 
 // router
 const router = useRouter();
@@ -143,10 +151,12 @@ onMounted(() => {
   watchEffect(() => {
     return () => clearInterval(intervalidCircle);
   });
+  getOrderDetails();
 });
 
 // trial count
 const trialCount = ref<number>(1);
+const guessCount = ref<number>(3);
 interface name {
   name: string;
 }
@@ -160,23 +170,30 @@ const rules = {
   name: { required },
 };
 const v$ = useVuelidate(rules, placeholder);
+const errorValidate = (): boolean => {
+  if (placeholder.value.name !== "") {
+    return placeholder.value.name !== senderName.value;
+  }
+  return false;
+};
 
 const handleSubmit = () => {
-  if (v$.value.$invalid) {
+  if (v$.value.$invalid || placeholder.value.name !== senderName.value) {
     v$.value.$validate();
     scrollTo({ top: 0 });
     trialCount.value += 1;
-    if (trialCount.value >= 3) {
+    guessCount.value = 4 - trialCount.value;
+    if (trialCount.value >= 4) {
       form.value = false;
       formProceed.value = true;
     }
   } else {
-    console.log(placeholder.value);
+    console.log(senderName.value);
     router.push({
       name: "home-lovebox-details",
-      query: {
-        name: placeholder.value.name,
-      },
+      // query: {
+      //   name: placeholder.value.name,
+      // },
     });
   }
 };
