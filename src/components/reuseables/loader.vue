@@ -59,7 +59,7 @@ const simulateProgress = () => {
     if (progress.value >= 100) {
       clearInterval(interval);
     }
-  }, 300);
+  }, 200);
 };
 
 const currentIndex = ref<number>(0);

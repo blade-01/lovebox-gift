@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div>
+    <div v-if="isLoading === true">
       <loader />
     </div>
-    <!-- <div
+    <div
       v-else
       class="w-full h-full 1xl:h-screen mt-10 1xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
     >
@@ -76,7 +76,7 @@
         ></div>
       </div>
       <close-circle />
-    </div> -->
+    </div>
   </div>
 </template>
 <script setup lang="ts">
