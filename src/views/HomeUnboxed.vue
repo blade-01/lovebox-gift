@@ -67,14 +67,7 @@
           </div>
         </div>
       </div>
-      <div class="animation-container">
-        <div
-          class="circle"
-          :style="{
-            backgroundImage: `url(${animateCircle[currentAnimateIndex]})`,
-          }"
-        ></div>
-      </div>
+      <animate-circle-bg />
       <close-circle />
     </div>
   </div>
@@ -89,32 +82,7 @@ const isAnonymous = computed(() => {
   return data.value?.isAnonymous;
 });
 
-const animateCircle: string[] = [
-  "/img/circle-1.svg",
-  "/img/circle-2.svg",
-  "/img/circle-3.svg",
-  "/img/circle-4.svg",
-  "/img/circle-1.svg",
-  "/img/circle-2.svg",
-  "/img/circle-3.svg",
-  "/img/circle-4.svg",
-];
-
-const currentAnimateIndex = ref(0);
-
-const changeImage = () => {
-  currentAnimateIndex.value =
-    (currentAnimateIndex.value + 1) % animateCircle.length;
-};
-
-// Automatically change image every 3 second
-const intervalidCircle = setInterval(changeImage, 3000);
-
-// Cleanup when component is unmounted
 onMounted(() => {
-  watchEffect(() => {
-    return () => clearInterval(intervalidCircle);
-  });
   getOrderDetails();
 });
 
@@ -127,13 +95,6 @@ const incrementProgress = () => {
 </script>
 
 <style scoped>
-.animation-container {
-  @apply absolute w-[600px] md:w-[1000px] h-[600px] md:h-[900px] flex items-center place-content-center;
-}
-.circle {
-  @apply w-full h-full rounded-[50%] bg-cover transition-[backgroud-image_1s];
-}
-
 .progress-bar {
   @apply h-1  bg-primary border-[1px] border-[#644AE2] rounded-lg overflow-hidden w-[250px] md:w-[280px] mx-auto my-[20px];
 }

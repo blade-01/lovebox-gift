@@ -1,15 +1,11 @@
 <template>
-  <div
-    class="w-full h-screen relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
-  >
-    <div class="animation-container">
-      <div
-        class="circle"
-        :style="{
-          backgroundImage: `url(${animateCircle[currentAnimateIndex]})`,
-        }"
-      ></div>
-    </div>
+  <div class="animation-container">
+    <div
+      class="circle"
+      :style="{
+        backgroundImage: `url(${animateCircle[currentAnimateIndex]})`,
+      }"
+    ></div>
   </div>
 </template>
 <script setup lang="ts">
@@ -45,10 +41,10 @@ onMounted(() => {
 </script>
 <style scoped>
 .animation-container {
-  @apply absolute w-[600px] md:w-[800px] h-[600px] md:h-[800px] flex items-center place-content-center;
+  @apply fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[600px] md:h-[800px] flex items-center justify-center;
 }
 
 .circle {
-  @apply w-full h-full rounded-[50%] bg-cover transition-[backgroud-image_1s];
+  @apply w-full h-full lg:w-[800px] lg:h-[800px] rounded-[50%] bg-cover transition-[backgroud-image_1s];
 }
 </style>
