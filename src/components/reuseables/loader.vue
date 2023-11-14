@@ -57,9 +57,11 @@ const simulateProgress = () => {
   const interval = setInterval(() => {
     progress.value += 1;
     if (progress.value >= 100) {
-      clearInterval(interval);
+      // clearInterval(interval);
+      progress.value = 0;
+      ProgressEvent.value += 1;
     }
-  }, 50);
+  }, 100);
 };
 
 const currentIndex = ref<number>(0);
