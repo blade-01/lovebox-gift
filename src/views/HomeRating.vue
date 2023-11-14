@@ -1,6 +1,7 @@
 <template>
   <div
-    class="w-full h-full 1xl:h-screen mt-8 1xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+    class="w-full h-full mt-8 relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+    :class="shortNote ? 'lg:h-auto lg:mt-10' : 'lg:h-screen lg:mt-auto'"
   >
     <div class="container">
       <router-link :to="{ name: 'home' }">
@@ -107,14 +108,7 @@
         </div>
       </div>
     </div>
-    <div class="animation-container">
-      <div
-        class="circle"
-        :style="{
-          backgroundImage: `url(${animateCircle[currentAnimateIndex]})`,
-        }"
-      ></div>
-    </div>
+    <animate-circle-bg />
   </div>
 </template>
 <script setup lang="ts">
@@ -206,32 +200,8 @@ const handleCancelSubmit = () => {
 
 const progress = ref(100);
 
-const animateCircle: string[] = [
-  "/img/circle-1.svg",
-  "/img/circle-2.svg",
-  "/img/circle-3.svg",
-  "/img/circle-4.svg",
-  "/img/circle-1.svg",
-  "/img/circle-2.svg",
-  "/img/circle-3.svg",
-  "/img/circle-4.svg",
-];
-
-const currentAnimateIndex = ref(0);
-
-const changeImage = () => {
-  currentAnimateIndex.value =
-    (currentAnimateIndex.value + 1) % animateCircle.length;
-};
-
-// Automatically change image every 3 second
-const intervalidCircle = setInterval(changeImage, 3000);
-
 // Cleanup when component is unmounted
 onMounted(() => {
-  watchEffect(() => {
-    return () => clearInterval(intervalidCircle);
-  });
   getOrderDetails();
 });
 </script>

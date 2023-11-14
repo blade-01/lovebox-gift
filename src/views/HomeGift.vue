@@ -1,5 +1,9 @@
 <template>
+  <div v-if="isLoading === true">
+    <loader />
+  </div>
   <div
+    v-else
     class="w-full h-full xl:h-screen mt-8 xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
     <div class="container">
@@ -97,14 +101,7 @@
         </div>
       </div>
     </div>
-    <div class="animation-container">
-      <div
-        class="circle"
-        :style="{
-          backgroundImage: `url(${animateCircle[currentAnimateIndex]})`,
-        }"
-      ></div>
-    </div>
+    <animate-circle-bg />
   </div>
 </template>
 <script setup lang="ts">
@@ -114,7 +111,7 @@ import { useRouter } from "vue-router";
 import { useStore } from "../composables/useStore";
 
 // get order details and data from store
-const { getOrderDetails, data } = useStore();
+const { getOrderDetails, data, isLoading } = useStore();
 
 const senderName = computed(() => {
   return data.value?.senderName;
@@ -125,32 +122,8 @@ const router = useRouter();
 // progress bar
 const progress = ref<number>(70);
 
-const animateCircle: string[] = [
-  "/img/circle-1.svg",
-  "/img/circle-2.svg",
-  "/img/circle-3.svg",
-  "/img/circle-4.svg",
-  "/img/circle-1.svg",
-  "/img/circle-2.svg",
-  "/img/circle-3.svg",
-  "/img/circle-4.svg",
-];
-
-const currentAnimateIndex = ref<number>(0);
-
-const changeImage = () => {
-  currentAnimateIndex.value =
-    (currentAnimateIndex.value + 1) % animateCircle.length;
-};
-
-// Automatically change image every 3 second
-const intervalidCircle = setInterval(changeImage, 3000);
-
 // Cleanup when component is unmounted
 onMounted(() => {
-  watchEffect(() => {
-    return () => clearInterval(intervalidCircle);
-  });
   getOrderDetails();
 });
 
