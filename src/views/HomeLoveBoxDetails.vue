@@ -1,90 +1,92 @@
 <template>
-  <div v-if="isLoading === true">
-    <loader />
-  </div>
-  <div
-    v-else
-    class="w-full h-full xl:h-screen mt-8 xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
-  >
-    <div class="container">
-      <router-link :to="{ name: 'home' }">
-        <img
-          class="mx-auto mb-3 w-auto relative z-[9999]"
-          src="/img/logo.svg"
-          alt="logo"
-      /></router-link>
-      <div class="p-0.5 relative z-[9999]">
-        <div
-          class="flex flex-col items-center place-content-center m-auto bg-secBg shadow-xl rounded-3xl py-8 px-5 md:w-[488px] drop-shadow"
-        >
-          <div class="progress-bar">
-            <div class="progress" :style="{ width: `${progress}%` }"></div>
-          </div>
-          <h1
-            class="font-semibold text-center text-lg md:text-4xl text-black tracking-wide"
+  <div>
+    <div v-if="isLoading === true">
+      <loader />
+    </div>
+    <div
+      v-else
+      class="w-full h-full xl:h-screen mt-8 xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+    >
+      <div class="container">
+        <router-link :to="{ name: 'home' }">
+          <img
+            class="mx-auto mb-3 w-auto relative z-[9999]"
+            src="/img/logo.svg"
+            alt="logo"
+        /></router-link>
+        <div class="p-0.5 relative z-[9999]">
+          <div
+            class="flex flex-col items-center place-content-center m-auto bg-secBg shadow-xl rounded-3xl py-8 px-5 md:w-[488px] drop-shadow"
           >
-            Lovebox Details
-          </h1>
-          <div class="text-center flex flex-col gap-2 my-4">
-            <img
-              class="mx-auto"
-              src="/img/lovebox-sender.svg"
-              alt="lovebox-sender"
-            />
-            <div
-              v-if="isAnonymous === false"
-              class="text-center flex flex-col gap-2"
+            <div class="progress-bar">
+              <div class="progress" :style="{ width: `${progress}%` }"></div>
+            </div>
+            <h1
+              class="font-semibold text-center text-lg md:text-4xl text-black tracking-wide"
             >
-              <h1 class="text-2xl font-semibold leading-8 text-priBlack">
-                Correct! Thoughtfully sent by
-              </h1>
-              <p class="text-priGray text-lg leading-6">“{{ senderName }}”</p>
+              Lovebox Details
+            </h1>
+            <div class="text-center flex flex-col gap-2 my-4">
+              <img
+                class="mx-auto"
+                src="/img/lovebox-sender.svg"
+                alt="lovebox-sender"
+              />
+              <div
+                v-if="isAnonymous === false"
+                class="text-center flex flex-col gap-2"
+              >
+                <h1 class="text-2xl font-semibold leading-8 text-priBlack">
+                  Correct! Thoughtfully sent by
+                </h1>
+                <p class="text-priGray text-lg leading-6">“{{ senderName }}”</p>
+              </div>
+            </div>
+            <div class="text-center flex flex-col gap-2 md:w-[300px]">
+              <p class="font-medium leading-6 text-priBlack text-[15px]">
+                Your Package Number
+              </p>
+              <button
+                class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize"
+              >
+                5871630601
+              </button>
+              <p class="leading-6 font-medium py-1 text-sm">
+                To track your shipment, click
+                <span
+                  class="text-main underline font-bold cursor-pointer"
+                  @click="trackShipment"
+                  >here.</span
+                >
+              </p>
+              <p class="leading-6 font-medium py-3 text-base">
+                Tell the world about Love Box! click
+                <span
+                  class="text-main underline font-bold cursor-pointer"
+                  @click="handleRating"
+                  >here.</span
+                >
+              </p>
             </div>
           </div>
-          <div class="text-center flex flex-col gap-2 md:w-[300px]">
-            <p class="font-medium leading-6 text-priBlack text-[15px]">
-              Your Package Number
-            </p>
-            <button
-              class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize"
+          <div class="text-center pt-4">
+            <a
+              href="www.lovebox.com"
+              class="text-main font-bold text-sm underline cursor-pointer"
             >
-              5871630601
-            </button>
-            <p class="leading-6 font-medium py-1 text-sm">
-              To track your shipment, click
-              <span
-                class="text-main underline font-bold cursor-pointer"
-                @click="trackShipment"
-                >here.</span
-              >
-            </p>
-            <p class="leading-6 font-medium py-3 text-base">
-              Tell the world about Love Box! click
-              <span
-                class="text-main underline font-bold cursor-pointer"
-                @click="handleRating"
-                >here.</span
-              >
-            </p>
+              www.lovebox.com
+            </a>
           </div>
         </div>
-        <div class="text-center pt-4">
-          <a
-            href="www.lovebox.com"
-            class="text-main font-bold text-sm underline cursor-pointer"
-          >
-            www.lovebox.com
-          </a>
-        </div>
       </div>
-    </div>
-    <div class="animation-container">
-      <div
-        class="circle"
-        :style="{
-          backgroundImage: `url(${animateCircle[currentAnimateIndex]})`,
-        }"
-      ></div>
+      <div class="animation-container">
+        <div
+          class="circle"
+          :style="{
+            backgroundImage: `url(${animateCircle[currentAnimateIndex]})`,
+          }"
+        ></div>
+      </div>
     </div>
   </div>
 </template>
