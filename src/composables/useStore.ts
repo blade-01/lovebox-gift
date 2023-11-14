@@ -32,12 +32,15 @@ export function useStore() {
 
   const getOrderDetails = async () => {
     try {
+      isLoading.value = true;
       const response = await axios.get(
         "https://core-api-katg.onrender.com/api/v1/orders/205e1ce3-52b7-442f-910b-6c7f0d79b05f"
       );
       data.value = response.data.data;
     } catch (error) {
       return Promise.reject(error);
+    } finally {
+      isLoading.value = false;
     }
   };
 
@@ -53,7 +56,7 @@ export function useStore() {
     } finally {
       isLoading.value = false;
       router.push({
-        name: "home-thank-you"
+        name: "home-thank-you",
       });
     }
   };
@@ -62,6 +65,6 @@ export function useStore() {
     getOrderDetails,
     postReviews,
     isLoading,
-    data
+    data,
   };
 }
