@@ -1,74 +1,75 @@
 <template>
-  <div
-    class="w-full h-full 1xl:h-screen mt-10 1xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
-  >
-    <div class="container">
-      <router-link :to="{ name: 'home' }">
-        <img
-          class="mx-auto mb-4 w-[144px] h-[36px] relative z-[9999]"
-          src="/img/logo.svg"
-          alt="logo"
-      /></router-link>
-      <div class="p-0.5 relative z-[9999]">
-        <div
-          class="flex flex-col items-center place-content-center m-auto bg-secBg shadow-xl rounded-3xl py-8 px-5 md:w-[488px] drop-shadow"
-        >
-          <div class="progress-bar">
-            <div class="progress" :style="{ width: `${progress}%` }"></div>
-          </div>
-          <h1 class="font-semibold text-center text-2xl text-priBlack">
-            Lovebox unboxed!
-          </h1>
+  <div>
+    <div v-if="isLoading === true">
+      <loader />
+    </div>
+    <div
+      v-else
+      class="w-full h-full 1xl:h-screen mt-10 1xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+    >
+      <div class="container">
+        <router-link :to="{ name: 'home' }">
           <img
-            class="w-auto md:w-[391.13px] md:h-[359.69px]"
-            src="/img/love-unboxed.svg"
-            alt="love-unboxed"
-          />
-          <div class="text-center w-full flex flex-col gap-4 mt-6">
-            <div v-if="isAnonymous === true">
-              <router-link
-                :to="{ name: 'home-lovebox-details' }"
-                class="btn w-full lg:w-[360px] mx-auto bg-main text-white rounded-3xl capitalize"
-              >
-                Proceed
-              </router-link>
+            class="mx-auto mb-4 w-[144px] h-[36px] relative z-[9999]"
+            src="/img/logo.svg"
+            alt="logo"
+        /></router-link>
+        <div class="p-0.5 relative z-[9999]">
+          <div
+            class="flex flex-col items-center place-content-center m-auto bg-secBg shadow-xl rounded-3xl py-8 px-5 md:w-[488px] drop-shadow"
+          >
+            <div class="progress-bar">
+              <div class="progress" :style="{ width: `${progress}%` }"></div>
             </div>
-            <div class="flex flex-col gap-4" v-if="isAnonymous === false">
-              <p class="text-priBlack font-semibold text-base">
-                Want to guess the sender of this Lovebox?
-              </p>
-              <router-link :to="{ name: 'home-gift' }">
-                <button class="btn bg-main w-full rounded-3xl capitalize">Yes</button>
-              </router-link>
-              <router-link :to="{ name: 'home-lovebox-details' }">
-                <button
-                  class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
+            <h1 class="font-semibold text-center text-2xl text-priBlack">
+              Lovebox unboxed!
+            </h1>
+            <img
+              class="w-auto md:w-[391.13px] md:h-[359.69px]"
+              src="/img/love-unboxed.svg"
+              alt="love-unboxed"
+            />
+            <div class="text-center w-full flex flex-col gap-4 mt-6">
+              <div v-if="isAnonymous === true">
+                <router-link
+                  :to="{ name: 'home-lovebox-details' }"
+                  class="btn w-full lg:w-[360px] mx-auto bg-main text-white rounded-3xl capitalize"
                 >
-                  No, Proceed
-                </button>
-              </router-link>
+                  Proceed
+                </router-link>
+              </div>
+              <div class="flex flex-col gap-4" v-if="isAnonymous === false">
+                <p class="text-priBlack font-semibold text-base">
+                  Want to guess the sender of this Lovebox?
+                </p>
+                <router-link :to="{ name: 'home-gift' }">
+                  <button class="btn bg-main w-full rounded-3xl capitalize">
+                    Yes
+                  </button>
+                </router-link>
+                <router-link :to="{ name: 'home-lovebox-details' }">
+                  <button
+                    class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
+                  >
+                    No, Proceed
+                  </button>
+                </router-link>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="text-center pt-4">
-          <a
-            href="www.lovebox.com"
-            class="text-main font-bold text-sm underline cursor-pointer"
-          >
-            www.lovebox.com
-          </a>
+          <div class="text-center pt-4">
+            <a
+              href="www.lovebox.com"
+              class="text-main font-bold text-sm underline cursor-pointer"
+            >
+              www.lovebox.com
+            </a>
+          </div>
         </div>
       </div>
+      <animate-circle-bg />
+      <close-circle />
     </div>
-    <div class="animation-container">
-      <div
-        class="circle"
-        :style="{
-          backgroundImage: `url(${animateCircle[currentAnimateIndex]})`,
-        }"
-      ></div>
-    </div>
-    <close-circle />
   </div>
 </template>
 <script setup lang="ts">
@@ -76,36 +77,12 @@ import { ref, onMounted, watch, computed } from "vue";
 import { useStore } from "../composables/useStore";
 
 // get order details and data from store
-const { getOrderDetails, data } = useStore();
+const { getOrderDetails, isLoading, data } = useStore();
 const isAnonymous = computed(() => {
   return data.value?.isAnonymous;
 });
 
-const animateCircle: string[] = [
-  "/img/circle-1.svg",
-  "/img/circle-2.svg",
-  "/img/circle-3.svg",
-  "/img/circle-4.svg",
-  "/img/circle-1.svg",
-  "/img/circle-2.svg",
-  "/img/circle-3.svg",
-  "/img/circle-4.svg",
-];
-
-const currentAnimateIndex = ref(0);
-
-const changeImage = () => {
-  currentAnimateIndex.value = (currentAnimateIndex.value + 1) % animateCircle.length;
-};
-
-// Automatically change image every 3 second
-const intervalidCircle = setInterval(changeImage, 3000);
-
-// Cleanup when component is unmounted
 onMounted(() => {
-  watchEffect(() => {
-    return () => clearInterval(intervalidCircle);
-  });
   getOrderDetails();
 });
 
@@ -118,13 +95,6 @@ const incrementProgress = () => {
 </script>
 
 <style scoped>
-.animation-container {
-  @apply absolute w-[600px] md:w-[1000px] h-[600px] md:h-[900px] flex items-center place-content-center;
-}
-.circle {
-  @apply w-full h-full rounded-[50%] bg-cover transition-[backgroud-image_1s];
-}
-
 .progress-bar {
   @apply h-1  bg-primary border-[1px] border-[#644AE2] rounded-lg overflow-hidden w-[250px] md:w-[280px] mx-auto my-[20px];
 }
@@ -133,6 +103,7 @@ const incrementProgress = () => {
 }
 
 .drop-shadow {
-  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px #00000026;
+  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px
+    #00000026;
 }
 </style>
