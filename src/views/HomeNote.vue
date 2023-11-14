@@ -37,14 +37,7 @@
         </div>
       </div>
     </div>
-    <div class="animation-container">
-      <div
-        class="circle"
-        :style="{
-          backgroundImage: `url(${animateCircle[currentAnimateIndex]})`,
-        }"
-      ></div>
-    </div>
+    <animate-circle-bg />
   </div>
 </template>
 <script setup lang="ts">
@@ -72,32 +65,8 @@ const back = () => {
   router.go(-1);
 };
 
-const animateCircle: string[] = [
-  "/img/circle-1.svg",
-  "/img/circle-2.svg",
-  "/img/circle-3.svg",
-  "/img/circle-4.svg",
-  "/img/circle-1.svg",
-  "/img/circle-2.svg",
-  "/img/circle-3.svg",
-  "/img/circle-4.svg",
-];
-
-const currentAnimateIndex = ref(0);
-
-const changeImage = () => {
-  currentAnimateIndex.value =
-    (currentAnimateIndex.value + 1) % animateCircle.length;
-};
-
-// Automatically change image every 3 second
-const intervalidCircle = setInterval(changeImage, 3000);
-
 // Cleanup when component is unmounted
 onMounted(() => {
-  watchEffect(() => {
-    return () => clearInterval(intervalidCircle);
-  });
   getOrderDetails();
 });
 </script>
