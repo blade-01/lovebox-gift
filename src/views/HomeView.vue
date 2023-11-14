@@ -5,7 +5,7 @@
     <div class="container">
       <div class="flex flex-col items-center place-content-center m-auto">
         <img src="/img/logo.svg" alt="logo" />
-        <ProgressBar />
+        <progressBar />
         <p class="text-black font-bold">{{ currentText.header }}</p>
         <p class="text-black font-bold">{{ currentText.content }}</p>
       </div>
