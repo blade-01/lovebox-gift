@@ -1,5 +1,9 @@
 <template>
+  <div v-if="isLoading === true">
+    <loader />
+  </div>
   <div
+    v-else
     class="w-full h-full xl:h-screen mt-8 xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
     <div class="container">
@@ -90,7 +94,7 @@ import { useRouter, useRoute } from "vue-router";
 import { useStore } from "../composables/useStore";
 
 // get order details and data from store
-const { getOrderDetails, data } = useStore();
+const { getOrderDetails, data, isLoading } = useStore();
 const isAnonymous = computed(() => {
   return data.value?.isAnonymous;
 });
