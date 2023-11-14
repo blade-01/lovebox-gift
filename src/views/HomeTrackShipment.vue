@@ -4,10 +4,7 @@
   >
     <div class="container">
       <router-link :to="{ name: 'home' }">
-        <img
-          class="mx-auto mb-3 w-auto relative z-[9999]"
-          src="/img/logo.svg"
-          alt="logo"
+        <img class="mx-auto mb-3 w-auto relative z-[9999]" src="/img/logo.svg" alt="logo"
       /></router-link>
       <div class="p-0.5 relative z-[9999]">
         <div
@@ -23,15 +20,8 @@
               Lovebox Details
             </h1>
             <div class="text-center flex flex-col gap-2 my-10">
-              <img
-                class="mx-auto"
-                src="/img/lovebox-sender.svg"
-                alt="lovebox-sender"
-              />
-              <div
-                v-if="isAnonymous === false"
-                class="text-center flex flex-col gap-2"
-              >
+              <img class="mx-auto" src="/img/lovebox-sender.svg" alt="lovebox-sender" />
+              <div v-if="isAnonymous === false" class="text-center flex flex-col gap-2">
                 <h1 class="text-2xl font-semibold leading-8 text-priBlack">
                   Correct! Thoughtfully sent by
                 </h1>
@@ -40,10 +30,8 @@
                 </p>
               </div>
               <p class="font-medium text-base leading-5" v-if="notes !== null">
-                You’ve got a note from the sender,
-                <span
-                  class="text-main underline cursor-pointer"
-                  @click="viewNote"
+                You've got a note from the sender,
+                <span class="text-main underline cursor-pointer" @click="viewNote"
                   >view</span
                 >
               </p>
@@ -69,9 +57,7 @@
                   </p>
                   <p class="text-[12px] text-priGray capitalize">Dummy Text</p>
                 </div>
-                <div
-                  class="text-center border-x-[1px] border-priGray px-2 md:px-5"
-                >
+                <div class="text-center border-x-[1px] border-priGray px-2 md:px-5">
                   <p class="text-sm text-priBlack font-semibold uppercase">
                     {{ formatNumber(product?.price) }} NGN
                   </p>
@@ -178,8 +164,7 @@ const animateCircle: string[] = [
 const currentAnimateIndex = ref(0);
 
 const changeImage = () => {
-  currentAnimateIndex.value =
-    (currentAnimateIndex.value + 1) % animateCircle.length;
+  currentAnimateIndex.value = (currentAnimateIndex.value + 1) % animateCircle.length;
 };
 
 // Automatically change image every 3 second

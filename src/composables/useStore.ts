@@ -53,29 +53,15 @@ export function useStore() {
     } finally {
       isLoading.value = false;
       router.push({
-        name: "home-thank-you",
+        name: "home-thank-you"
       });
     }
   };
-
-  // async applyBootcamp(bootcamp) {
-  //   try {
-  //     const response = await http.post("/application", bootcamp);
-  //     toast.success("Successfully applied to bootcamp 🎉");
-  //     this.bootcamp.push(response.data.data);
-  //     push("home");
-  //   } catch (error) {
-  //     toast.error("Oops!, Something went wrong.", {
-  //       timeout: 5000,
-  //     });
-  //     return Promise.reject(error);
-  //   }
-  // },
 
   return {
     getOrderDetails,
     postReviews,
     isLoading,
-    data,
+    data
   };
 }

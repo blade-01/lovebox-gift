@@ -24,24 +24,21 @@
             src="/img/love-unboxed.svg"
             alt="love-unboxed"
           />
-          <div class="text-center flex flex-col gap-4">
-            <p class="text-priBlack font-semibold text-base">
-              Want to guess the sender of this Lovebox?
-            </p>
+          <div class="text-center w-full flex flex-col gap-4 mt-6">
             <div v-if="isAnonymous === true">
-              <router-link :to="{ name: 'home-lovebox-details' }">
-                <button
-                  class="btn w-full bg-main text-white rounded-3xl capitalize"
-                >
-                  Proceed
-                </button>
+              <router-link
+                :to="{ name: 'home-lovebox-details' }"
+                class="btn w-full lg:w-[360px] mx-auto bg-main text-white rounded-3xl capitalize"
+              >
+                Proceed
               </router-link>
             </div>
             <div class="flex flex-col gap-4" v-if="isAnonymous === false">
+              <p class="text-priBlack font-semibold text-base">
+                Want to guess the sender of this Lovebox?
+              </p>
               <router-link :to="{ name: 'home-gift' }">
-                <button class="btn bg-main w-full rounded-3xl capitalize">
-                  Yes
-                </button>
+                <button class="btn bg-main w-full rounded-3xl capitalize">Yes</button>
               </router-link>
               <router-link :to="{ name: 'home-lovebox-details' }">
                 <button
@@ -98,8 +95,7 @@ const animateCircle: string[] = [
 const currentAnimateIndex = ref(0);
 
 const changeImage = () => {
-  currentAnimateIndex.value =
-    (currentAnimateIndex.value + 1) % animateCircle.length;
+  currentAnimateIndex.value = (currentAnimateIndex.value + 1) % animateCircle.length;
 };
 
 // Automatically change image every 3 second
@@ -137,7 +133,6 @@ const incrementProgress = () => {
 }
 
 .drop-shadow {
-  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px
-    #00000026;
+  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px #00000026;
 }
 </style>
