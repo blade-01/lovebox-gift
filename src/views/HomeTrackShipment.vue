@@ -4,7 +4,7 @@
       <loader />
     </div>
     <div
-      class="w-full h-full 2xl:h-screen mt-8 2xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+      class="w-full h-full lg:h-screen mt-8 lg:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
     >
       <div class="container">
         <router-link :to="{ name: 'home' }">
@@ -124,14 +124,7 @@
           </div>
         </div>
       </div>
-      <div class="animation-container">
-        <div
-          class="circle"
-          :style="{
-            backgroundImage: `url(${animateCircle[currentAnimateIndex]})`,
-          }"
-        ></div>
-      </div>
+      <animate-circle-bg />
     </div>
   </div>
 </template>
@@ -178,32 +171,8 @@ const viewNote = () => {
 
 const progress = ref(100);
 
-const animateCircle: string[] = [
-  "/img/circle-1.svg",
-  "/img/circle-2.svg",
-  "/img/circle-3.svg",
-  "/img/circle-4.svg",
-  "/img/circle-1.svg",
-  "/img/circle-2.svg",
-  "/img/circle-3.svg",
-  "/img/circle-4.svg",
-];
-
-const currentAnimateIndex = ref(0);
-
-const changeImage = () => {
-  currentAnimateIndex.value =
-    (currentAnimateIndex.value + 1) % animateCircle.length;
-};
-
-// Automatically change image every 3 second
-const intervalidCircle = setInterval(changeImage, 3000);
-
 // Cleanup when component is unmounted
 onMounted(() => {
-  watchEffect(() => {
-    return () => clearInterval(intervalidCircle);
-  });
   getOrderDetails();
 });
 </script>
