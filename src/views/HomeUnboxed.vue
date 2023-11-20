@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="isLoading === false">
+    <div v-if="isLoading === true">
       <loader />
     </div>
     <div
