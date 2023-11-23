@@ -7,7 +7,7 @@
     class="w-full h-screen mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
     <div class="container">
-      <router-link :to="{ name: 'home' }">
+      <router-link to="/">
         <img
           class="mx-auto mb-3 w-auto relative z-[9999]"
           src="/img/logo.svg"

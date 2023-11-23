@@ -43,7 +43,7 @@ watch(progress, (newProgress) => {
       showPurpleBackground.value = true;
       setTimeout(() => {
         showPurpleBackground.value = false;
-        router.push({ name: "home-unboxed" });
+        router.push({ path: "/unboxed" });
       }, 2000); // Set duration to 2 seconds
     }, 2000); // Set duration to 2 seconds
   } else {

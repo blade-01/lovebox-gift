@@ -7,7 +7,7 @@
     class="w-full h-full xl:h-screen mt-8 xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
     <div class="container">
-      <router-link :to="{ name: 'home' }">
+      <router-link to="/">
         <img
           class="mx-auto mb-3 w-auto relative z-[9999]"
           src="/img/logo.svg"
@@ -65,7 +65,7 @@
               >
                 Yes
               </button>
-              <router-link :to="{ name: 'home-lovebox-details' }">
+              <router-link to="/details">
                 <button
                   class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
                 >
@@ -80,7 +80,7 @@
                 ></span>
                 Limit exceeded! Proceed to view sender</small
               >
-              <router-link :to="{ name: 'home-lovebox-details' }">
+              <router-link to="/details">
                 <button class="btn bg-main w-full rounded-3xl capitalize">
                   Proceed
                 </button>
@@ -93,10 +93,11 @@
         </div>
         <div class="text-center pt-4">
           <a
-            href="www.lovebox.com"
+            href="https://www.lovebox.africa"
+            target="_blank"
             class="text-main font-bold text-sm underline cursor-pointer"
           >
-            www.lovebox.com
+            www.lovebox.africa
           </a>
         </div>
       </div>
@@ -163,7 +164,7 @@ const handleSubmit = () => {
   } else {
     console.log(senderName.value);
     router.push({
-      name: "home-lovebox-details",
+      path: "/details",
       // query: {
       //   name: placeholder.value.name,
       // },

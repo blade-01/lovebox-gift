@@ -8,7 +8,7 @@
       class="w-full h-full 1xl:h-screen mt-10 1xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
     >
       <div class="container">
-        <router-link :to="{ name: 'home' }">
+        <router-link to="/">
           <img
             class="mx-auto mb-4 w-[144px] h-[36px] relative z-[9999]"
             src="/img/logo.svg"
@@ -32,7 +32,7 @@
             <div class="text-center w-full flex flex-col gap-4 mt-6">
               <div v-if="isAnonymous === true">
                 <router-link
-                  :to="{ name: 'home-lovebox-details' }"
+                  to="/details"
                   class="btn w-full lg:w-[360px] mx-auto bg-main text-white rounded-3xl capitalize"
                 >
                   Proceed
@@ -47,7 +47,7 @@
                     Yes
                   </button>
                 </router-link>
-                <router-link :to="{ name: 'home-lovebox-details' }">
+                <router-link to="/details">
                   <button
                     class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
                   >
@@ -59,10 +59,11 @@
           </div>
           <div class="text-center pt-4">
             <a
-              href="www.lovebox.com"
+              href="https://www.lovebox.africa"
+              target="_blank"
               class="text-main font-bold text-sm underline cursor-pointer"
             >
-              www.lovebox.com
+              www.lovebox.africa
             </a>
           </div>
         </div>

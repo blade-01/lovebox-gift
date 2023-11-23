@@ -4,7 +4,7 @@
     :class="shortNote ? 'lg:h-auto lg:mt-10' : 'lg:h-screen lg:mt-auto'"
   >
     <div class="container">
-      <router-link :to="{ name: 'home' }">
+      <router-link to="/">
         <img
           class="mx-auto mb-3 w-auto relative z-[9999]"
           src="/img/logo.svg"
@@ -100,10 +100,11 @@
         </div>
         <div class="text-center pt-4">
           <a
-            href="www.lovebox.com"
+            href="https://www.lovebox.africa"
+              target="_blank"
             class="text-main font-bold text-sm underline cursor-pointer"
           >
-            www.lovebox.com
+            www.lovebox.africa
           </a>
         </div>
       </div>
@@ -194,7 +195,7 @@ const handleSubmit = () => {
 
 const handleCancelSubmit = () => {
   router.push({
-    name: "home-thank-you",
+    path: "/thanks",
   });
 };
 
