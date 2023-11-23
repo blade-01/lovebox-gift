@@ -42,10 +42,8 @@
                 <p class="text-priBlack font-semibold text-base">
                   Want to guess the sender of this Lovebox?
                 </p>
-                <router-link :to="{ name: 'home-gift' }">
-                  <button class="btn bg-main w-full rounded-3xl capitalize">
-                    Yes
-                  </button>
+                <router-link to="gift">
+                  <button class="btn bg-main w-full rounded-3xl capitalize">Yes</button>
                 </router-link>
                 <router-link to="/details">
                   <button
@@ -104,7 +102,6 @@ const incrementProgress = () => {
 }
 
 .drop-shadow {
-  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px
-    #00000026;
+  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px #00000026;
 }
 </style>
