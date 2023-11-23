@@ -7,7 +7,7 @@
     class="w-full h-full 1xl:h-screen mt-10 1xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
     <div class="container">
-      <router-link :to="{ name: 'home' }">
+      <router-link to="/">
         <img
           class="mx-auto mb-4 w-[144px] h-[36px] relative z-[9999]"
           src="/img/logo.svg"
@@ -55,12 +55,12 @@
             <p class="text-priBlack font-semibold text-base">
               Want to guess the sender of this Lovebox?
             </p>
-            <router-link :to="{ name: 'home-gift' }">
+            <router-link to="/gift">
               <button class="btn bg-main w-full rounded-3xl capitalize">
                 Yes
               </button>
             </router-link>
-            <router-link :to="{ name: 'home-lovebox-details' }">
+            <router-link to="/details">
               <button
                 class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
               >

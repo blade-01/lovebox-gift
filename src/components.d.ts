@@ -11,7 +11,6 @@ declare module '@vue/runtime-core' {
     CloseCircle: typeof import('./components/closeCircle.vue')['default']
     Loader: typeof import('./components/reuseables/loader.vue')['default']
     ProgressBar: typeof import('./components/progressBar.vue')['default']
-    ProgressBarh: typeof import('./components/progressBarh.vue')['default']
     RippleCircle: typeof import('./components/rippleCircle.vue')['default']
     RippleSquare: typeof import('./components/rippleSquare.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

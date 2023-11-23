@@ -8,7 +8,7 @@
       class="w-full h-full lg:h-screen mt-8 lg:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
     >
       <div class="container">
-        <router-link :to="{ name: 'home' }">
+        <router-link to="/">
           <img
             class="mx-auto mb-3 w-auto relative z-[9999]"
             src="/img/logo.svg"
@@ -71,10 +71,11 @@
           </div>
           <div class="text-center pt-4">
             <a
-              href="www.lovebox.com"
+              href="https://www.lovebox.africa"
+              target="_blank"
               class="text-main font-bold text-sm underline cursor-pointer"
             >
-              www.lovebox.com
+              www.lovebox.africa
             </a>
           </div>
         </div>
@@ -105,7 +106,7 @@ const progress = ref(100);
 // Track shipment
 const trackShipment = () => {
   router.push({
-    name: "home-track-shipment",
+    path: "/shipment",
     query: {
       name: route.query.name,
     },
@@ -115,7 +116,7 @@ const trackShipment = () => {
 // rating
 const handleRating = () => {
   router.push({
-    name: "home-rating",
+    path: "/rating",
   });
 };
 

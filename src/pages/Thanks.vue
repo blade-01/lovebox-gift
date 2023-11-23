@@ -3,7 +3,7 @@
     class="w-full h-full xl:h-screen mt-8 xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
     <div class="container">
-      <router-link :to="{ name: 'home' }">
+      <router-link to="/">
         <img
           class="mx-auto mb-3 w-auto relative z-[9999]"
           src="/img/logo.svg"
@@ -31,32 +31,33 @@
             </p>
           </div>
           <div class="text-center flex flex-col gap-4 md:w-[300px]">
-            <button
+            <a href="https://www.lovebox.africa/wait" target="_blank"
               class="btn bg-main text-white md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-12"
             >
-              Download our App
-            </button>
-            <button
+              Join our waitlist
+            </a>
+            <a href="https://www.lovebox.africa" target="_blank"
               class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-12"
             >
               View our website
-            </button>
-            <p class="leading-6 font-medium py-3 text-base">
+            </a>
+            <!-- <p class="leading-6 font-medium py-3 text-base">
               Tell the world about Love Box! click
               <span
                 class="text-main underline font-bold cursor-pointer"
                 @click="handleRating"
                 >here.</span
               >
-            </p>
+            </p> -->
           </div>
         </div>
         <!-- <div class="text-center pt-4">
           <a
-            href="www.lovebox.com"
+            href="https://www.lovebox.africa"
+            target="_blank"
             class="text-main font-bold text-sm underline cursor-pointer"
           >
-            www.lovebox.com
+            www.lovebox.africa
           </a>
         </div> -->
       </div>
@@ -76,7 +77,7 @@ const progress = ref(100);
 // rating
 const handleRating = () => {
   router.push({
-    name: "home-rating",
+    path: "/rating",
   });
 };
 </script>

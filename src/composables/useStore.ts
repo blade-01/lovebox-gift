@@ -56,7 +56,7 @@ export function useStore() {
     } finally {
       isLoading.value = false;
       router.push({
-        name: "home-thank-you",
+        path: "/thanks"
       });
     }
   };
@@ -65,6 +65,6 @@ export function useStore() {
     getOrderDetails,
     postReviews,
     isLoading,
-    data,
+    data
   };
 }
