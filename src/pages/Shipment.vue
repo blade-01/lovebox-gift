@@ -27,15 +27,8 @@
                 Lovebox Details
               </h1>
               <div class="text-center flex flex-col gap-2 my-10">
-                <img
-                  class="mx-auto"
-                  src="/img/lovebox-sender.svg"
-                  alt="lovebox-sender"
-                />
-                <div
-                  v-if="isAnonymous === false"
-                  class="text-center flex flex-col gap-2"
-                >
+                <img class="mx-auto" src="/img/lovebox-sender.svg" alt="lovebox-sender" />
+                <div v-if="isAnonymous === false" class="text-center flex flex-col gap-2">
                   <h1 class="text-2xl font-semibold leading-8 text-priBlack">
                     Correct! Thoughtfully sent by
                   </h1>
@@ -43,23 +36,16 @@
                     “{{ senderName }}”
                   </p>
                 </div>
-                <p
-                  class="font-medium text-base leading-5"
-                  v-if="notes !== null"
-                >
+                <p class="font-medium text-base leading-5" v-if="notes !== null">
                   You've got a note from the sender,
-                  <span
-                    class="text-main underline cursor-pointer"
-                    @click="viewNote"
+                  <span class="text-main underline cursor-pointer" @click="viewNote"
                     >view</span
                   >
                 </p>
               </div>
               <div class="grid grid-cols-1 gap-3">
                 <div class="flex justify-between items-center">
-                  <p class="text-priBlack text-sm font-bold">
-                    what is in your package
-                  </p>
+                  <p class="text-priBlack text-sm font-bold">What is in your package.</p>
                   <div class="flex gap-1 items-center">
                     <img src="/img/trash.svg" alt="trash" />
                     <p class="text-priGray text-sm font-medium">
@@ -72,52 +58,51 @@
                   v-for="(product, index) in productDetails"
                   :key="index"
                 >
-                  <div class="text-center mr-auto pr-2 md:pr-0">
+                  <div class="text-center mr-auto pr-2 md:pr-0 py-2">
                     <p class="text-sm text-priBlack font-semibold capitalize">
                       {{ product?.type }}
                     </p>
-                    <p class="text-[12px] text-priGray capitalize">
-                      Dummy Text
-                    </p>
+                    <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
                   </div>
                   <div
-                    class="text-center border-x-[1px] border-priGray px-2 md:px-5"
+                    class="text-center border-x-[1px] border-priGray px-2 md:px-5 py-2"
                   >
                     <p class="text-sm text-priBlack font-semibold uppercase">
                       {{ formatNumber(product?.price) }} NGN
                     </p>
-                    <p class="text-[12px] text-priGray capitalize">Any Store</p>
+                    <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
                   </div>
-                  <div class="text-center ml-auto pl-2 md:pl-0">
+                  <div class="text-center ml-auto pl-2 md:pl-0 py-2">
                     <p class="text-sm text-priBlack font-semibold">
                       {{ product?.name }}
                     </p>
-                    <p class="text-[12px] text-priGray capitalize">
-                      Dummy Text
-                    </p>
+                    <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
                   </div>
                 </div>
-                <div v-if="status === 'processing'" class="pt-6 text-center">
+                <div
+                  v-if="status === 'completed'"
+                  class="btn border-[1px] border-main flex gap-1 items-center bg-white rounded-3xl h-[45px] mt-3 w-[95%] mx-auto hover:bg-main text-main hover:text-white"
+                  @click="handleRatings"
+                >
+                  <p class="font-semibold text-center text-lg capitalize">Rate us</p>
+                  <img src="/img/star.svg" alt="star" />
+                </div>
+                <div v-else class="pt-6 text-center">
                   <p class="leading-6 font-medium text-base text-center">
-                    Tell the world about Love Box! click
-                    <span class="text-main underline font-bold cursor-pointer"
-                      >here.</span
+                    To track your package click
+                    <router-link
+                      :to="{
+                        path: '/details',
+                        query: { id: $route.query.id },
+                      }"
+                      class="text-main underline font-bold cursor-pointer"
+                      >here.</router-link
                     >
                   </p>
                   <p class="text-base" v-if="hasDelivery === true">
                     Tracking Number:
                     <span class="font-bold text-[#2A3538]">N/A</span>
                   </p>
-                </div>
-                <div
-                  v-if="status !== 'processing'"
-                  class="btn border-[1px] border-main flex gap-1 items-center bg-white rounded-3xl h-[45px] mt-3 w-[95%] mx-auto hover:bg-main text-main hover:text-white"
-                  @click="handleRatings"
-                >
-                  <p class="font-semibold text-center text-lg capitalize">
-                    Rate us
-                  </p>
-                  <img src="/img/star.svg" alt="star" />
                 </div>
               </div>
             </div>
