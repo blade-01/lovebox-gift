@@ -36,12 +36,11 @@ const simulateProgress = () => {
 
 const showBlackBackground = ref<boolean>(false);
 const showPurpleBackground = ref<boolean>(false);
-const { data } = useStore();
-watch(progress, async (newProgress) => {
+watch(progress, (newProgress) => {
   if (newProgress === 40) {
     ripple.value = true;
   } else if (newProgress === 50) {
-    await useStore().getOrderDetails(props.routeQuery.id);
+    // await useStore().getOrderDetails(props.routeQuery.id);
     showBlackBackground.value = true;
     setTimeout(() => {
       showBlackBackground.value = false;
@@ -51,7 +50,8 @@ watch(progress, async (newProgress) => {
         router.push({
           path: data.value?.billDetails === null ? "/unboxed" : "/shipment",
           query: {
-            id: props.routeQuery.id,
+            // id: props.routeQuery.id,
+            id: "6493acf9-9d64-4554-b61c-68634b2c7c22",
           },
         });
       }, 2000); // Set duration to 2 seconds

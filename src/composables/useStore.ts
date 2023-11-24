@@ -6,7 +6,11 @@ interface responseData {
   // Define the structure of your order details here
   id: string;
   isAnonymous: boolean;
-  billDetails: [];
+  billDetails: {
+    type: string;
+    amount: number;
+    group: string;
+  };
   senderName: string;
   productDetails: {
     id: string;
@@ -62,7 +66,7 @@ export function useStore() {
     } finally {
       isLoading.value = false;
       router.push({
-        path: "/thanks"
+        path: "/thanks",
       });
     }
   };
@@ -71,6 +75,6 @@ export function useStore() {
     getOrderDetails,
     postReviews,
     isLoading,
-    data
+    data,
   };
 }
