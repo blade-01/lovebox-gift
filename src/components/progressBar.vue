@@ -20,6 +20,9 @@ const progress = ref<number>(0);
 
 const ripple = ref<boolean>(false);
 
+// get order details and data from store
+const { getOrderDetails, isLoading, data } = useStore();
+
 // Simulate progress increment for demonstration
 const simulateProgress = () => {
   const interval = setInterval(() => {

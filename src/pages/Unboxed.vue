@@ -118,8 +118,6 @@ const slideImages: any = computed(() => {
   );
 });
 
-console.log(slideImages, isAnonymous);
-
 // route for id
 const route = useRoute();
 
