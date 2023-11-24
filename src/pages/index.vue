@@ -5,7 +5,7 @@
     <div class="container">
       <div class="flex flex-col items-center place-content-center m-auto">
         <img src="/img/logo.svg" alt="logo" />
-        <progressBar />
+        <progressBar :route-query="$route.query" />
         <p class="text-black font-bold">{{ currentText.header }}</p>
         <p class="text-black font-bold">{{ currentText.content }}</p>
       </div>
@@ -81,8 +81,7 @@ const animateCircle: string[] = [
 const currentAnimateIndex = ref(0);
 
 const changeImage = () => {
-  currentAnimateIndex.value =
-    (currentAnimateIndex.value + 1) % animateCircle.length;
+  currentAnimateIndex.value = (currentAnimateIndex.value + 1) % animateCircle.length;
 };
 
 // Automatically change image every 3 second
