@@ -27,15 +27,8 @@
               Lovebox Details
             </h1>
             <div class="text-center flex flex-col gap-2 my-4">
-              <img
-                class="mx-auto"
-                src="/img/lovebox-sender.svg"
-                alt="lovebox-sender"
-              />
-              <div
-                v-if="isAnonymous === false"
-                class="text-center flex flex-col gap-2"
-              >
+              <img class="mx-auto" src="/img/lovebox-sender.svg" alt="lovebox-sender" />
+              <div v-if="isAnonymous === false" class="text-center flex flex-col gap-2">
                 <h1 class="text-2xl font-semibold leading-8 text-priBlack">
                   Correct! Thoughtfully sent by
                 </h1>
@@ -49,23 +42,17 @@
               <button
                 class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize"
               >
-                5871630601
+                N/A
               </button>
-              <p class="leading-6 font-medium py-1 text-sm">
-                To track your shipment, click
-                <span
-                  class="text-main underline font-bold cursor-pointer"
-                  @click="trackShipment"
-                  >here.</span
-                >
-              </p>
+              <button
+                class="btn bg-main border-[1px] border-main text-white md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize mt-2"
+                @click="$router.back()"
+              >
+                Go Back
+              </button>
               <p class="leading-6 font-medium py-3 text-base">
                 Tell the world about Love Box! click
-                <span
-                  class="text-main underline font-bold cursor-pointer"
-                  @click="handleRating"
-                  >here.</span
-                >
+                <span class="text-main underline font-bold cursor-pointer">here.</span>
               </p>
             </div>
           </div>
@@ -108,7 +95,7 @@ const trackShipment = () => {
   router.push({
     path: "/shipment",
     query: {
-      name: route.query.name,
+      id: route.query.id,
     },
   });
 };
@@ -117,12 +104,15 @@ const trackShipment = () => {
 const handleRating = () => {
   router.push({
     path: "/rating",
+    query: {
+      id: route.query.id,
+    },
   });
 };
 
 // Cleanup when component is unmounted
 onMounted(() => {
-  getOrderDetails();
+  getOrderDetails(route.query.id);
 });
 </script>
 

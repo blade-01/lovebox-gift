@@ -8,10 +8,7 @@
   >
     <div class="container">
       <router-link to="/">
-        <img
-          class="mx-auto mb-3 w-auto relative z-[9999]"
-          src="/img/logo.svg"
-          alt="logo"
+        <img class="mx-auto mb-3 w-auto relative z-[9999]" src="/img/logo.svg" alt="logo"
       /></router-link>
       <div class="p-0.5 relative z-[9999]">
         <div
@@ -46,9 +43,7 @@
                 :class="{ 'err-message': v$.name.$error }"
                 v-if="v$.name.$error || errorValidate()"
               >
-                <span
-                  class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
-                ></span>
+                <span class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"></span>
                 Your guess is wrong, give it {{ guessCount }} more shot!</small
               >
               <input
@@ -65,26 +60,24 @@
               >
                 Yes
               </button>
-              <router-link to="/details">
-                <button
-                  class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
-                >
-                  No, Proceed
-                </button>
-              </router-link>
+              <button
+                @click="handleDetails"
+                class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
+              >
+                No, Proceed
+              </button>
             </form>
             <div v-if="formProceed" class="flex flex-col gap-7 my-4">
               <small class="font-medium leading-6 text-black flex items-center">
-                <span
-                  class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
-                ></span>
+                <span class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"></span>
                 Limit exceeded! Proceed to view sender</small
               >
-              <router-link to="/details">
-                <button class="btn bg-main w-full rounded-3xl capitalize">
-                  Proceed
-                </button>
-              </router-link>
+              <button
+                @click="handleDetails"
+                class="btn bg-main w-full rounded-3xl capitalize"
+              >
+                Proceed
+              </button>
             </div>
             <p class="text-sm font-medium pt-4">
               Not to worry, we will not notify the sender on wrong guesses
@@ -108,7 +101,7 @@
 <script setup lang="ts">
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useStore } from "../composables/useStore";
 
 // get order details and data from store
@@ -120,12 +113,14 @@ const senderName = computed(() => {
 
 // router
 const router = useRouter();
+const route = useRoute();
+
 // progress bar
 const progress = ref<number>(70);
 
 // Cleanup when component is unmounted
 onMounted(() => {
-  getOrderDetails();
+  getOrderDetails(route.query.id);
 });
 
 // trial count
@@ -162,14 +157,20 @@ const handleSubmit = () => {
       formProceed.value = true;
     }
   } else {
-    console.log(senderName.value);
     router.push({
       path: "/details",
-      // query: {
-      //   name: placeholder.value.name,
-      // },
+      query: {
+        id: route.query.id,
+      },
     });
   }
+};
+
+const handleDetails = () => {
+  router.push({
+    path: "/details",
+    query: { id: route.query.id },
+  });
 };
 </script>
 
@@ -189,7 +190,6 @@ const handleSubmit = () => {
 }
 
 .drop-shadow {
-  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px
-    #00000026;
+  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px #00000026;
 }
 </style>

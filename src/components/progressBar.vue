@@ -4,15 +4,16 @@
   </div>
   <div v-if="showBlackBackground" class="black-overlay"></div>
   <div v-if="showPurpleBackground" class="purple-overlay"></div>
-  <div class="circle-container" v-if="ripple === true">
+  <!-- <div class="circle-container" v-if="ripple === true">
     <RippleCircle />
     <RippleSquare />
-  </div>
+  </div> -->
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
-import { useRouter } from "vue-router";
+const props = defineProps<{
+  routeQuery: any;
+}>();
 
 const router = useRouter();
 
@@ -32,18 +33,24 @@ const simulateProgress = () => {
 
 const showBlackBackground = ref<boolean>(false);
 const showPurpleBackground = ref<boolean>(false);
-
-watch(progress, (newProgress) => {
+const { data } = useStore();
+watch(progress, async (newProgress) => {
   if (newProgress === 40) {
     ripple.value = true;
   } else if (newProgress === 50) {
+    await useStore().getOrderDetails(props.routeQuery.id);
     showBlackBackground.value = true;
     setTimeout(() => {
       showBlackBackground.value = false;
       showPurpleBackground.value = true;
       setTimeout(() => {
         showPurpleBackground.value = false;
-        router.push({ path: "/unboxed" });
+        router.push({
+          path: data.value?.billDetails === null ? "/unboxed" : "/shipment",
+          query: {
+            id: props.routeQuery.id,
+          },
+        });
       }, 2000); // Set duration to 2 seconds
     }, 2000); // Set duration to 2 seconds
   } else {
