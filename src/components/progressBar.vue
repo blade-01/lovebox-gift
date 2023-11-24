@@ -39,7 +39,6 @@ watch(progress, async (newProgress) => {
     ripple.value = true;
   } else if (newProgress === 50) {
     await useStore().getOrderDetails(props.routeQuery.id);
-    console.log(data.value);
     showBlackBackground.value = true;
     setTimeout(() => {
       showBlackBackground.value = false;
