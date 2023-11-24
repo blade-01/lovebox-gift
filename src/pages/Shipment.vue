@@ -58,7 +58,7 @@
               <div class="grid grid-cols-1 gap-3">
                 <div class="flex justify-between items-center">
                   <p class="text-priBlack text-sm font-bold">
-                    Sample HTML text
+                    what is in your package
                   </p>
                   <div class="flex gap-1 items-center">
                     <img src="/img/trash.svg" alt="trash" />
@@ -97,12 +97,10 @@
                     </p>
                   </div>
                 </div>
-                <div class="pt-6 text-center">
+                <div v-if="status === 'processing'" class="pt-6 text-center">
                   <p class="leading-6 font-medium text-base text-center">
                     Tell the world about Love Box! click
-                    <span
-                      class="text-main underline font-bold cursor-pointer"
-                      @click="handleRating"
+                    <span class="text-main underline font-bold cursor-pointer"
                       >here.</span
                     >
                   </p>
@@ -110,6 +108,16 @@
                     Tracking Number:
                     <span class="font-bold text-[#2A3538]">N/A</span>
                   </p>
+                </div>
+                <div
+                  v-if="status !== 'processing'"
+                  class="btn border-[1px] border-main flex gap-1 items-center bg-white rounded-3xl h-[45px] mt-3 w-[95%] mx-auto hover:bg-main text-main hover:text-white"
+                  @click="handleRatings"
+                >
+                  <p class="font-semibold text-center text-lg capitalize">
+                    Rate us
+                  </p>
+                  <img src="/img/star.svg" alt="star" />
                 </div>
               </div>
             </div>
@@ -154,13 +162,27 @@ const notes = computed(() => {
 const hasDelivery = computed(() => {
   return data.value?.hasDelivery;
 });
+const status = computed(() => {
+  return data.value?.status;
+});
 
 // home rating
 const route = useRoute();
 const router = useRouter();
-const handleRating = () => {
+const handleDetails = () => {
+  router.push({
+    path: "/details",
+    query: {
+      id: route.query.id,
+    },
+  });
+};
+const handleRatings = () => {
   router.push({
     path: "/rating",
+    query: {
+      id: route.query.id,
+    },
   });
 };
 // navigate to note route
@@ -174,7 +196,7 @@ const progress = ref(100);
 
 // Cleanup when component is unmounted
 onMounted(() => {
-  getOrderDetails();
+  getOrderDetails(route.query.id);
 });
 </script>
 

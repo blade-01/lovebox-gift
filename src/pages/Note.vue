@@ -67,7 +67,7 @@ const back = () => {
 
 // Cleanup when component is unmounted
 onMounted(() => {
-  getOrderDetails();
+  getOrderDetails(route.query.id);
 });
 </script>
 

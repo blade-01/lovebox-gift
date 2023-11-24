@@ -65,13 +65,12 @@
               >
                 Yes
               </button>
-              <router-link to="/details">
-                <button
-                  class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
-                >
-                  No, Proceed
-                </button>
-              </router-link>
+              <button
+                @click="handleDetails"
+                class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
+              >
+                No, Proceed
+              </button>
             </form>
             <div v-if="formProceed" class="flex flex-col gap-7 my-4">
               <small class="font-medium leading-6 text-black flex items-center">
@@ -80,11 +79,12 @@
                 ></span>
                 Limit exceeded! Proceed to view sender</small
               >
-              <router-link to="/details">
-                <button class="btn bg-main w-full rounded-3xl capitalize">
-                  Proceed
-                </button>
-              </router-link>
+              <button
+                @click="handleDetails"
+                class="btn bg-main w-full rounded-3xl capitalize"
+              >
+                Proceed
+              </button>
             </div>
             <p class="text-sm font-medium pt-4">
               Not to worry, we will not notify the sender on wrong guesses
@@ -108,7 +108,7 @@
 <script setup lang="ts">
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useStore } from "../composables/useStore";
 
 // get order details and data from store
@@ -120,12 +120,14 @@ const senderName = computed(() => {
 
 // router
 const router = useRouter();
+const route = useRoute();
+
 // progress bar
 const progress = ref<number>(70);
 
 // Cleanup when component is unmounted
 onMounted(() => {
-  getOrderDetails();
+  getOrderDetails(route.query.id);
 });
 
 // trial count
@@ -165,11 +167,18 @@ const handleSubmit = () => {
     console.log(senderName.value);
     router.push({
       path: "/details",
-      // query: {
-      //   name: placeholder.value.name,
-      // },
+      query: {
+        id: route.query.id,
+      },
     });
   }
+};
+
+const handleDetails = () => {
+  router.push({
+    path: "/details",
+    query: { id: route.query.id },
+  });
 };
 </script>
 

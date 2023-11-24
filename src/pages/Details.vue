@@ -108,7 +108,7 @@ const trackShipment = () => {
   router.push({
     path: "/shipment",
     query: {
-      name: route.query.name,
+      id: route.query.id,
     },
   });
 };
@@ -117,12 +117,15 @@ const trackShipment = () => {
 const handleRating = () => {
   router.push({
     path: "/rating",
+    query: {
+      id: route.query.id,
+    },
   });
 };
 
 // Cleanup when component is unmounted
 onMounted(() => {
-  getOrderDetails();
+  getOrderDetails(route.query.id);
 });
 </script>
 
