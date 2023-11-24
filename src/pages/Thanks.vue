@@ -31,12 +31,16 @@
             </p>
           </div>
           <div class="text-center flex flex-col gap-4 md:w-[300px]">
-            <a href="https://www.lovebox.africa/wait" target="_blank"
+            <a
+              href="https://www.lovebox.africa/wait"
+              target="_blank"
               class="btn bg-main text-white md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-12"
             >
               Join our waitlist
             </a>
-            <a href="https://www.lovebox.africa" target="_blank"
+            <a
+              href="https://www.lovebox.africa"
+              target="_blank"
               class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-12"
             >
               View our website
@@ -78,6 +82,9 @@ const progress = ref(100);
 const handleRating = () => {
   router.push({
     path: "/rating",
+    query: {
+      id: route.query.id,
+    },
   });
 };
 </script>

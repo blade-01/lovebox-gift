@@ -43,7 +43,12 @@ watch(progress, (newProgress) => {
       showPurpleBackground.value = true;
       setTimeout(() => {
         showPurpleBackground.value = false;
-        router.push({ path: "/unboxed" });
+        router.push({
+          path: "/unboxed",
+          query: {
+            id: "205e1ce3-52b7-442f-910b-6c7f0d79b05f",
+          },
+        });
       }, 2000); // Set duration to 2 seconds
     }, 2000); // Set duration to 2 seconds
   } else {

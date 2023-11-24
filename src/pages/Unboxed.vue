@@ -5,7 +5,7 @@
     </div>
     <div
       v-else
-      class="w-full h-full 1xl:h-screen mt-10 1xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+      class="w-full h-full lg:h-screen mt-10 lg:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
     >
       <div class="container">
         <router-link to="/">
@@ -24,26 +24,54 @@
             <h1 class="font-semibold text-center text-2xl text-priBlack">
               Lovebox unboxed!
             </h1>
-            <img
-              class="w-auto md:w-[391.13px] md:h-[359.69px]"
-              src="/img/love-unboxed.svg"
-              alt="love-unboxed"
-            />
-            <div class="text-center w-full flex flex-col gap-4 mt-6">
-              <div v-if="isAnonymous === true">
-                <router-link
-                  to="/details"
-                  class="btn w-full lg:w-[360px] mx-auto bg-main text-white rounded-3xl capitalize"
-                >
-                  Proceed
-                </router-link>
+            <div class="my-6" v-if="slideImages?.length === 1">
+              <img
+                v-for="(slide, index) in slideImages"
+                :key="index"
+                class="w-auto md:w-[391.13px] md:h-[359.69px]"
+                :src="`${slide?.src}`"
+                :alt="`${slide?.alt}`"
+              />
+            </div>
+            <div v-else class="max-w-[300px] mx-auto my-6">
+              <carousel
+                :items-to-show="1.5"
+                :autoplay="2000"
+                :wrap-around="true"
+              >
+                <slide v-for="(slide, index) in slideImages" :key="index">
+                  <img
+                    class="w-[90%] h-[250px] rounded-lg"
+                    :src="`${slide?.src}`"
+                    :alt="`${slide?.alt}`"
+                  />
+                </slide>
+                <template #addons>
+                  <pagination />
+                </template>
+              </carousel>
+            </div>
+            <div class="text-center w-full flex flex-col gap-4">
+              <div
+                v-if="isAnonymous === true"
+                @click="
+                  $router.push({
+                    path: '/Shipment',
+                    query: { id: $route.query.id },
+                  })
+                "
+                class="btn w-full lg:w-[360px] mx-auto bg-main text-white rounded-3xl capitalize"
+              >
+                Proceed
               </div>
               <div class="flex flex-col gap-4" v-if="isAnonymous === false">
                 <p class="text-priBlack font-semibold text-base">
                   Want to guess the sender of this Lovebox?
                 </p>
                 <router-link to="gift">
-                  <button class="btn bg-main w-full rounded-3xl capitalize">Yes</button>
+                  <button class="btn bg-main w-full rounded-3xl capitalize">
+                    Yes
+                  </button>
                 </router-link>
                 <router-link to="/details">
                   <button
@@ -66,23 +94,37 @@
           </div>
         </div>
       </div>
-      <animate-circle-bg />
       <close-circle />
+      <animate-circle-bg />
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { ref, onMounted, watch, computed } from "vue";
-import { useStore } from "../composables/useStore";
-
+import "vue3-carousel/dist/carousel.css";
+import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 // get order details and data from store
 const { getOrderDetails, isLoading, data } = useStore();
 const isAnonymous = computed(() => {
   return data.value?.isAnonymous;
 });
 
+const slideImages: any = computed(() => {
+  return data.value?.productDetails.flatMap((element: any) =>
+    element?.images.map((image: any) => ({
+      src: image.src,
+      alt: image.alt,
+    }))
+  );
+});
+
+console.log(slideImages, isAnonymous);
+
+// route for id
+const route = useRoute();
+
 onMounted(() => {
-  getOrderDetails();
+  getOrderDetails(route.query.id);
 });
 
 // progress bar
@@ -102,6 +144,7 @@ const incrementProgress = () => {
 }
 
 .drop-shadow {
-  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px #00000026;
+  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px
+    #00000026;
 }
 </style>

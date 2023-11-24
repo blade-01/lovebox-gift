@@ -1,7 +1,7 @@
 <template>
+  <!-- :class="shortNote ? 'lg:h-auto lg:mt-10' : 'lg:h-screen lg:mt-auto'" -->
   <div
-    class="w-full h-full mt-8 relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
-    :class="shortNote ? 'lg:h-auto lg:mt-10' : 'lg:h-screen lg:mt-auto'"
+    class="w-full h-full mt-8 relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden lg:h-auto lg:mt-10 1xl:h-screen 1xl:mt-0"
   >
     <div class="container">
       <router-link to="/">
@@ -47,7 +47,7 @@
                   <p>Not Satisfied</p>
                   <p>Very Satisfied</p>
                 </div>
-                <div v-if="shortNote" class="mt-3">
+                <div class="mt-3">
                   <div class="flex justify-between items-center font-medium">
                     <p class="text-sm leading-5">Write a short review</p>
                     <p
@@ -72,8 +72,8 @@
                   />
                 </div>
               </div>
+              <!-- v-if="shortNote" -->
               <button
-                v-if="shortNote"
                 @click="handleSubmit"
                 class="btn bg-main border-[1px] border-main text-white md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-[48px]"
               >
@@ -101,7 +101,7 @@
         <div class="text-center pt-4">
           <a
             href="https://www.lovebox.africa"
-              target="_blank"
+            target="_blank"
             class="text-main font-bold text-sm underline cursor-pointer"
           >
             www.lovebox.africa
@@ -167,6 +167,7 @@ const submitRating = (count: any) => {
   // submit rating to router
   router.push({
     query: {
+      id: route.query.id,
       rating: count.rate,
     },
   });
@@ -196,6 +197,9 @@ const handleSubmit = () => {
 const handleCancelSubmit = () => {
   router.push({
     path: "/thanks",
+    query: {
+      id: route.query.id,
+    },
   });
 };
 
@@ -203,7 +207,7 @@ const progress = ref(100);
 
 // Cleanup when component is unmounted
 onMounted(() => {
-  getOrderDetails();
+  getOrderDetails(route.query.id);
 });
 </script>
 

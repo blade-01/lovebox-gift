@@ -6,6 +6,7 @@ interface responseData {
   // Define the structure of your order details here
   id: string;
   isAnonymous: boolean;
+  billDetails: [];
   senderName: string;
   productDetails: {
     id: string;
@@ -18,7 +19,12 @@ interface responseData {
     }[];
     type: string;
     price: string;
+    images: {
+      alt: string;
+      src: string;
+    }[];
   }[];
+  status: string;
   notes: string | null;
   hasDelivery: boolean;
   // ... other properties
@@ -30,11 +36,11 @@ export function useStore() {
   const router = useRouter();
   const isLoading = ref<boolean>(false);
 
-  const getOrderDetails = async () => {
+  const getOrderDetails = async (id: any) => {
     try {
       isLoading.value = true;
       const response = await axios.get(
-        "https://core-api-katg.onrender.com/api/v1/orders/205e1ce3-52b7-442f-910b-6c7f0d79b05f"
+        `https://core-api-katg.onrender.com/api/v1/orders/${id}`
       );
       data.value = response.data.data;
     } catch (error) {
@@ -56,7 +62,7 @@ export function useStore() {
     } finally {
       isLoading.value = false;
       router.push({
-        path: "/thanks"
+        path: "/thanks",
       });
     }
   };
@@ -65,6 +71,6 @@ export function useStore() {
     getOrderDetails,
     postReviews,
     isLoading,
-    data
+    data,
   };
 }
