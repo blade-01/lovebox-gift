@@ -71,50 +71,56 @@
                   </div>
                 </div>
                 <div
-                  class="grid grid-cols-3 place-items-center border-[1px] border-priGray rounded-lg py-2 px-4 md:py-3 md:px-6"
+                  class="flex justify-between items-center border-[1px] border-priGray rounded-lg py-2"
                   v-for="(product, index) in productDetails"
                   :key="index"
                 >
-                  <div class="text-center mr-auto pr-2 md:pr-0 py-2">
-                    <p class="text-sm text-priBlack font-semibold capitalize">
+                  <div class="basis-[33.33%]">
+                    <p
+                      class="text-sm text-center text-priBlack font-semibold capitalize"
+                    >
                       {{ product?.type }}
                     </p>
                     <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
                   </div>
                   <div
-                    class="text-center border-x-[1px] border-priGray px-2 md:px-5 py-2"
+                    class="text-center border-x-[1px] border-priGray basis-[33.33%]"
                   >
                     <p class="text-sm text-priBlack font-semibold uppercase">
                       {{ formatNumber(product?.price) }} NGN
                     </p>
                     <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
                   </div>
-                  <div class="text-center ml-auto pl-2 md:pl-0 py-2">
-                    <p class="text-sm text-priBlack font-semibold">
+                  <div class="basis-[33.33%]">
+                    <p class="text-sm text-center text-priBlack font-semibold">
                       {{ product?.name }}
                     </p>
                     <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
                   </div>
                 </div>
                 <div
-                  class="grid grid-cols-3 place-items-center border-[1px] border-priGray rounded-lg py-2 px-4 md:py-3 md:px-6"
+                  class="flex justify-between items-center border-[1px] border-priGray rounded-lg py-2"
                 >
-                  <div class="text-center mr-auto pr-2 md:pr-0 py-2">
-                    <p class="text-sm text-priBlack font-semibold capitalize">
+                  <div class="basis-[33.33%]">
+                    <p
+                      class="text-sm text-center text-priBlack font-semibold capitalize"
+                    >
                       {{ billDetails?.group }}
                     </p>
                     <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
                   </div>
                   <div
-                    class="text-center border-x-[1px] border-priGray px-2 md:px-5 py-2"
+                    class="text-center border-x-[1px] border-priGray basis-[33.33%]"
                   >
                     <p class="text-sm text-priBlack font-semibold uppercase">
                       {{ billDetails?.amount }} NGN
                     </p>
                     <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
                   </div>
-                  <div class="text-center ml-auto pl-2 md:pl-0 py-2">
-                    <p class="text-sm text-priBlack font-semibold">
+                  <div class="basis-[33.33%]">
+                    <p
+                      class="text-sm text-center text-priBlack font-semibold capitalize"
+                    >
                       {{ billDetails?.type }}
                     </p>
                     <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->

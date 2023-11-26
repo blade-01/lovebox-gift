@@ -51,7 +51,7 @@ watch(progress, (newProgress) => {
           path: data.value?.billDetails === null ? "/unboxed" : "/shipment",
           query: {
             // id: props.routeQuery.id,
-            id: "6493acf9-9d64-4554-b61c-68634b2c7c22",
+            id: "205e1ce3-52b7-442f-910b-6c7f0d79b05f",
           },
         });
       }, 2000); // Set duration to 2 seconds
