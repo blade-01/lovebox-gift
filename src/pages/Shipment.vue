@@ -79,7 +79,12 @@
                     <p
                       class="text-sm text-center text-priBlack font-semibold capitalize"
                     >
-                      {{ product?.type }}
+                      <span class="lg:hidden">
+                        {{ truncateText(product?.type, 10) }}
+                      </span>
+                      <span class="hidden lg:block">
+                        {{ truncateText(product?.type, 15) }}
+                      </span>
                     </p>
                     <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
                   </div>
@@ -92,13 +97,21 @@
                     <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
                   </div>
                   <div class="basis-[33.33%]">
-                    <p class="text-sm text-center text-priBlack font-semibold">
-                      {{ product?.name }}
+                    <p
+                      class="text-sm text-center text-priBlack font-semibold capitalize"
+                    >
+                      <span class="lg:hidden">
+                        {{ truncateText(product?.name, 10) }}
+                      </span>
+                      <span class="hidden lg:block">{{
+                        truncateText(product?.name, 15)
+                      }}</span>
                     </p>
                     <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
                   </div>
                 </div>
                 <div
+                  v-if="billDetails !== null"
                   class="flex justify-between items-center border-[1px] border-priGray rounded-lg py-2"
                 >
                   <div class="basis-[33.33%]">
@@ -174,9 +187,10 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { useStore } from "../composables/useStore";
-import { useFormatter } from "../composables/useFormatter";
+import useTruncattor from "../composables/useTruncattor";
 
+// use truncattor
+const { truncateText } = useTruncattor();
 // use formatter for number
 const { formatNumber, formatCurrency } = useFormatter();
 // get order details and data from store
