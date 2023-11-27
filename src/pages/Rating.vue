@@ -5,7 +5,10 @@
   >
     <div class="container">
       <router-link to="/">
-        <img class="mx-auto mb-3 w-auto relative z-[9999]" src="/img/logo.svg" alt="logo"
+        <img
+          class="mx-auto mb-3 w-auto relative z-[9999]"
+          src="/img/logo.svg"
+          alt="logo"
       /></router-link>
       <div class="p-0.5 relative z-[9999]">
         <div
@@ -29,14 +32,18 @@
                     :key="index"
                     class="h-[48px] lg:h-[60px] rounded-lg text-center flex items-center justify-center font-medium text-xl cursor-pointer"
                     :class="
-                      count.isActive ? 'bg-main text-white' : 'bg-[#E9E6FA] text-main'
+                      count.isActive
+                        ? 'bg-main text-white'
+                        : 'bg-[#E9E6FA] text-main'
                     "
                     @click="submitRating(count)"
                   >
                     {{ count.rate }}
                   </div>
                 </div>
-                <div class="flex justify-between items-center text-priGray text-[12px]">
+                <div
+                  class="flex justify-between items-center text-priGray text-[12px]"
+                >
                   <p>Not Satisfied</p>
                   <p>Very Satisfied</p>
                 </div>
@@ -59,7 +66,8 @@
                     placeholder="Placeholder"
                     @input="updateCharacterCount"
                     :class="{
-                      'border-[1px] border-red-600': err || characterCount >= 50,
+                      'border-[1px] border-red-600':
+                        err || characterCount >= 50,
                     }"
                   />
                 </div>
@@ -83,7 +91,7 @@
               </button>
               <p class="leading-6 font-medium py-3 text-base text-center">
                 Tell the world about Love Box! click
-                <!-- <ShareNetwork
+                <ShareNetwork
                   network="whatsapp"
                   :url="`http://localhost:3334/shipment?id=${$route.query.id}`"
                   title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
@@ -91,8 +99,10 @@
                   quote="The hot reload is so fast it\'s near instant. - Evan You"
                   hashtags="vuejs,vite"
                 >
-                  <span class="text-main underline font-bold cursor-pointer">here.</span>
-                </ShareNetwork> -->
+                  <span class="text-main underline font-bold cursor-pointer"
+                    >here.</span
+                  >
+                </ShareNetwork>
               </p>
             </div>
           </div>
