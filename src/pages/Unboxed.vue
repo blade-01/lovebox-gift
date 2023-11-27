@@ -38,7 +38,7 @@
                 <slide v-for="(slide, index) in slideImages" :key="index">
                   <div class="carousel__item">
                     <img
-                      class="w-[90%] h-[250px] object-contain rounded-lg"
+                      class="w-[90%] h-[250px] rounded-lg"
                       :src="`${slide?.src}`"
                       :alt="`${slide?.alt}`"
                     />

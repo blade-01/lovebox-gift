@@ -25,7 +25,7 @@ const ripple = ref<boolean>(false);
 const { getOrderDetails, isLoading, data } = useStore();
 
 // Simulate progress increment for demonstration
-const simulateProgress = () => {
+const simulateProgress = async () => {
   const interval = setInterval(() => {
     progress.value += 1;
     if (progress.value >= 50) {
@@ -36,11 +36,13 @@ const simulateProgress = () => {
 
 const showBlackBackground = ref<boolean>(false);
 const showPurpleBackground = ref<boolean>(false);
-watch(progress, (newProgress) => {
+const response = computed(() => data.value);
+
+watch(progress, async (newProgress) => {
   if (newProgress === 40) {
     ripple.value = true;
   } else if (newProgress === 50) {
-    // await useStore().getOrderDetails(props.routeQuery.id);
+    await getOrderDetails(props.routeQuery.id);
     showBlackBackground.value = true;
     setTimeout(() => {
       showBlackBackground.value = false;
@@ -48,10 +50,9 @@ watch(progress, (newProgress) => {
       setTimeout(() => {
         showPurpleBackground.value = false;
         router.push({
-          path: "/unboxed",
+          path: response.value?.productDetails ? "/unboxed" : "/shipment",
           query: {
-            // id: props.routeQuery.id,
-            id: "205e1ce3-52b7-442f-910b-6c7f0d79b05f",
+            id: props.routeQuery.id,
           },
         });
       }, 2000); // Set duration to 2 seconds
@@ -61,8 +62,8 @@ watch(progress, (newProgress) => {
   }
 });
 
-onMounted(() => {
-  simulateProgress();
+onMounted(async () => {
+  await simulateProgress();
 });
 </script>
 
