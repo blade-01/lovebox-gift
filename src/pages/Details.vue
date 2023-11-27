@@ -65,7 +65,6 @@
                   >
                 </ShareNetwork> -->
               </p>
-              Share
             </div>
           </div>
           <div class="text-center pt-4">
@@ -84,10 +83,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { useStore } from "../composables/useStore";
-
 // get order details and data from store
 const { getOrderDetails, data, isLoading } = useStore();
 const isAnonymous = computed(() => {

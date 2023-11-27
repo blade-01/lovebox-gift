@@ -46,7 +46,7 @@
             </p> -->
           </div>
         </div>
-        <!-- <div class="text-center pt-4">
+        <div class="text-center pt-4">
           <a
             href="https://www.lovebox.africa"
             target="_blank"
@@ -54,7 +54,7 @@
           >
             www.lovebox.africa
           </a>
-        </div> -->
+        </div>
       </div>
     </div>
     <animate-circle-bg />

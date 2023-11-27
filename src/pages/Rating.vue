@@ -112,10 +112,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { useStore } from "../composables/useStore";
-
 // send review from store
 const { postReviews, getOrderDetails, data, isLoading } = useStore();
 const id = computed(() => {
