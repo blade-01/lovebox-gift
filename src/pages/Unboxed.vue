@@ -36,11 +36,13 @@
             <div v-else class="max-w-[300px] mx-auto my-6">
               <carousel :items-to-show="1.5" :autoplay="2000" :wrap-around="true">
                 <slide v-for="(slide, index) in slideImages" :key="index">
-                  <img
-                    class="w-[90%] h-[250px] rounded-lg"
-                    :src="`${slide?.src}`"
-                    :alt="`${slide?.alt}`"
-                  />
+                  <div class="carousel__item">
+                    <img
+                      class="w-[90%] h-[250px] object-contain rounded-lg"
+                      :src="`${slide?.src}`"
+                      :alt="`${slide?.alt}`"
+                    />
+                  </div>
                 </slide>
                 <template #addons>
                   <pagination />
@@ -94,9 +96,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from "vue";
 import "vue3-carousel/dist/carousel.css";
-import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
+import { Carousel, Slide, Pagination } from "vue3-carousel";
 // get order details and data from store
 const { getOrderDetails, isLoading, data } = useStore();
 const isAnonymous = computed(() => {
@@ -137,5 +138,15 @@ const incrementProgress = () => {
 
 .drop-shadow {
   box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px #00000026;
+}
+:deep(.carousel__pagination) {
+  @apply !flex !gap-2 !justify-center !mt-4;
+}
+:deep(.carousel__pagination-button) {
+  @apply !w-3 !h-3 !bg-[#DEE8F8] !rounded-full after:hidden transition-all ease-in-out duration-200;
+}
+
+:deep(.carousel__pagination-button--active) {
+  @apply !w-6 !h-3 !rounded-lg !bg-main;
 }
 </style>

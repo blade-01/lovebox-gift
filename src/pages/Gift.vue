@@ -101,8 +101,6 @@
 <script setup lang="ts">
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
-import { useRouter, useRoute } from "vue-router";
-import { useStore } from "../composables/useStore";
 
 // get order details and data from store
 const { getOrderDetails, data, isLoading } = useStore();

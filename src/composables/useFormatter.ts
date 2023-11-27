@@ -8,8 +8,14 @@ export function useFormatter() {
     }
     return num.toLocaleString(undefined, { maximumFractionDigits: 0 });
   };
+  const formatCurrency = (value: number) =>
+    new Intl.NumberFormat("en-NG", {
+      style: "currency",
+      currency: "NGN",
+    }).format(value);
 
   return {
     formatNumber,
+    formatCurrency,
   };
 }

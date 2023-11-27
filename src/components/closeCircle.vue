@@ -10,8 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-
 const circles = ref<any>([]);
 
 const createCircle = (x: number, y: number) => {

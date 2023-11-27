@@ -21,6 +21,9 @@ const progress = ref<number>(0);
 
 const ripple = ref<boolean>(false);
 
+// get order details and data from store
+const { getOrderDetails, isLoading, data } = useStore();
+
 // Simulate progress increment for demonstration
 const simulateProgress = () => {
   const interval = setInterval(() => {
@@ -33,12 +36,11 @@ const simulateProgress = () => {
 
 const showBlackBackground = ref<boolean>(false);
 const showPurpleBackground = ref<boolean>(false);
-const { data } = useStore();
-watch(progress, async (newProgress) => {
+watch(progress, (newProgress) => {
   if (newProgress === 40) {
     ripple.value = true;
   } else if (newProgress === 50) {
-    await useStore().getOrderDetails(props.routeQuery.id);
+    // await useStore().getOrderDetails(props.routeQuery.id);
     showBlackBackground.value = true;
     setTimeout(() => {
       showBlackBackground.value = false;
@@ -46,9 +48,10 @@ watch(progress, async (newProgress) => {
       setTimeout(() => {
         showPurpleBackground.value = false;
         router.push({
-          path: data.value?.billDetails === null ? "/unboxed" : "/shipment",
+          path: "/unboxed",
           query: {
-            id: props.routeQuery.id,
+            // id: props.routeQuery.id,
+            id: "205e1ce3-52b7-442f-910b-6c7f0d79b05f",
           },
         });
       }, 2000); // Set duration to 2 seconds
