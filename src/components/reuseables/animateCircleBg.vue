@@ -9,8 +9,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watchEffect } from "vue";
-
 const animateCircle: string[] = [
   "/img/circle-1.svg",
   "/img/circle-2.svg",
@@ -25,8 +23,7 @@ const animateCircle: string[] = [
 const currentAnimateIndex = ref(0);
 
 const changeImage = () => {
-  currentAnimateIndex.value =
-    (currentAnimateIndex.value + 1) % animateCircle.length;
+  currentAnimateIndex.value = (currentAnimateIndex.value + 1) % animateCircle.length;
 };
 
 // Automatically change image every 3 second

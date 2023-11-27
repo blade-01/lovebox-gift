@@ -21,7 +21,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watchEffect } from "vue";
 interface textItem {
   header: string;
   content: string;

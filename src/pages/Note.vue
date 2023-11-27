@@ -8,10 +8,7 @@
   >
     <div class="container">
       <router-link to="/">
-        <img
-          class="mx-auto mb-3 w-auto relative z-[9999]"
-          src="/img/logo.svg"
-          alt="logo"
+        <img class="mx-auto mb-3 w-auto relative z-[9999]" src="/img/logo.svg" alt="logo"
       /></router-link>
       <div class="p-0.5">
         <div
@@ -41,10 +38,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { useStore } from "../composables/useStore";
-
 // get order details and data from store
 const { getOrderDetails, data, isLoading } = useStore();
 const notes = computed(() => {

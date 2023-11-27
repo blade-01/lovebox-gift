@@ -53,38 +53,44 @@
                     </p>
                   </div>
                 </div>
-                <div
-                  class="flex justify-between items-center border-[1px] border-priGray rounded-lg py-2"
-                  v-for="(product, index) in productDetails"
-                  :key="index"
-                >
-                  <div class="basis-[33.33%]">
-                    <p class="text-sm text-center text-priBlack font-semibold capitalize">
-                      <span class="lg:hidden">
-                        {{ truncateText(product?.type, 10) }}
-                      </span>
-                      <span class="hidden lg:block">
-                        {{ truncateText(product?.type, 15) }}
-                      </span>
-                    </p>
-                    <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
-                  </div>
-                  <div class="text-center border-x-[1px] border-priGray basis-[33.33%]">
-                    <p class="text-sm text-priBlack font-semibold uppercase">
-                      {{ formatNumber(product?.price) }} NGN
-                    </p>
-                    <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
-                  </div>
-                  <div class="basis-[33.33%]">
-                    <p class="text-sm text-center text-priBlack font-semibold capitalize">
-                      <span class="lg:hidden">
-                        {{ truncateText(product?.name, 10) }}
-                      </span>
-                      <span class="hidden lg:block">{{
-                        truncateText(product?.name, 15)
-                      }}</span>
-                    </p>
-                    <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
+                <div v-if="productDetails !== null">
+                  <div
+                    class="flex justify-between items-center border-[1px] border-priGray rounded-lg py-2"
+                    v-for="(product, index) in productDetails"
+                    :key="index"
+                  >
+                    <div class="basis-[33.33%]">
+                      <p
+                        class="text-sm text-center text-priBlack font-semibold capitalize"
+                      >
+                        <span class="lg:hidden">
+                          {{ truncateText(product?.type, 10) }}
+                        </span>
+                        <span class="hidden lg:block">
+                          {{ truncateText(product?.type, 15) }}
+                        </span>
+                      </p>
+                      <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
+                    </div>
+                    <div class="text-center border-x-[1px] border-priGray basis-[33.33%]">
+                      <p class="text-sm text-priBlack font-semibold uppercase">
+                        {{ formatNumber(product?.price) }} NGN
+                      </p>
+                      <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
+                    </div>
+                    <div class="basis-[33.33%]">
+                      <p
+                        class="text-sm text-center text-priBlack font-semibold capitalize"
+                      >
+                        <span class="lg:hidden">
+                          {{ truncateText(product?.name, 10) }}
+                        </span>
+                        <span class="hidden lg:block">{{
+                          truncateText(product?.name, 15)
+                        }}</span>
+                      </p>
+                      <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
+                    </div>
                   </div>
                 </div>
                 <div
@@ -154,12 +160,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import useTruncattor from "../composables/useTruncattor";
-
 // use truncattor
-const { truncateText } = useTruncattor();
+const { truncateText } = useTruncate();
 // use formatter for number
 const { formatNumber } = useFormatter();
 // get order details and data from store
