@@ -53,55 +53,58 @@
                     </p>
                   </div>
                 </div>
-                <div v-if="productDetails">
-                  <div
-                    class="grid grid-cols-3 place-items-center border-[1px] border-priGray rounded-lg py-2 px-4 md:py-3 md:px-6"
-                    v-for="(product, index) in productDetails"
-                    :key="index"
-                  >
-                    <div class="text-center mr-auto pr-2 md:pr-0 py-2">
-                      <p class="text-sm text-priBlack font-semibold capitalize">
-                        {{ product?.type }}
-                      </p>
-                      <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
-                    </div>
-                    <div
-                      class="text-center border-x-[1px] border-priGray px-2 md:px-5 py-2"
-                    >
-                      <p class="text-sm text-priBlack font-semibold uppercase">
-                        {{ formatNumber(product?.price) }} NGN
-                      </p>
-                      <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
-                    </div>
-                    <div class="text-center ml-auto pl-2 md:pl-0 py-2">
-                      <p class="text-sm text-priBlack font-semibold">
-                        {{ product?.name }}
-                      </p>
-                      <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
-                    </div>
+                <div
+                  class="flex justify-between items-center border-[1px] border-priGray rounded-lg py-2"
+                  v-for="(product, index) in productDetails"
+                  :key="index"
+                >
+                  <div class="basis-[33.33%]">
+                    <p class="text-sm text-center text-priBlack font-semibold capitalize">
+                      <span class="lg:hidden">
+                        {{ truncateText(product?.type, 10) }}
+                      </span>
+                      <span class="hidden lg:block">
+                        {{ truncateText(product?.type, 15) }}
+                      </span>
+                    </p>
+                    <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
+                  </div>
+                  <div class="text-center border-x-[1px] border-priGray basis-[33.33%]">
+                    <p class="text-sm text-priBlack font-semibold uppercase">
+                      {{ formatNumber(product?.price) }} NGN
+                    </p>
+                    <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
+                  </div>
+                  <div class="basis-[33.33%]">
+                    <p class="text-sm text-center text-priBlack font-semibold capitalize">
+                      <span class="lg:hidden">
+                        {{ truncateText(product?.name, 10) }}
+                      </span>
+                      <span class="hidden lg:block">{{
+                        truncateText(product?.name, 15)
+                      }}</span>
+                    </p>
+                    <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
                   </div>
                 </div>
-
                 <div
-                  class="grid grid-cols-3 place-items-center border-[1px] border-priGray rounded-lg py-2 px-4 md:py-3 md:px-6"
-                  v-if="billDetails"
+                  v-if="billDetails !== null"
+                  class="flex justify-between items-center border-[1px] border-priGray rounded-lg py-2"
                 >
-                  <div class="text-center mr-auto pr-2 md:pr-0 py-2">
-                    <p class="text-sm text-priBlack font-semibold capitalize">
+                  <div class="basis-[33.33%]">
+                    <p class="text-sm text-center text-priBlack font-semibold capitalize">
                       {{ billDetails?.group }}
                     </p>
                     <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
                   </div>
-                  <div
-                    class="text-center border-x-[1px] border-priGray px-2 md:px-5 py-2"
-                  >
+                  <div class="text-center border-x-[1px] border-priGray basis-[33.33%]">
                     <p class="text-sm text-priBlack font-semibold uppercase">
                       {{ billDetails?.amount }} NGN
                     </p>
                     <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
                   </div>
-                  <div class="text-center ml-auto pl-2 md:pl-0 py-2">
-                    <p class="text-sm text-priBlack font-semibold capitalize">
+                  <div class="basis-[33.33%]">
+                    <p class="text-sm text-center text-priBlack font-semibold capitalize">
                       {{ billDetails?.type }}
                     </p>
                     <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
@@ -151,6 +154,12 @@
   </div>
 </template>
 <script setup lang="ts">
+import { ref, onMounted, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import useTruncattor from "../composables/useTruncattor";
+
+// use truncattor
+const { truncateText } = useTruncattor();
 // use formatter for number
 const { formatNumber } = useFormatter();
 // get order details and data from store

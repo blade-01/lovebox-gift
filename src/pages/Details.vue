@@ -27,8 +27,15 @@
               Lovebox Details
             </h1>
             <div class="text-center flex flex-col gap-2 my-4">
-              <img class="mx-auto" src="/img/lovebox-sender.svg" alt="lovebox-sender" />
-              <div v-if="isAnonymous === false" class="text-center flex flex-col gap-2">
+              <img
+                class="mx-auto"
+                src="/img/lovebox-sender.svg"
+                alt="lovebox-sender"
+              />
+              <div
+                v-if="isAnonymous === false"
+                class="text-center flex flex-col gap-2"
+              >
                 <h1 class="text-2xl font-semibold leading-8 text-priBlack">
                   Correct! Thoughtfully sent by
                 </h1>
@@ -52,7 +59,18 @@
               </button>
               <p class="leading-6 font-medium py-3 text-base">
                 Tell the world about Love Box! click
-                <span class="text-main underline font-bold cursor-pointer">here.</span>
+                <ShareNetwork
+                  network="whatsapp"
+                  :url="`http://localhost:3334/shipment?id=${$route.query.id}`"
+                  title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
+                  description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
+                  quote="The hot reload is so fast it\'s near instant. - Evan You"
+                  hashtags="vuejs,vite"
+                >
+                  <span class="text-main underline font-bold cursor-pointer"
+                    >here.</span
+                  >
+                </ShareNetwork>
               </p>
             </div>
           </div>
