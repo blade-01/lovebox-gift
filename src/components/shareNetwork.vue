@@ -7,7 +7,7 @@
         class="mdi mdi-close-circle-outline text-2xl cursor-pointer"
       ></span>
     </div>
-    <div class="flex justify-between items-center gap-4">
+    <div class="grid grid-cols-3 place-items-center gap-4">
       <div
         v-for="(link, index) in links"
         :key="index"
@@ -30,12 +30,12 @@
     <div class="flex flex-col gap-3 text-left">
       <p class="capitalize font-medium text-lg">Page link</p>
       <div v-if="isSupported">
-        <div class="flex justify-between bg-secBg rounded-xl p-4">
-          <p class="text-priGray text-lg">
+        <div class="flex justify-between gap-4 bg-secBg rounded-xl p-4">
+          <p class="text-priGray text-lg basis-[80%]">
             <code>{{ text || "https://lovebox.africa" }}</code>
           </p>
           <span
-            class="mdi mdi-content-copy text-xl cursor-pointer transition-all ease-in-out duration-100 hover:scale-90"
+            class="mdi text-right mdi-content-copy text-xl cursor-pointer transition-all ease-in-out duration-100 hover:scale-90 basis-[20%]"
             @click="copy(source)"
           ></span>
         </div>
