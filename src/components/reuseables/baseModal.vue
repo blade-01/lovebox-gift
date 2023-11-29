@@ -2,7 +2,7 @@
   <Teleport to="body">
     <Transition name="zoom">
       <div
-        class="fixed top-0 left-0 w-screen h-screen bg-[rgb(0,0,0,0.1)] flex justify-center items-center z-50"
+        class="fixed top-0 left-0 w-screen h-screen bg-[rgb(0,0,0,0.1)] flex justify-center items-center z-[9999]"
         @click.self="$emit('openModal', false)"
         v-if="isActive"
       >

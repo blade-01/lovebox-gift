@@ -91,7 +91,12 @@
               </button>
               <p class="leading-6 font-medium py-3 text-base text-center">
                 Tell the world about Love Box! click
-                <ShareNetwork
+                <span
+                  @click="openModal(true)"
+                  class="text-main underline font-bold cursor-pointer"
+                  >here.</span
+                >
+                <!-- <ShareNetwork
                   network="whatsapp"
                   url="https://www.lovebox.africa"
                   title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
@@ -99,10 +104,7 @@
                   quote="The hot reload is so fast it\'s near instant. - Evan You"
                   hashtags="vuejs,vite"
                 >
-                  <span class="text-main underline font-bold cursor-pointer"
-                    >here.</span
-                  >
-                </ShareNetwork>
+                </ShareNetwork> -->
               </p>
             </div>
           </div>
@@ -119,14 +121,20 @@
       </div>
     </div>
     <animate-circle-bg />
+    <baseModal :isActive="isActive" @openModal="openModal"> hfhfh</baseModal>
   </div>
 </template>
 <script setup lang="ts">
+import useModal from "../composables/useModal";
+
 // send review from store
 const { postReviews, getOrderDetails, data, isLoading } = useStore();
 const id = computed(() => {
   return data.value?.id;
 });
+
+// use modal
+const { isActive, openModal } = useModal();
 
 // home rating
 const router = useRouter();
