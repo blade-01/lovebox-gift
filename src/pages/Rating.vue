@@ -121,7 +121,9 @@
       </div>
     </div>
     <animate-circle-bg />
-    <baseModal :isActive="isActive" @openModal="openModal"> hfhfh</baseModal>
+    <baseModal :isActive="isActive" @openModal="openModal">
+      <ShareNetwork :isActive="isActive" @openModal="openModal" />
+    </baseModal>
   </div>
 </template>
 <script setup lang="ts">
