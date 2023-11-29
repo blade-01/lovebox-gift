@@ -4,15 +4,11 @@
       <h1 class="font-semibold leading-8 text-2xl capitalize">share</h1>
       <span
         @click="$emit('openModal', false)"
-        class="mdi mdi-close-circle-outline text-2xl cursor-pointer"
+        class="mdi mdi-close font-bold text-xl cursor-pointer rounded-full bg-gray-200 w-8 h-8 text-center flex justify-center items-center"
       ></span>
     </div>
     <div class="grid grid-cols-3 place-items-center gap-4">
-      <div
-        v-for="(link, index) in links"
-        :key="index"
-        @click="switchLinks(link)"
-      >
+      <div v-for="(link, index) in links" :key="index" @click="switchLinks(link)">
         <ShareNetwork
           :network="link.social"
           url="https://www.lovebox.africa"
@@ -20,7 +16,7 @@
           description="Lovebox aims to revolutionize how you spread love through gifts, subscription payments, and timely reminders for special occasions! Peer into the lives of your friends, family, and loved ones and make them feel cherished with a tap of a button."
         >
           <div
-            class="rounded-full bg-gray-300 w-[80px] lg:w-[100px] xl:w-[120px] h-[80px] lg:h-[100px] xl:h-[120px] text-center flex justify-center items-center hover:bg-main hover:text-white text-main cursor-pointer"
+            class="rounded-full bg-gray-200 w-[80px] lg:w-[100px] h-[80px] lg:h-[100px] text-center flex justify-center items-center hover:bg-main hover:text-white text-main cursor-pointer transition-colors duration-150 ease-linear"
           >
             <span :class="`mdi mdi-${link.social} text-4xl xl:text-5xl`"></span>
           </div>
@@ -34,7 +30,9 @@
           <p class="text-priGray text-lg basis-[80%]">
             <code>{{ text || "https://lovebox.africa" }}</code>
           </p>
+          <span v-if="copied">Copied!</span>
           <span
+            v-else
             class="mdi text-right mdi-content-copy text-xl cursor-pointer transition-all ease-in-out duration-100 hover:scale-90 basis-[20%]"
             @click="copy(source)"
           ></span>
@@ -47,7 +45,7 @@
 <script setup lang="ts">
 import { useClipboard } from "@vueuse/core";
 const source = ref("https://lovebox.africa");
-const { text, copy, isSupported } = useClipboard({ source });
+const { text, copy, copied, isSupported } = useClipboard({ source });
 
 const links = ref<any>([
   {
