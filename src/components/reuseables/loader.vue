@@ -4,10 +4,11 @@
   >
     <div class="container">
       <div class="flex flex-col items-center place-content-center m-auto">
-        <img src="/img/logo.svg" alt="logo" />
-        <progressBar :route-query="$route.query" />
-        <p class="text-black font-bold">{{ currentText.header }}</p>
-        <p class="text-black font-bold">{{ currentText.content }}</p>
+        <div class="bg-white shadow-xl rounded-2xl px-10 py-6 relative z-50">
+          <div class="progress-bar">
+            <div class="progress" :style="{ width: `${progress}%` }"></div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="animation-container">
@@ -21,51 +22,25 @@
   </div>
 </template>
 <script setup lang="ts">
-interface textItem {
-  header: string;
-  content: string;
-}
+// progress bar
+const progress = ref<number>(0);
 
-const text: textItem[] = [
-  {
-    header: "Your Package Adventure Begins:",
-    content: "Time to Unwrap!",
-  },
-  {
-    header: "Your Package Adventure Begins:",
-    content: "Time to Unwrap!",
-  },
-  {
-    header: "A Gentle Reminder:",
-    content: "Patience is Key",
-  },
-  {
-    header: "Preparing Your Package:",
-    content: "Let's Get Started!",
-  },
-  {
-    header: "End in Sight",
-    content: "Finalizing the Process",
-  },
-];
-const currentIndex = ref<number>(0);
-const currentText = ref(text[currentIndex.value]);
-
-const changeText = () => {
-  currentIndex.value = (currentIndex.value + 1) % text.length;
-  currentText.value = text[currentIndex.value];
+// Simulate progress increment for demonstration
+const simulateProgress = () => {
+  const interval = setInterval(() => {
+    progress.value += 1;
+    if (progress.value >= 100) {
+      progress.value = 0;
+    }
+  }, 100);
 };
-
-// Automatically change text every 1 seconds
-const intervalId = setInterval(changeText, 1100);
 
 // Cleanup when component is unmounted
 onMounted(() => {
-  watchEffect(() => {
-    return () => clearInterval(intervalId);
-  });
+  simulateProgress();
 });
 
+// animated circle
 const animateCircle: string[] = [
   "/img/circle-1.svg",
   "/img/circle-2.svg",
@@ -100,5 +75,12 @@ onMounted(() => {
 
 .circle {
   @apply w-full h-full rounded-[50%] bg-cover transition-[backgroud-image_1s];
+}
+
+.progress-bar {
+  @apply h-1 bg-white border-[1px] border-[#644AE2] rounded-lg overflow-hidden w-[250px] md:w-[280px];
+}
+.progress {
+  @apply h-full bg-[#644AE2];
 }
 </style>

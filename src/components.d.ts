@@ -7,14 +7,14 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    BackgroundAnimate: typeof import('./components/BackgroundAnimate.vue')['default']
+    AnimateCircleBg: typeof import('./components/reuseables/animateCircleBg.vue')['default']
+    'BaseModa;': typeof import('./components/reuseables/base-moda
+    BaseModal: typeof import('./components/reuseables/baseModal.vue')['default']
     CloseCircle: typeof import('./components/closeCircle.vue')['default']
-    DynamicText: typeof import('./components/DynamicText.vue')['default']
-    ProgressBar: typeof import('./components/ProgressBar.vue')['default']
-    RippleCircle: typeof import('./components/rippleCircle.vue')['default']
-    RippleSquare: typeof import('./components/rippleSquare.vue')['default']
+    Loader: typeof import('./components/reuseables/loader.vue')['default']
+    ProgressBar: typeof import('./components/progressBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TextChanger: typeof import('./components/TextChanger.vue')['default']
+    ShareNetwork: typeof import('./components/shareNetwork.vue')['default']
   }
 }
