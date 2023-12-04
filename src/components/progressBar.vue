@@ -42,7 +42,8 @@ watch(progress, async (newProgress) => {
   if (newProgress === 40) {
     ripple.value = true;
   } else if (newProgress === 50) {
-    await getOrderDetails(props.routeQuery.id);
+    // await getOrderDetails("205e1ce3-52b7-442f-910b-6c7f0d79b05f");
+    // await getOrderDetails(props.routeQuery.id);
     showBlackBackground.value = true;
     setTimeout(() => {
       showBlackBackground.value = false;
@@ -52,7 +53,8 @@ watch(progress, async (newProgress) => {
         router.push({
           path: response.value?.productDetails ? "/unboxed" : "/shipment",
           query: {
-            id: props.routeQuery.id,
+            id: "205e1ce3-52b7-442f-910b-6c7f0d79b05f",
+            // id: props.routeQuery.id,
           },
         });
       }, 2000); // Set duration to 2 seconds
