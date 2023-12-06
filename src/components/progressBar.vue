@@ -10,9 +10,14 @@
   </div> -->
 </template>
 
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+};
+</script>
 <script setup lang="ts">
 const props = defineProps<{
-  routeQuery: any;
+  id: any;
 }>();
 
 const router = useRouter();
@@ -36,13 +41,13 @@ const simulateProgress = async () => {
 
 const showBlackBackground = ref<boolean>(false);
 const showPurpleBackground = ref<boolean>(false);
-const productDetails = computed(() => data.value?.productDetails);
+const response = computed(() => data.value);
 
 watch(progress, async (newProgress) => {
   if (newProgress === 40) {
     ripple.value = true;
   } else if (newProgress === 50) {
-    // await getOrderDetails(props.routeQuery.id);
+    await getOrderDetails(props.id);
     showBlackBackground.value = true;
     setTimeout(() => {
       showBlackBackground.value = false;
@@ -50,13 +55,19 @@ watch(progress, async (newProgress) => {
       setTimeout(() => {
         showPurpleBackground.value = false;
         router.push({
-          path: productDetails ? "/unboxed" : "/shipment",
-          query: {
-            id: "205e1ce3-52b7-442f-910b-6c7f0d79b05f",
-            // id: props.routeQuery.id,
+          // USING SEPARATE ROUTES FOR PRODUCT AND BILL
+          // path: response.value?.productDetails ? "/unboxed" : "/shipment",
+          // query: {
+          //   id: props.id,
+          // },
+          // USING SAME ROUTE FOR PRODUCT AND BILL
+          name: "product-id",
+          params: {
+            id: props.id,
           },
-          // product: 205e1ce3-52b7-442f-910b-6c7f0d79b05f
-          // bill: 6493acf9-9d64-4554-b61c-68634b2c7c22
+          query: {
+            type: response.value?.productDetails ? "unboxed" : "shipment",
+          },
         });
       }, 2000); // Set duration to 2 seconds
     }, 2000); // Set duration to 2 seconds
