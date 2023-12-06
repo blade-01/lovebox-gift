@@ -1,8 +1,8 @@
 <template>
-  <!-- :class="shortNote ? 'lg:h-auto lg:mt-10' : 'lg:h-screen lg:mt-auto'"  1xl:mt-0-->
+  <!-- :class="shortNote ? 'lg:h-auto lg:mt-10' : 'lg:h-screen lg:mt-auto'"  1xl:mt-0 1xl:h-screen-->
   <div
-    class="w-full h-full mt-8 relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden 1xl:h-screen"
-    :class="shortNote ? 'lg:h-auto lg:mt-10' : 'lg:h-screen lg:mt-auto'"
+    class="w-full h-full md:h-screen md:mt-auto mt-8 relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+    :class="shortNote ? 'lg:h-full lg:mt-10' : 'md:h-screen md:mt-auto'"
   >
     <div class="container">
       <router-link to="/">

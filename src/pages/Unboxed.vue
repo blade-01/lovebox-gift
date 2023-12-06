@@ -5,7 +5,7 @@
     </div>
     <div
       v-else
-      class="w-full h-full lg:h-screen mt-10 lg:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+      class="w-full h-full md:h-screen mt-10 lg:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
     >
       <div class="container">
         <router-link to="/">

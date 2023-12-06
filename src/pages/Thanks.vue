@@ -1,10 +1,13 @@
 <template>
   <div
-    class="w-full h-full xl:h-screen mt-8 xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+    class="w-full h-full md:h-screen mt-8 md:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
     <div class="container">
       <router-link to="/">
-        <img class="mx-auto mb-3 w-auto relative z-[9999]" src="/img/logo.svg" alt="logo"
+        <img
+          class="mx-auto mb-3 w-auto relative z-[9999]"
+          src="/img/logo.svg"
+          alt="logo"
       /></router-link>
       <div class="p-0.5 relative z-[9999]">
         <div
@@ -14,11 +17,17 @@
             <div class="progress" :style="{ width: `${progress}%` }"></div>
           </div>
           <div class="text-center flex flex-col gap-2 my-4">
-            <img class="mx-auto" src="/img/lovebox-sender.svg" alt="lovebox-sender" />
-            <h1 class="text-2xl font-semibold leading-8 text-priBlack">Thank you!</h1>
+            <img
+              class="mx-auto"
+              src="/img/lovebox-sender.svg"
+              alt="lovebox-sender"
+            />
+            <h1 class="text-2xl font-semibold leading-8 text-priBlack">
+              Thank you!
+            </h1>
             <p class="text-priGray text-base leading-6 max-w-[327px] py-4">
-              We hope you enjoyed your experience with Lovebox. We would love for you to
-              join our customer family.
+              We hope you enjoyed your experience with Lovebox. We would love
+              for you to join our customer family.
             </p>
           </div>
           <div class="text-center flex flex-col gap-4 md:w-[300px]">

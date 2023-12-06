@@ -4,7 +4,7 @@
       <loader />
     </div>
     <div
-      class="w-full h-full lg:h-screen mt-8 lg:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+      class="w-full h-full md:h-screen mt-8 md:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
     >
       <div class="container">
         <router-link to="/">
