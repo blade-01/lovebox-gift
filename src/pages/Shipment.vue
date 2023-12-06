@@ -27,8 +27,15 @@
                 Lovebox Details
               </h1>
               <div class="text-center flex flex-col gap-2 my-10">
-                <img class="mx-auto" src="/img/lovebox-sender.svg" alt="lovebox-sender" />
-                <div v-if="isAnonymous === false" class="text-center flex flex-col gap-2">
+                <img
+                  class="mx-auto"
+                  src="/img/lovebox-sender.svg"
+                  alt="lovebox-sender"
+                />
+                <div
+                  v-if="isAnonymous === false"
+                  class="text-center flex flex-col gap-2"
+                >
                   <h1 class="text-2xl font-semibold leading-8 text-priBlack">
                     Correct! Thoughtfully sent by
                   </h1>
@@ -36,17 +43,27 @@
                     “{{ senderName }}”
                   </p>
                 </div>
-                <p class="font-medium text-base leading-5" v-if="notes !== null">
+                <p
+                  class="font-medium text-base leading-5"
+                  v-if="notes !== null"
+                >
                   You've got a note from the sender,
-                  <span class="text-main underline cursor-pointer" @click="viewNote"
+                  <span
+                    class="text-main underline cursor-pointer"
+                    @click="viewNote"
                     >view</span
                   >
                 </p>
               </div>
               <div class="grid grid-cols-1 gap-3">
                 <div class="flex justify-between items-center">
-                  <p class="text-priBlack text-sm font-bold">What is in your package.</p>
-                  <div v-if="productDetails !== null" class="flex gap-1 items-center">
+                  <p class="text-priBlack text-sm font-bold">
+                    What is in your package.
+                  </p>
+                  <div
+                    v-if="productDetails !== null"
+                    class="flex gap-1 items-center"
+                  >
                     <img src="/img/trash.svg" alt="trash" />
                     <p class="text-priGray text-sm font-medium">
                       {{ productDetails?.length }} Packages
@@ -59,7 +76,7 @@
                     v-for="(product, index) in productDetails"
                     :key="index"
                   >
-                    <div class="basis-[33.33%]">
+                    <!-- <div class="basis-[33.33%]">
                       <p
                         class="text-sm text-center text-priBlack font-semibold capitalize"
                       >
@@ -70,26 +87,28 @@
                           {{ truncateText(product?.type, 15) }}
                         </span>
                       </p>
-                      <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
-                    </div>
-                    <div class="text-center border-x-[1px] border-priGray basis-[33.33%]">
-                      <p class="text-sm text-priBlack font-semibold uppercase">
-                        {{ formatNumber(product?.price) }} NGN
-                      </p>
-                      <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
-                    </div>
-                    <div class="basis-[33.33%]">
+                      <p class="text-[12px] text-priGray capitalize">Dummy Text</p>
+                    </div> -->
+                    <div class="basis-[50%]">
                       <p
                         class="text-sm text-center text-priBlack font-semibold capitalize"
                       >
                         <span class="lg:hidden">
-                          {{ truncateText(product?.name, 10) }}
+                          {{ truncateText(product?.name, 15) }}
                         </span>
                         <span class="hidden lg:block">{{
-                          truncateText(product?.name, 15)
+                          truncateText(product?.name, 20)
                         }}</span>
                       </p>
                       <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
+                    </div>
+                    <div
+                      class="text-center border-l-[1px] border-priGray basis-[50%]"
+                    >
+                      <p class="text-sm text-priBlack font-semibold uppercase">
+                        {{ formatNumber(product?.price) }} NGN
+                      </p>
+                      <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
                     </div>
                   </div>
                 </div>
@@ -98,19 +117,27 @@
                   class="flex justify-between items-center border-[1px] border-priGray rounded-lg py-2"
                 >
                   <div class="basis-[33.33%]">
-                    <p class="text-sm text-center text-priBlack font-semibold capitalize">
+                    <p
+                      class="text-sm text-center text-priBlack font-semibold capitalize"
+                    >
                       {{ billDetails?.group }}
                     </p>
-                    <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
+                    <!-- <p class="text-[12px] text-priGray capitalize">
+                      Dummy Text
+                    </p> -->
                   </div>
-                  <div class="text-center border-x-[1px] border-priGray basis-[33.33%]">
+                  <div
+                    class="text-center border-x-[1px] border-priGray basis-[33.33%]"
+                  >
                     <p class="text-sm text-priBlack font-semibold uppercase">
                       {{ billDetails?.amount }} NGN
                     </p>
                     <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
                   </div>
                   <div class="basis-[33.33%]">
-                    <p class="text-sm text-center text-priBlack font-semibold capitalize">
+                    <p
+                      class="text-sm text-center text-priBlack font-semibold capitalize"
+                    >
                       {{ billDetails?.type }}
                     </p>
                     <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
@@ -121,7 +148,9 @@
                   class="btn border-[1px] border-main flex gap-1 items-center bg-white rounded-3xl h-[45px] mt-3 w-[95%] mx-auto hover:bg-main text-main hover:text-white"
                   @click="handleRatings"
                 >
-                  <p class="font-semibold text-center text-lg capitalize">Rate us</p>
+                  <p class="font-semibold text-center text-lg capitalize">
+                    Rate us
+                  </p>
                   <img src="/img/star.svg" alt="star" />
                 </div>
                 <div v-else class="pt-6 text-center">

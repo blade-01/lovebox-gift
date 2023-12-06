@@ -34,11 +34,15 @@
               />
             </div>
             <div v-else class="max-w-[300px] mx-auto my-6">
-              <carousel :items-to-show="1.5" :autoplay="2000" :wrap-around="true">
+              <carousel
+                :items-to-show="1.5"
+                :autoplay="2000"
+                :wrap-around="true"
+              >
                 <slide v-for="(slide, index) in slideImages" :key="index">
                   <div class="carousel__item">
                     <img
-                      class="w-[90%] h-[250px] rounded-lg"
+                      class="w-[90%] h-[250px] rounded-lg object-cover"
                       :src="`${slide?.src}`"
                       :alt="`${slide?.alt}`"
                     />
@@ -67,7 +71,9 @@
                   Want to guess the sender of this Lovebox?
                 </p>
                 <router-link to="gift">
-                  <button class="btn bg-main w-full rounded-3xl capitalize">Yes</button>
+                  <button class="btn bg-main w-full rounded-3xl capitalize">
+                    Yes
+                  </button>
                 </router-link>
                 <router-link to="/details">
                   <button
@@ -137,7 +143,8 @@ const incrementProgress = () => {
 }
 
 .drop-shadow {
-  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px #00000026;
+  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px
+    #00000026;
 }
 :deep(.carousel__pagination) {
   @apply !flex !gap-2 !justify-center !mt-4;

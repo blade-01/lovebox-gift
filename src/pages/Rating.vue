@@ -1,11 +1,15 @@
 <template>
-  <!-- :class="shortNote ? 'lg:h-auto lg:mt-10' : 'lg:h-screen lg:mt-auto'" -->
+  <!-- :class="shortNote ? 'lg:h-auto lg:mt-10' : 'lg:h-screen lg:mt-auto'"  1xl:mt-0-->
   <div
-    class="w-full h-full mt-8 relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden lg:h-auto lg:mt-10 1xl:h-screen 1xl:mt-0"
+    class="w-full h-full mt-8 relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden 1xl:h-screen"
+    :class="shortNote ? 'lg:h-auto lg:mt-10' : 'lg:h-screen lg:mt-auto'"
   >
     <div class="container">
       <router-link to="/">
-        <img class="mx-auto mb-3 w-auto relative z-[9999]" src="/img/logo.svg" alt="logo"
+        <img
+          class="mx-auto mb-3 w-auto relative z-[9999]"
+          src="/img/logo.svg"
+          alt="logo"
       /></router-link>
       <div class="p-0.5 relative z-[9999]">
         <div
@@ -29,18 +33,22 @@
                     :key="index"
                     class="h-[48px] lg:h-[60px] rounded-lg text-center flex items-center justify-center font-medium text-xl cursor-pointer"
                     :class="
-                      count.isActive ? 'bg-main text-white' : 'bg-[#E9E6FA] text-main'
+                      count.isActive
+                        ? 'bg-main text-white'
+                        : 'bg-[#E9E6FA] text-main'
                     "
                     @click="submitRating(count)"
                   >
                     {{ count.rate }}
                   </div>
                 </div>
-                <div class="flex justify-between items-center text-priGray text-[12px]">
+                <div
+                  class="flex justify-between items-center text-priGray text-[12px]"
+                >
                   <p>Not Satisfied</p>
                   <p>Very Satisfied</p>
                 </div>
-                <div class="mt-3">
+                <div class="mt-3" v-if="shortNote">
                   <div class="flex justify-between items-center font-medium">
                     <p class="text-sm leading-5">Write a short review</p>
                     <p
@@ -59,15 +67,18 @@
                     placeholder="Placeholder"
                     @input="updateCharacterCount"
                     :class="{
-                      'border-[1px] border-red-600': err || characterCount >= 50,
+                      'border-[1px] border-red-600':
+                        err || characterCount >= 50,
                     }"
                   />
                 </div>
               </div>
               <!-- v-if="shortNote" -->
               <button
+                v-if="shortNote"
                 @click="handleSubmit"
-                class="btn bg-main border-[1px] border-main text-white md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-[48px]"
+                class="btn bg-main border-[1px] text-white md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-[48px]"
+                :class="reviewText.length === 0 ? 'bg-gray-400' : 'bg-main'"
               >
                 <span
                   v-if="isLoading === true"
@@ -76,6 +87,14 @@
                 <span v-else>Submit</span>
               </button>
               <button
+                v-if="!shortNote"
+                @click="$router.go(-1)"
+                class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-[48px]"
+              >
+                Go, Back
+              </button>
+              <button
+                v-if="shortNote"
                 @click="handleCancelSubmit"
                 class="btn bg-white border-[1px] border-main text-main md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize h-[48px]"
               >
