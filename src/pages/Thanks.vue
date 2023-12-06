@@ -4,10 +4,7 @@
   >
     <div class="container">
       <router-link to="/">
-        <img
-          class="mx-auto mb-3 w-auto relative z-[9999]"
-          src="/img/logo.svg"
-          alt="logo"
+        <img class="mx-auto mb-3 w-auto relative z-[9999]" src="/img/logo.svg" alt="logo"
       /></router-link>
       <div class="p-0.5 relative z-[9999]">
         <div
@@ -17,17 +14,11 @@
             <div class="progress" :style="{ width: `${progress}%` }"></div>
           </div>
           <div class="text-center flex flex-col gap-2 my-4">
-            <img
-              class="mx-auto"
-              src="/img/lovebox-sender.svg"
-              alt="lovebox-sender"
-            />
-            <h1 class="text-2xl font-semibold leading-8 text-priBlack">
-              Thank you!
-            </h1>
+            <img class="mx-auto" src="/img/lovebox-sender.svg" alt="lovebox-sender" />
+            <h1 class="text-2xl font-semibold leading-8 text-priBlack">Thank you!</h1>
             <p class="text-priGray text-base leading-6 max-w-[327px] py-4">
-              We hope you enjoyed your experience with Lovebox. We would love
-              for you to join our customer family.
+              We hope you enjoyed your experience with Lovebox. We would love for you to
+              join our customer family.
             </p>
           </div>
           <div class="text-center flex flex-col gap-4 md:w-[300px]">
@@ -67,9 +58,9 @@
       </div>
     </div>
     <animate-circle-bg />
-    <baseModal :isActive="isActive" @openModal="openModal">
+    <BaseModal :isActive="isActive" @openModal="openModal">
       <ShareNetwork :isActive="isActive" @openModal="openModal" />
-    </baseModal>
+    </BaseModal>
   </div>
 </template>
 <script setup lang="ts">
