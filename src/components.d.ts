@@ -7,14 +7,20 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AnimateCircleBg: typeof import('./components/reuseables/animateCircleBg.vue')['default']
-    'BaseModa;': typeof import('./components/reuseables/base-moda
-    BaseModal: typeof import('./components/reuseables/baseModal.vue')['default']
-    CloseCircle: typeof import('./components/closeCircle.vue')['default']
+    AnimateCircleBg: typeof import('./components/reuseables/AnimateCircleBg.vue')['default']
+    BaseModal: typeof import('./components/reuseables/BaseModal.vue')['default']
+    CloseCircle: typeof import('./components/CloseCircle.vue')['default']
+    Details: typeof import('./components/Resource/Details.vue')['default']
+    Gift: typeof import('./components/Resource/Gift.vue')['default']
     Loader: typeof import('./components/reuseables/loader.vue')['default']
-    ProgressBar: typeof import('./components/progressBar.vue')['default']
+    Note: typeof import('./components/Resource/Note.vue')['default']
+    ProgressBar: typeof import('./components/ProgressBar.vue')['default']
+    Rating: typeof import('./components/Resource/Rating.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    ShareNetwork: typeof import('./components/shareNetwork.vue')['default']
+    ShareNetwork: typeof import('./components/ShareNetwork.vue')['default']
+    Shipment: typeof import('./components/Resource/Shipment.vue')['default']
+    Thanks: typeof import('./components/Resource/Thanks.vue')['default']
+    Unboxed: typeof import('./components/Resource/Unboxed.vue')['default']
   }
 }

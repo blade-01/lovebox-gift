@@ -10,9 +10,14 @@
   </div> -->
 </template>
 
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+};
+</script>
 <script setup lang="ts">
 const props = defineProps<{
-  routeQuery: any;
+  id: any;
 }>();
 
 const router = useRouter();
@@ -42,7 +47,7 @@ watch(progress, async (newProgress) => {
   if (newProgress === 40) {
     ripple.value = true;
   } else if (newProgress === 50) {
-    await getOrderDetails(props.routeQuery.id);
+    await getOrderDetails(props.id);
     showBlackBackground.value = true;
     setTimeout(() => {
       showBlackBackground.value = false;
@@ -50,9 +55,18 @@ watch(progress, async (newProgress) => {
       setTimeout(() => {
         showPurpleBackground.value = false;
         router.push({
-          path: response.value?.productDetails ? "/unboxed" : "/shipment",
+          // USING SEPARATE ROUTES FOR PRODUCT AND BILL
+          // path: response.value?.productDetails ? "/unboxed" : "/shipment",
+          // query: {
+          //   id: props.id,
+          // },
+          // USING SAME ROUTE FOR PRODUCT AND BILL
+          name: "product-id",
+          params: {
+            id: props.id,
+          },
           query: {
-            id: props.routeQuery.id,
+            type: response.value?.productDetails ? "unboxed" : "shipment",
           },
         });
       }, 2000); // Set duration to 2 seconds

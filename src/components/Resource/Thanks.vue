@@ -3,7 +3,7 @@
     class="w-full h-full md:h-screen mt-8 md:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
     <div class="container">
-      <router-link to="/">
+      <router-link :to="`/order/${id}`">
         <img class="mx-auto mb-3 w-auto relative z-[9999]" src="/img/logo.svg" alt="logo"
       /></router-link>
       <div class="p-0.5 relative z-[9999]">
@@ -64,24 +64,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import useModal from "../composables/useModal";
+const props = defineProps<{
+  id: string;
+}>();
 // use modal
 const { isActive, openModal } = useModal();
 
-// router
-const router = useRouter();
-const route = useRoute();
 const progress = ref(100);
-
-// rating
-const handleRating = () => {
-  router.push({
-    path: "/rating",
-    query: {
-      id: route.query.id,
-    },
-  });
-};
 </script>
 
 <style scoped>
