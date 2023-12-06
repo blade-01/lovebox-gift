@@ -1,13 +1,10 @@
 <template>
-  <div v-if="isLoading === true">
-    <loader />
-  </div>
   <div
-    v-else
+    v-if="data"
     class="w-full h-full md:h-screen mt-8 md:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
     <div class="container">
-      <router-link to="/">
+      <router-link :to="`/order/${id}`">
         <img class="mx-auto mb-3 w-auto relative z-[9999]" src="/img/logo.svg" alt="logo"
       /></router-link>
       <div class="p-0.5 relative z-[9999]">
@@ -101,25 +98,21 @@
 <script setup lang="ts">
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
+import { ResponseData } from "../../../types/ResponseData";
 
-// get order details and data from store
-const { getOrderDetails, data, isLoading } = useStore();
+const props = defineProps<{
+  id: string;
+  data: ResponseData | undefined;
+}>();
+
+const emits = defineEmits(["gotoShipment", "gotoDetails"]);
 
 const senderName = computed(() => {
-  return data.value?.senderName;
+  return props.data?.senderName;
 });
-
-// router
-const router = useRouter();
-const route = useRoute();
 
 // progress bar
 const progress = ref<number>(70);
-
-// Cleanup when component is unmounted
-onMounted(() => {
-  getOrderDetails(route.query.id);
-});
 
 // trial count
 const trialCount = ref<number>(1);
@@ -155,20 +148,12 @@ const handleSubmit = () => {
       formProceed.value = true;
     }
   } else {
-    router.push({
-      path: "/shipment",
-      query: {
-        id: route.query.id,
-      },
-    });
+    emits("gotoShipment");
   }
 };
 
 const handleProceed = () => {
-  router.push({
-    path: "/shipment",
-    query: { id: route.query.id },
-  });
+  emits("gotoShipment");
 };
 </script>
 

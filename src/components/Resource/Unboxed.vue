@@ -1,14 +1,10 @@
 <template>
-  <div>
-    <div v-if="isLoading === true">
-      <loader />
-    </div>
+  <div v-if="data">
     <div
-      v-else
       class="w-full h-full md:h-screen mt-10 lg:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
     >
       <div class="container">
-        <router-link to="/">
+        <router-link :to="`/order/${id}`">
           <img
             class="mx-auto mb-4 w-[144px] h-[36px] relative z-[9999]"
             src="/img/logo.svg"
@@ -51,31 +47,26 @@
             </div>
             <div class="text-center w-full flex flex-col gap-4">
               <div
-                v-if="isAnonymous === true"
-                @click="
-                  $router.push({
-                    path: '/shipment',
-                    query: { id: $route.query.id },
-                  })
-                "
+                v-if="isAnonymous"
+                @click="$emit('gotoShipment')"
                 class="btn w-full lg:w-[360px] mx-auto bg-main text-white rounded-3xl capitalize"
               >
                 Proceed
               </div>
-              <div class="flex flex-col gap-4" v-if="isAnonymous === false">
+              <div class="flex flex-col gap-4 w-full lg:w-[360px] mx-auto" v-else>
                 <p class="text-priBlack font-semibold text-base">
                   Want to guess the sender of this Lovebox?
                 </p>
-                <router-link to="/gift">
+                <div @click="$emit('gotoGift')">
                   <button class="btn bg-main w-full rounded-3xl capitalize">Yes</button>
-                </router-link>
-                <router-link to="/details">
+                </div>
+                <div @click="$emit('gotoShipment')">
                   <button
                     class="btn w-full bg-white border-[1px] border-main text-main rounded-3xl capitalize"
                   >
                     No, Proceed
                   </button>
-                </router-link>
+                </div>
               </div>
             </div>
           </div>
@@ -98,14 +89,21 @@
 <script setup lang="ts">
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination } from "vue3-carousel";
-// get order details and data from store
-const { getOrderDetails, isLoading, data } = useStore();
+import { ResponseData } from "../../../types/ResponseData";
+
+const props = defineProps<{
+  id: string;
+  data: ResponseData | undefined;
+}>();
+
+const emits = defineEmits(["gotoShipment", "gotoGift"]);
+
 const isAnonymous = computed(() => {
-  return data.value?.isAnonymous;
+  return props.data?.isAnonymous;
 });
 
 const slideImages: any = computed(() => {
-  return data.value?.productDetails.flatMap((element: any) =>
+  return props.data?.productDetails.flatMap((element: any) =>
     element?.images.map((image: any) => ({
       src: image.src,
       alt: image.alt,
@@ -113,19 +111,8 @@ const slideImages: any = computed(() => {
   );
 });
 
-// route for id
-const route = useRoute();
-
-onMounted(() => {
-  getOrderDetails(route.query.id);
-});
-
 // progress bar
 const progress = ref(30);
-
-const incrementProgress = () => {
-  progress.value = Math.min(progress.value + 30, 100);
-};
 </script>
 
 <style scoped>

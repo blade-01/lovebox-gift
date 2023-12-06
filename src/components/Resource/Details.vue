@@ -1,14 +1,10 @@
 <template>
-  <div>
-    <div v-if="isLoading === true">
-      <loader />
-    </div>
+  <div v-if="data">
     <div
-      v-else
       class="w-full h-full md:h-screen mt-8 md:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
     >
       <div class="container">
-        <router-link to="/">
+        <router-link :to="`/order/${id}`">
           <img
             class="mx-auto mb-3 w-auto relative z-[9999]"
             src="/img/logo.svg"
@@ -46,7 +42,7 @@
               </button>
               <button
                 class="btn bg-main border-[1px] border-main text-white md:text-lg leading-7 font-semibold w-full rounded-3xl capitalize mt-2"
-                @click="$router.back()"
+                @click="$emit('gotoShipment')"
               >
                 Go Back
               </button>
@@ -79,47 +75,26 @@
   </div>
 </template>
 <script setup lang="ts">
-import useModal from "../composables/useModal";
+import { ResponseData } from "../../../types/ResponseData";
+
+const props = defineProps<{
+  id: string;
+  data: ResponseData | undefined;
+}>();
+
+const emits = defineEmits(["gotoShipment"]);
 // use modal
 const { isActive, openModal } = useModal();
-// get order details and data from store
-const { getOrderDetails, data, isLoading } = useStore();
+
 const isAnonymous = computed(() => {
-  return data.value?.isAnonymous;
+  return props.data?.isAnonymous;
 });
 const senderName = computed(() => {
-  return data.value?.senderName;
+  return props.data?.senderName;
 });
 
 // router
-const router = useRouter();
-const route = useRoute();
 const progress = ref(100);
-
-// Track shipment
-const trackShipment = () => {
-  router.push({
-    path: "/shipment",
-    query: {
-      id: route.query.id,
-    },
-  });
-};
-
-// rating
-const handleRating = () => {
-  router.push({
-    path: "/rating",
-    query: {
-      id: route.query.id,
-    },
-  });
-};
-
-// Cleanup when component is unmounted
-onMounted(() => {
-  getOrderDetails(route.query.id);
-});
 </script>
 
 <style scoped>

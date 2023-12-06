@@ -5,13 +5,16 @@
     :class="shortNote ? 'lg:h-full lg:mt-10' : 'md:h-screen md:mt-auto'"
   >
     <div class="container">
-      <router-link to="/">
+      <router-link :to="`/order/${id}`">
         <img class="mx-auto mb-3 w-auto relative z-[9999]" src="/img/logo.svg" alt="logo"
       /></router-link>
       <div class="p-0.5 relative z-[9999]">
         <div
           class="flex flex-col items-center place-content-center m-auto bg-secBg shadow-xl rounded-3xl py-8 px-5 md:w-[488px] drop-shadow"
         >
+          <div class="progress-bar">
+            <div class="progress" :style="{ width: `${progress}%` }"></div>
+          </div>
           <div class="w-full">
             <div class="text-center flex flex-col gap-2 my-4">
               <img class="mx-auto" src="/img/home-mark.svg" alt="home mark" />
@@ -120,12 +123,18 @@
   </div>
 </template>
 <script setup lang="ts">
-import useModal from "../composables/useModal";
+import { ResponseData } from "../../../types/ResponseData";
 
+const props = defineProps<{
+  id: string;
+  data: ResponseData | undefined;
+}>();
+
+const emits = defineEmits(["gotoShipment", "gotoThanks"]);
 // send review from store
-const { postReviews, getOrderDetails, data, isLoading } = useStore();
+const { postReviews, isLoading } = useStore();
 const id = computed(() => {
-  return data.value?.id;
+  return props.data?.id;
 });
 
 // use modal
@@ -172,13 +181,6 @@ const submitRating = (count: any) => {
   });
 
   shortNote.value = count.isActive;
-  // submit rating to router
-  router.push({
-    query: {
-      id: route.query.id,
-      rating: count.rate,
-    },
-  });
 };
 
 const handleSubmit = () => {
@@ -203,20 +205,10 @@ const handleSubmit = () => {
 };
 
 const handleCancelSubmit = () => {
-  router.push({
-    path: "/thanks",
-    query: {
-      id: route.query.id,
-    },
-  });
+  emits("gotoThanks");
 };
 
 const progress = ref(100);
-
-// Cleanup when component is unmounted
-onMounted(() => {
-  getOrderDetails(route.query.id);
-});
 </script>
 
 <style scoped>

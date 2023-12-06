@@ -1,13 +1,10 @@
 <template>
-  <div>
-    <div v-if="isLoading === true">
-      <loader />
-    </div>
+  <div v-if="data">
     <div
       class="w-full h-full md:h-screen mt-8 md:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
     >
       <div class="container">
-        <router-link to="/">
+        <router-link :to="`/order/${id}`">
           <img
             class="mx-auto mb-3 w-auto relative z-[9999]"
             src="/img/logo.svg"
@@ -28,7 +25,8 @@
               </h1>
               <div class="text-center flex flex-col gap-2 my-10">
                 <img class="mx-auto" src="/img/lovebox-sender.svg" alt="lovebox-sender" />
-                <div v-if="isAnonymous === false" class="text-center flex flex-col gap-2">
+                <!-- v-if="isAnonymous === false" -->
+                <div class="text-center flex flex-col gap-2">
                   <h1 class="text-2xl font-semibold leading-8 text-priBlack">
                     Correct! Thoughtfully sent by
                   </h1>
@@ -59,19 +57,6 @@
                     v-for="(product, index) in productDetails"
                     :key="index"
                   >
-                    <!-- <div class="basis-[33.33%]">
-                      <p
-                        class="text-sm text-center text-priBlack font-semibold capitalize"
-                      >
-                        <span class="lg:hidden">
-                          {{ truncateText(product?.type, 10) }}
-                        </span>
-                        <span class="hidden lg:block">
-                          {{ truncateText(product?.type, 15) }}
-                        </span>
-                      </p>
-                      <p class="text-[12px] text-priGray capitalize">Dummy Text</p>
-                    </div> -->
                     <div class="basis-[50%]">
                       <p
                         class="text-sm text-center text-priBlack font-semibold capitalize"
@@ -83,13 +68,11 @@
                           truncateText(product?.name, 20)
                         }}</span>
                       </p>
-                      <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
                     </div>
                     <div class="text-center border-l-[1px] border-priGray basis-[50%]">
                       <p class="text-sm text-priBlack font-semibold uppercase">
                         {{ formatNumber(product?.price) }} NGN
                       </p>
-                      <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
                     </div>
                   </div>
                 </div>
@@ -101,21 +84,16 @@
                     <p class="text-sm text-center text-priBlack font-semibold capitalize">
                       {{ billDetails?.group }}
                     </p>
-                    <!-- <p class="text-[12px] text-priGray capitalize">
-                      Dummy Text
-                    </p> -->
                   </div>
                   <div class="text-center border-x-[1px] border-priGray basis-[33.33%]">
                     <p class="text-sm text-priBlack font-semibold uppercase">
                       {{ billDetails?.amount }} NGN
                     </p>
-                    <!-- <p class="text-[12px] text-priGray capitalize">Any Store</p> -->
                   </div>
                   <div class="basis-[33.33%]">
                     <p class="text-sm text-center text-priBlack font-semibold capitalize">
                       {{ billDetails?.type }}
                     </p>
-                    <!-- <p class="text-[12px] text-priGray capitalize">Dummy Text</p> -->
                   </div>
                 </div>
                 <div
@@ -129,13 +107,10 @@
                 <div v-else class="pt-6 text-center">
                   <p class="leading-6 font-medium text-base text-center">
                     To track your package click
-                    <router-link
-                      :to="{
-                        path: '/details',
-                        query: { id: $route.query.id },
-                      }"
+                    <span
+                      @click="$emit('gotoDetails')"
                       class="text-main underline font-bold cursor-pointer"
-                      >here.</router-link
+                      >here.</span
                     >
                   </p>
                   <p class="text-base" v-if="hasDelivery === true">
@@ -162,58 +137,51 @@
   </div>
 </template>
 <script setup lang="ts">
+import { ResponseData } from "../../../types/ResponseData";
+
+const props = defineProps<{
+  id: string;
+  data: ResponseData | undefined;
+}>();
+
+const emits = defineEmits(["gotoDetails", "gotoRating", "gotoNote"]);
+
 // use truncattor
 const { truncateText } = useTruncate();
 // use formatter for number
 const { formatNumber } = useFormatter();
 // get order details and data from store
-const { getOrderDetails, data, isLoading } = useStore();
 const isAnonymous = computed(() => {
-  return data.value?.isAnonymous;
+  return props.data?.isAnonymous;
 });
 const senderName = computed(() => {
-  return data.value?.senderName;
+  return props.data?.senderName;
 });
 const productDetails = computed(() => {
-  return data.value?.productDetails;
+  return props.data?.productDetails;
 });
 const notes = computed(() => {
-  return data.value?.notes;
+  return props.data?.notes;
 });
 const hasDelivery = computed(() => {
-  return data.value?.hasDelivery;
+  return props.data?.hasDelivery;
 });
 const status = computed(() => {
-  return data.value?.status;
+  return props.data?.status;
 });
 const billDetails = computed(() => {
-  return data.value?.billDetails;
+  return props.data?.billDetails;
 });
 
-// home rating
-const route = useRoute();
-const router = useRouter();
+// Navigate
 const handleRatings = () => {
-  router.push({
-    path: "/rating",
-    query: {
-      id: route.query.id,
-    },
-  });
+  emits("gotoRating");
 };
-// navigate to note route
 const viewNote = () => {
-  router.push({
-    path: "/note",
-  });
+  emits("gotoNote");
 };
 
 const progress = ref(100);
-
-// Cleanup when component is unmounted
-onMounted(() => {
-  getOrderDetails(route.query.id);
-});
 </script>
 
 <style scoped>

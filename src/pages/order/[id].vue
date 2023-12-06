@@ -5,7 +5,7 @@
     <div class="container">
       <div class="flex flex-col items-center place-content-center m-auto">
         <img src="/img/logo.svg" alt="logo" />
-        <ProgressBar :id="$route?.query?.id" />
+        <ProgressBar :id="id" />
         <p class="text-black font-bold">{{ currentText.header }}</p>
         <p class="text-black font-bold">{{ currentText.content }}</p>
       </div>
@@ -21,6 +21,7 @@
   </div>
 </template>
 <script setup lang="ts">
+const { id } = useRoute().params;
 interface textItem {
   header: string;
   content: string;
