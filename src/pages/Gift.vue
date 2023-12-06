@@ -4,11 +4,14 @@
   </div>
   <div
     v-else
-    class="w-full h-full xl:h-screen mt-8 xl:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
+    class="w-full h-full md:h-screen mt-8 md:mt-auto relative flex flex-col items-center place-content-center m-auto bg-white overflow-hidden"
   >
     <div class="container">
       <router-link to="/">
-        <img class="mx-auto mb-3 w-auto relative z-[9999]" src="/img/logo.svg" alt="logo"
+        <img
+          class="mx-auto mb-3 w-auto relative z-[9999]"
+          src="/img/logo.svg"
+          alt="logo"
       /></router-link>
       <div class="p-0.5 relative z-[9999]">
         <div
@@ -43,7 +46,9 @@
                 :class="{ 'err-message': v$.name.$error }"
                 v-if="v$.name.$error || errorValidate()"
               >
-                <span class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"></span>
+                <span
+                  class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
+                ></span>
                 Your guess is wrong, give it {{ guessCount }} more shot!</small
               >
               <input
@@ -69,7 +74,9 @@
             </form>
             <div v-if="formProceed" class="flex flex-col gap-7 my-4">
               <small class="font-medium leading-6 text-black flex items-center">
-                <span class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"></span>
+                <span
+                  class="mdi mdi-alert-circle text-red-500 text-2xl pr-2"
+                ></span>
                 Limit exceeded! Proceed to view sender</small
               >
               <button
@@ -188,6 +195,7 @@ const handleDetails = () => {
 }
 
 .drop-shadow {
-  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px #00000026;
+  box-shadow: 0px 0.7499999403953552px 2.249999761581421px 0.7499999403953552px
+    #00000026;
 }
 </style>

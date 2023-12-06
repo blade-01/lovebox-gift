@@ -44,7 +44,7 @@ export function useStore() {
     try {
       isLoading.value = true;
       const response = await axios.get(
-        `https://core-api-katg.onrender.com/api/v1/orders/${id}`
+        `https://sandbox-api.lovebox.africa/api/v1/orders/${id}`
       );
       data.value = response.data.data;
     } catch (error) {

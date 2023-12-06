@@ -46,7 +46,6 @@
 import { useClipboard } from "@vueuse/core";
 const source = ref("https://lovebox.africa");
 const { text, copy, copied, isSupported } = useClipboard({ source });
-
 const links = ref<any>([
   {
     id: 1,
@@ -64,13 +63,11 @@ const links = ref<any>([
     active: false,
   },
 ]);
-
 // switch links
 const switchLinks = (item: any) => {
   const index = links.value.findIndex((element: any) => {
     return element.id === item.id;
   });
-
   links.value.forEach((element: any, i: any) => {
     if (i !== index) {
       element.active = false;
