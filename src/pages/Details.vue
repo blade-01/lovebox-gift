@@ -27,15 +27,8 @@
               Lovebox Details
             </h1>
             <div class="text-center flex flex-col gap-2 my-4">
-              <img
-                class="mx-auto"
-                src="/img/lovebox-sender.svg"
-                alt="lovebox-sender"
-              />
-              <div
-                v-if="isAnonymous === false"
-                class="text-center flex flex-col gap-2"
-              >
+              <img class="mx-auto" src="/img/lovebox-sender.svg" alt="lovebox-sender" />
+              <div v-if="isAnonymous === false" class="text-center flex flex-col gap-2">
                 <h1 class="text-2xl font-semibold leading-8 text-priBlack">
                   Correct! Thoughtfully sent by
                 </h1>
@@ -79,9 +72,9 @@
         </div>
       </div>
       <animate-circle-bg />
-      <baseModal :isActive="isActive" @openModal="openModal">
+      <BaseModal :isActive="isActive" @openModal="openModal">
         <ShareNetwork :isActive="isActive" @openModal="openModal" />
-      </baseModal>
+      </BaseModal>
     </div>
   </div>
 </template>
